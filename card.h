@@ -19,7 +19,8 @@ typedef struct Log Log;
 Log* logCreate();
 Log* logDelete(Log*, Time);
 Log* logExtend(Log*);
-Log* logSearch(Log*, Time);
+Log* logSearch(Log*, Time);     //按时间搜索记录
+Log* logFix(Log*);  //记录修复
 
 struct card{
     char *name;
@@ -44,7 +45,10 @@ void cardRecharge(Card*, float);    //充值续费，升级
 void cardComsume(Card*, float);     //消费，打折
 void cardFind(Card*, char*); //找回密码
 
+void logIn();   //系统登录
 void backUp();  //数据备份
 void restore(); //数据恢复
+void read();    //文件读取
+void write();   //文件写入
 
 #endif
