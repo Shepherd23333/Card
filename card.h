@@ -17,12 +17,12 @@ struct Log{
 };  //交易记录
 typedef struct Log Log;
 Log* logCreate();
-Log* logDelete(Log*, Time);
-Log* logExtend(Log*);
+Log* logDelete(Log*, Time);//按时间删除记录；
+Log* logExtend(Log*);//扩展
 Log* logSearch(Log*, Time);     //按时间搜索记录
-Log* logFix(Log*);  //记录修复
+Log* logFix(Log*,Log*);  //记录修复
 
-struct card{
+struct Card{
     char *name;
     char *number;
     char *password; //密码
@@ -40,6 +40,7 @@ Card* cardExtend(Card*);
 void cardSort(Card*);   //依次按关键词排序
 Card* cardFix(Card*);   //信息修改
 Card* cardSearch(Card*, char*);    //按卡号、用户名字查找
+Card* cardLost(Card*,char*);
 bool cardLogIn(char*, char*); //会员卡登录
 void cardRecharge(Card*, float);    //充值续费，升级
 void cardComsume(Card*, float);     //消费，打折
