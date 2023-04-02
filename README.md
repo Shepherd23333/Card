@@ -270,11 +270,73 @@ Card* head	链表头指针
 
 char* name/number	用户名/卡号
 
+## Admin类	系统账户
+
+### 成员
+
+char* username	账户名
+
+char* password	密码
+
+bool isSuper	是否为超级管理员
+
+Admin* next	指向下一节点的指针
+
+### 成员函数
+
+#### AdminCreate()
+
+创建Admin动态链表
+
+返回值：
+
+Admin*	链表头指针
+
+#### AdminDelete()
+
+删除Admin链表中某一节点
+
+参数
+
+Admin* head	链表头指针
+
+char* username	账户名
+
+返回值：
+
+Admin*	新链表头指针
+
+#### AdminExtend()
+
+在Admin链表后接入一个Admin类数据
+
+参数：
+
+Admin* head	链表头指针
+
+返回值：
+
+Admin*	新链表头指针
+
+#### adminSearch()
+
+在Admin链表中查找某个数据
+
+参数：
+
+Admin* head	链表头指针
+
+char* username	账户名
+
+返回值：
+
+Admin*	指向符合条件的数据的指针
+
 ## 系统
 
 int authority	权限等级（1：管理员，2：超级管理员）
 
-### authorize()
+#### authorize()
 
 验证权限
 
@@ -282,7 +344,7 @@ int authority	权限等级（1：管理员，2：超级管理员）
 
 系统登录
 
-### logOut()
+#### logOut()
 
 退出登录
 

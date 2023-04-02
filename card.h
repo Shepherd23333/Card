@@ -23,6 +23,7 @@ Log* logCreate();
 Log* logDelete(Log*, Time);
 Log* logExtend(Log*);
 Log* logSearch(Log*, int,...);
+Log* logSearchs(Log*, int,...);
 Log* logFix(Log*,Log*);
 
 struct Card{
@@ -37,17 +38,31 @@ struct Card{
     struct Card *next;
 };
 typedef struct Card Card;
+Card *cards;
 Card* cardCreate();
 Card* cardDelete(Card*, char*);     
 Card* cardExtend(Card*);
 void cardSort(Card*);   
 Card* cardSearch(Card*, char*);    
+Card* cardSearchs(Card*, char*);    
 Card* cardFix(Card*);
 Card* cardLost(Card*,char*);
 bool cardLogIn(char*, char*);
 void cardRecharge(Card*, float); 
 void cardComsume(Card*, float);
 void cardFind(Card*, char*);
+
+struct Admin{
+    char *username,*password;
+    bool isSuper;
+    struct Admin *next;
+};
+typedef struct Admin Admin;
+Admin *admins;
+Admin* adminCreate();
+Admin* adminDelete(Admin*, char*);     
+Admin* adminExtend(Admin*);
+Admin* adminSearch(Admin*, char*);    
 
 int authority;
 bool authorize();

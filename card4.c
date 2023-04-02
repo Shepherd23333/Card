@@ -1,16 +1,9 @@
 #include"card.h"
-bool authorize(){
-    if(authority!=2){
-        printf("错误：拒绝访问。\n该操作需要超级管理员权限。\n");
-        return 0;
-    }
-    return 1;
-}
 void setTime(Time t,int y,int mo,int d,int h,int mi){
     t.year=y;t.month=mo;t.day=d;t.hour=h;t.minute=mi;
 }
 Log* logFix(Log* head){
-    
+    //todo
 }
 Card* cardFix(Card* c){
     printf("请选择你要修改的内容：\n");
@@ -58,7 +51,9 @@ Card* cardFix(Card* c){
             }
             break;
         case 6:
-            
+            //todo
+            break;
+        case 7:
     }
     printf("按任意键继续...");
     getchar();
