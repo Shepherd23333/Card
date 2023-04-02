@@ -1,6 +1,7 @@
 #ifndef _CARD_H_
 #define _CARD_H_
 
+//所有变量及函数的内容在README.md
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -27,29 +28,29 @@ struct Card{
     char *number;
     char *password; 
     short level;
-    float remaining_sum,comsumption;  //余额，消费额
-    Time createTime,validTime;  //创建时间，有效时间
+    float remaining_sum,comsumption;
+    Time createTime,validTime;
     bool isLost;
-    Log *rechargeLog,*comsumeLog;   //充值、消费记录
+    Log *rechargeLog,*comsumeLog;
     struct Card *next;
 };
 typedef struct Card Card;
 Card* cardCreate();
-Card* cardDelete(Card*, char*);     //按卡号或用户名字删除，即退卡等
+Card* cardDelete(Card*, char*);     
 Card* cardExtend(Card*);
-void cardSort(Card*);   //依次按关键词排序
-Card* cardSearch(Card*, char*);    //按卡号、用户名字查找
-Card* cardFix(Card*);   //信息修改
+void cardSort(Card*);   
+Card* cardSearch(Card*, char*);    
+Card* cardFix(Card*);
 Card* cardLost(Card*,char*);
-bool cardLogIn(char*, char*); //会员卡登录
-void cardRecharge(Card*, float);    //充值续费，升级
-void cardComsume(Card*, float);     //消费，打折
-void cardFind(Card*, char*); //找回密码
+bool cardLogIn(char*, char*);
+void cardRecharge(Card*, float); 
+void cardComsume(Card*, float);
+void cardFind(Card*, char*);
 
-void logIn();   //系统登录
-void backUp();  //数据备份
-void restore(); //数据恢复
-void read();    //文件读取
-void write();   //文件写入
+void logIn();
+void backUp();
+void restore();
+void read();
+void write();
 
 #endif
