@@ -14,6 +14,26 @@ int hour	时
 
 int minute	分
 
+### 成员函数
+
+#### setTime()
+
+修改时间
+
+参数：
+
+Time t	待修改的时间
+
+int y	年
+
+int mo	月
+
+int d	日
+
+int h	时
+
+int mi	分
+
 ## Log类	交易记录
 
 ### 成员
@@ -62,11 +82,17 @@ Log* 新链表头指针
 
 #### logSearch()	
 
-在Log链表中按时间查找某个数据
+在Log链表中按时间或金额查找某个数据
 
 参数：
 
 Log* head	链表头指针
+
+int n	参数个数（1或2）
+
+Time t	时间
+
+float	money	交易金额
 
 返回值：
 
@@ -74,11 +100,15 @@ Log* 指向符合条件的元素的指针
 
 #### logFix()	
 
-修复Log链表中某个数据
+修复Log链表中某个数据（可以删除）
 
 参数：
 
 Log* head	链表头指针
+
+返回值：
+
+Card*	新链表头指针
 
 ## Card类	会员卡
 
@@ -100,7 +130,7 @@ Time createTime	创建时间
 
 Time validTime	有效时间（距离过期的剩余时间）
 
-bool isLost	是否丢失
+bool isLost	是否丢失（已丢失的卡无法使用）
 
 Log* rechargeLog	充值记录
 
@@ -242,9 +272,19 @@ char* name/number	用户名/卡号
 
 ## 系统
 
+int authority	权限等级（1：管理员，2：超级管理员）
+
+### authorize()
+
+验证权限
+
 #### logIn()	
 
 系统登录
+
+### logOut()
+
+退出登录
 
 #### backUp()	
 

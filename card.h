@@ -6,10 +6,12 @@
 #include <stdlib.h>
 #include <string.h>
 #include<stdbool.h>
+#include<stdarg.h>
 struct Time{
     int year, month, day, hour, minute;
 };
 typedef struct Time Time;
+void setTime(Time,int,int,int,int,int);
 
 struct Log{
     Time time;
@@ -20,7 +22,7 @@ typedef struct Log Log;
 Log* logCreate();
 Log* logDelete(Log*, Time);
 Log* logExtend(Log*);
-Log* logSearch(Log*, Time);
+Log* logSearch(Log*, int,...);
 Log* logFix(Log*,Log*);
 
 struct Card{
@@ -47,7 +49,10 @@ void cardRecharge(Card*, float);
 void cardComsume(Card*, float);
 void cardFind(Card*, char*);
 
+int authority;
+bool authorize();
 void logIn();
+void logOut();
 void backUp();
 void restore();
 void read();
