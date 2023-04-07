@@ -34,7 +34,7 @@ int h	时
 
 int mi	分
 
-## Log类	交易记录
+Log类	交易记录
 
 ### 成员
 
@@ -46,7 +46,7 @@ Log* next	指向下一节点的指针
 
 ### 成员函数
 
-#### logCreate()	
+#### logCreate()
 
 创建Log动态链表
 
@@ -54,7 +54,7 @@ Log* next	指向下一节点的指针
 
 Log* 链表头指针
 
-#### logDelete()	
+#### logDelete()
 
 按时间删除Log链表中某一节点
 
@@ -68,7 +68,7 @@ Time t	时间
 
 Log* 新链表头指针
 
-#### logExtend()	
+#### logExtend()
 
 在Log链表后接入一个Log类数据
 
@@ -80,7 +80,7 @@ Log* head	链表头指针
 
 Log* 新链表头指针
 
-#### logSearch()	
+#### logSearch()
 
 在Log链表中按时间或金额查找某个数据
 
@@ -98,7 +98,7 @@ float	money	交易金额
 
 Log* 指向符合条件的元素的指针
 
-#### logFix()	
+#### logFix()
 
 修复Log链表中某个数据（可以删除）
 
@@ -140,7 +140,7 @@ Card *next	指向下一节点的指针
 
 ### 成员函数
 
-#### cardCreate()	
+#### cardCreate()
 
 创建Card动态链表
 
@@ -148,7 +148,7 @@ Card *next	指向下一节点的指针
 
 Card*	链表头指针
 
-#### cardDelete()	
+#### cardDelete()
 
 删除Card链表中某一节点（退卡等操作）
 
@@ -162,7 +162,7 @@ char* name/number	用户姓名或卡号
 
 Card*	新链表头指针
 
-#### cardExtend()	
+#### cardExtend()
 
 在Card链表后接入一个Card类数据
 
@@ -174,7 +174,7 @@ Card* head	链表头指针
 
 Card*	新链表头指针
 
-#### cardSort()	
+#### cardSort()
 
 依次按关键词给Card链表排序
 
@@ -186,7 +186,7 @@ Card* head	链表头指针
 
 Card*	新链表头指针
 
-#### cardSearch()	
+#### cardSearch()
 
 在Card链表中查找某个数据
 
@@ -200,7 +200,7 @@ char* name/number	用户姓名或卡号
 
 Card*	指向符合条件的数据的指针
 
-#### cardFix()		
+#### cardFix()
 
 修复Card链表中某个数据
 
@@ -212,7 +212,7 @@ Card* head	链表头指针
 
 Card*	新链表头指针
 
-#### cardLost()	
+#### cardLost()
 
 会员卡挂失
 
@@ -226,7 +226,7 @@ char* name/number	用户姓名或卡号
 
 Card*	新链表头指针
 
-#### cardLogIn()	
+#### cardLogIn()
 
 登录会员卡
 
@@ -240,7 +240,7 @@ char* password	密码
 
 bool	是否登录成功
 
-#### cardRecharge()	
+#### cardRecharge()
 
 会员卡充值与升级
 
@@ -250,7 +250,7 @@ Card* c	指向待操作卡的指针
 
 float money	充值金额
 
-#### cardComsume()	
+#### cardConsume()
 
 会员卡消费及其折扣
 
@@ -260,7 +260,7 @@ Card* c	指向待操作卡的指针
 
 float money	消费金额
 
-#### cardFind()	
+#### cardFind()
 
 找回会员卡密码
 
@@ -340,7 +340,7 @@ int authority	权限等级（1：管理员，2：超级管理员）
 
 验证权限
 
-#### logIn()	
+#### logIn()
 
 系统登录
 
@@ -348,18 +348,18 @@ int authority	权限等级（1：管理员，2：超级管理员）
 
 退出登录
 
-#### backUp()	
+#### backUp()
 
 系统数据备份
 
-#### restore()	
+#### restore()
 
 系统数据恢复
 
-#### read()	
+#### read()
 
 文件读取
 
-#### write()	
+#### write()
 
 文件写入
