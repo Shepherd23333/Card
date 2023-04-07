@@ -54,6 +54,8 @@ Card* cardFix(Card* c){
             //todo
             break;
         case 7:
+            //todo
+            break;
     }
     printf("按任意键继续...");
     getchar();

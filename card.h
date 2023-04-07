@@ -24,7 +24,7 @@ Log* logDelete(Log*, Time);
 Log* logExtend(Log*);
 Log* logSearch(Log*, int,...);
 Log* logSearchs(Log*, int,...);
-Log* logFix(Log*,Log*);
+Log* logFix(Log*);
 
 struct Card{
     char *name;

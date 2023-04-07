@@ -5,9 +5,8 @@ Log *logCreate()
     int n=0;
     Log *head;
     Log *p1,*p2;
-    int n=0;
     p1=p2=(Log*)malloc(LENLog);
-    scanf("%d %d %d %d %d %f",&p1->time.year,&p1->time.month,&p1->time.day,&p1->time.hour,&p1->time.minute,&p1->money);
+    p1->time.year=0,p1->time.month=0,p1->time.day=0,p1->time.hour=0,p1->time.minute,p1->money;
     head=NULL;
     while(p1->time.year!=0)
     {
@@ -18,7 +17,7 @@ Log *logCreate()
         p2->next=p1;
         p2=p1;
         p1=(Log*)malloc(LENLog);
-        scanf("%d %d %d %d %d %f",&p1->time.year,&p1->time.month,&p1->time.day,&p1->time.hour,&p1->time.minute,&p1->money);
+        p1->time.year=0,p1->time.month=0,p1->time.day=0,p1->time.hour=0,p1->time.minute,p1->money;
     }
     p2->next=NULL;
     return (head);
@@ -33,7 +32,7 @@ Log* logExtend(Log* head)
         p1=p1->next;
     }
     p1=p1->next=(Log*)malloc(LENLog);
-    scanf("%d %d %d %d %d %f",&p1->time.year,&p1->time.month,&p1->time.day,&p1->time.hour,&p1->time.minute,&p1->money);
+    p1->time.year=0,p1->time.month=0,p1->time.day=0,p1->time.hour=0,p1->time.minute,p1->money;
     } 
     return (head);
 }
@@ -72,7 +71,7 @@ Log* logSearch(Log* head,int num,...)
             va_start(val,5);
             if((head->time.year==va_arg(val,int))&&(head->time.month==va_arg(val,int))&&(head->time.day==va_arg(val,int))&&(head->time.hour==va_arg(val,int))&&(head->time.minute==va_arg(val,int)))
             {
-                printf("%d年%d月%d日%d:%d\n",head->time.year,head->time.month,head->time.day,head->time.hour,head->time.minute);
+                //printf("%d年%d月%d日%d:%d\n",head->time.year,head->time.month,head->time.day,head->time.hour,head->time.minute);
                 return (head);
             }
             while(p1->next!=NULL)
@@ -82,7 +81,6 @@ Log* logSearch(Log* head,int num,...)
                 return p1;
             }
             p1=p1->next;
-            return (head);
         }
 
         }
@@ -101,13 +99,13 @@ Log* logSearch(Log* head,int num,...)
                     return (p1);
                 }
                 p1=p1->next;
-                return (head);
             }
         }
         return (head);
     }
     else
-    printf("用户为空\n");
+    //printf("用户为空\n");
+    return NULL;
 
 
 }
@@ -117,17 +115,16 @@ Card* cardCreate()
     int n=0;
     Card *head;
     Card *p1,*p2;
-    int n=0;
     p1=p2=(Card*)malloc(LENCard);
     
-    scanf("%d",&p1->level);
-    gets(p1->name);
-    gets(p1->number);
-    gets(p1->password);
-    scanf("%f,%f,%d,%d,%d,%d,%d",&p1->remaining_sum,&p1->comsumption,&p1->createTime.year,&p1->createTime.month,&p1->createTime.day,&p1->createTime.hour,&p1->createTime.minute);
-    scanf("%d,%d,%d,%d,%d",&p1->validTime.year,&p1->validTime.month,&p1->validTime.day,&p1->validTime.hour,&    p1->validTime.minute);
-    scanf("%d %d %d %d %d %f",&p1->rechargeLog->time.year,&p1->rechargeLog->time.month,&p1->rechargeLog->time.day,&p1->rechargeLog->time.hour,&p1->rechargeLog->time.minute,&p1->rechargeLog->money);
-    scanf("%d %d %d %d %d %f",&p1->comsumeLog->time.year,&p1->comsumeLog->time.month,&p1->comsumeLog->time.day,&p1->comsumeLog->time.hour,&p1->comsumeLog->time.minute,&p1->comsumeLog->money);
+    p1->level=0;
+    strcpy(p1->name,"");
+    strcpy(p1->number,"");
+    strcpy(p1->password,"");
+    p1->remaining_sum=0.0f,p1->comsumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
+    p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
+    p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
+    p1->comsumeLog->time.year=0,p1->comsumeLog->time.month=0,p1->comsumeLog->time.day=0,p1->comsumeLog->time.hour=0,p1->comsumeLog->time.minute=0,p1->comsumeLog->money=0.0f;
     head=NULL;
     while(p1->level!=9)
     {
@@ -139,16 +136,63 @@ Card* cardCreate()
         p2=p1;
         p1=(Log*)malloc(LENCard);
        
-        scanf("%d",&p1->level);
-        gets(p1->name);
-        gets(p1->number);
-        gets(p1->password);
-        scanf("%f,%f,%d,%d,%d,%d,%d",&p1->remaining_sum,&p1->comsumption,&p1->createTime.year,&p1->createTime.month,&p1->createTime.day,&p1->createTime.hour,&p1->createTime.minute);
-        scanf("%d,%d,%d,%d,%d",&p1->validTime.year,&p1->validTime.month,&p1->validTime.day,&p1->validTime.hour,&    p1->validTime.minute);
-        scanf("%d %d %d %d %d %f",&p1->rechargeLog->time.year,&p1->rechargeLog->time.month,&p1->rechargeLog->time.day,&p1->rechargeLog->time.hour,&p1->rechargeLog->time.minute,&p1->rechargeLog->money);
-        scanf("%d %d %d %d %d %f",&p1->comsumeLog->time.year,&p1->comsumeLog->time.month,&p1->comsumeLog->time.day,&p1->comsumeLog->time.hour,&p1->comsumeLog->time.minute,&p1->comsumeLog->money);
-        
+        p1->level=0;
+        strcpy(p1->name,"");
+        strcpy(p1->number,"");
+        strcpy(p1->password,"");
+        p1->remaining_sum=0.0f,p1->comsumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
+        p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
+        p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
+        p1->comsumeLog->time.year=0,p1->comsumeLog->time.month=0,p1->comsumeLog->time.day=0,p1->comsumeLog->time.hour=0,p1->comsumeLog->time.minute=0,p1->comsumeLog->money=0.0f;
+    head=NULL;
     }
     p2->next=NULL;
     return (head);
+}
+Card* cardExtend(Card* head)
+{
+    Card* p1=head;
+    if(head!=NULL)
+    {
+        while(p1->next!=NULL)
+    {
+        p1=p1->next;
+    }
+    p1=p1->next=(Log*)malloc(LENLog);
+    p1->level=0;
+    strcpy(p1->name,"");
+    strcpy(p1->number,"");
+    strcpy(p1->password,"");
+    p1->remaining_sum=0.0f,p1->comsumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
+    p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
+    p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
+    p1->comsumeLog->time.year=0,p1->comsumeLog->time.month=0,p1->comsumeLog->time.day=0,p1->comsumeLog->time.hour=0,p1->comsumeLog->time.minute=0,p1->comsumeLog->money=0.0f;
+    
+    } 
+    return (head);
+
+}
+Card* cardDelete(Card* head,char dename[])
+{
+    Card* p1=head;
+    if(head!=NULL)
+    {
+        while(p1->next!=NULL)
+        {
+            Card* p2=p1->next;
+            if(strcmp(p1->next->name,dename)==0)
+            {
+                p1->next=p1->next->next;
+                free(p2);
+                return (head);
+            }
+            p1=p1->next;
+        }
+            
+    }
+    else 
+    return NULL;
+}
+Admin* adminSearch(Admin* head,char* s){
+
 }
