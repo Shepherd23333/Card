@@ -5,7 +5,6 @@ Log *logCreate()
     int n=0;
     Log *head;
     Log *p1,*p2;
-    int n=0;
     p1=p2=(Log*)malloc(LENLog);
     p1->time.year=0,p1->time.month=0,p1->time.day=0,p1->time.hour=0,p1->time.minute,p1->money;
     head=NULL;
@@ -116,7 +115,6 @@ Card* cardCreate()
     int n=0;
     Card *head;
     Card *p1,*p2;
-    int n=0;
     p1=p2=(Card*)malloc(LENCard);
     
     p1->level=0;
@@ -194,4 +192,7 @@ Card* cardDelete(Card* head,char dename[])
     }
     else 
     return NULL;
+}
+Admin* adminSearch(Admin* head,char* s){
+
 }
