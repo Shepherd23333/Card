@@ -48,9 +48,9 @@ Log* logDelete(Log* head,Time detime)
     while(p1->next!=NULL)
     {
         p2=p1->next;
-        if((p1->time.year==detime.year)&&(p1->time.month==detime.month)&&(p1->time.day==detime.day)&&(p1->time.hour==detime.hour)&&(p1->time.minute==detime.minute))
+        if((p1->next->time.year==detime.year)&&(p1->next->time.month==detime.month)&&(p1->next->time.day==detime.day)&&(p1->next->time.hour==detime.hour)&&(p1->next->time.minute==detime.minute))
         {
-            p1=p1->next->next;
+            p1->next=p1->next->next;
             free(p2);
             return (head);
         }
@@ -142,6 +142,7 @@ Card* cardCreate()
         p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
         p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
         p1->comsumeLog->time.year=0,p1->comsumeLog->time.month=0,p1->comsumeLog->time.day=0,p1->comsumeLog->time.hour=0,p1->comsumeLog->time.minute=0,p1->comsumeLog->money=0.0f;
+        p1->isLost=0;
     head=NULL;
     }
     p2->next=NULL;
@@ -165,12 +166,12 @@ Card* cardExtend(Card* head)
     p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
     p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
     p1->comsumeLog->time.year=0,p1->comsumeLog->time.month=0,p1->comsumeLog->time.day=0,p1->comsumeLog->time.hour=0,p1->comsumeLog->time.minute=0,p1->comsumeLog->money=0.0f;
-    
+    p1->isLost=0;
     } 
     return (head);
 
 }
-Card* cardDelete(Card* head,char dename[])
+Card* cardDelete(Card* head,char* demessage)
 {
     Card* p1=head;
     if(head!=NULL)
@@ -178,7 +179,7 @@ Card* cardDelete(Card* head,char dename[])
         while(p1->next!=NULL)
         {
             Card* p2=p1->next;
-            if(strcmp(p1->next->name,dename)==0)
+            if(strcmp(p1->next->name,demessage)||strcmp(p1->next->number,demessage)==0)
             {
                 p1->next=p1->next->next;
                 free(p2);
@@ -191,7 +192,47 @@ Card* cardDelete(Card* head,char dename[])
     else 
     return NULL;
 }
+Card* cardSearch(Card* head, char* semessage)
+{
+    Card* p1=head;
+    if(head!=NULL)
+    {
+        if((strcmp(head->name,semessage)==0)||(strcmp(head->number,semessage)==0))
+        {
+            return head;
+        }
+        while(p1->next!=NULL)
+        {
+            if((strcmp(p1->name,semessage)==0)||(strcmp(p1->number,semessage)==0))
+            {
+                return p1;
+            }
+            p1=p1->next;
+        }
+    }
+}
+Card* cardLost(Card* head, char* lostmessage)
+{
+    Card* p1=head;
+    if(head!=NULL)
+    {
+        if((strcmp(head->name,lostmessage)==0)||(strcmp(head->number,lostmessage)==0))
+        {
+            head->isLost=0;
+            return head;
+        }
+        while(p1->next!=NULL)
+        {
+            if((strcmp(p1->name,lostmessage)==0)||(strcmp(p1->number,lostmessage)==0))
+            {
+                head->isLost=0;
+                return head;
+            }
+            p1=p1->next;
+        }
+    }
+} 
+
 Admin* adminSearch(Admin* head,char* s){
-    //todo
-    return NULL;
+
 }

@@ -20,10 +20,10 @@ typedef struct Log{
     struct Log *next;
 }Log;
 #define LENLog sizeof(Log)
-Log* logCreate();
-Log* logDelete(Log*, Time);
-Log* logExtend(Log*);
-Log* logSearch(Log*, ...);
+Log* logCreate();//card1
+Log* logDelete(Log*, Time);//card1
+Log* logExtend(Log*);//card1
+Log* logSearch(Log*, ...);//card1
 Log* logSearchs(Log*, ...);
 Log* logFix(Log*);  //card4
 
@@ -40,14 +40,14 @@ typedef struct Card{
 }Card;
 #define LENCard sizeof(Card)
 Card *cards;
-Card* cardCreate();
-Card* cardDelete(Card*, char*);     
-Card* cardExtend(Card*);
+Card* cardCreate();//card1
+Card* cardDelete(Card*, char*);//card1     
+Card* cardExtend(Card*);//card1
 void cardSort(Card*);   //card2.c
-Card* cardSearch(Card*, char*);    
+Card* cardSearch(Card*, char*); //card1   
 Card* cardSearchs(Card*, char*);    
 Card* cardFix(Card*);   //card4
-Card* cardLost(Card*,char*);
+Card* cardLost(Card*,char*);//card1
 bool cardLogIn(char*, char*);//card3.c
 void cardRecharge(Card*, double); //card3.c
 void cardConsume(Card*, double);//card2.c
