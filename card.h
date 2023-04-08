@@ -42,7 +42,7 @@ Card *cards;
 Card* cardCreate();
 Card* cardDelete(Card*, char*);     
 Card* cardExtend(Card*);
-void cardSort(Card*);   
+void cardSort(Card*);   //card2.c
 Card* cardSearch(Card*, char*);    
 Card* cardSearchs(Card*, char*);    
 Card* cardFix(Card*);
