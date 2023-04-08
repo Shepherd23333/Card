@@ -2,6 +2,20 @@
 void setTime(Time t,int y,int mo,int d,int h,int mi){
     t.year=y;t.month=mo;t.day=d;t.hour=h;t.minute=mi;
 }
+int sig(int x){
+    return !x?0:x/abs(x);
+}
+int timeComp(Time x,Time y){
+    return !sig(x.year-y.year)?(
+    !sig(x.month-y.month)?(
+    !sig(x.day-y.day)?(
+    !sig(x.hour-y.hour)?
+    sig(x.minute-y.minute)
+    :sig(x.hour-y.hour)
+    ):sig(x.day-y.day)
+    ):sig(x.month-y.month)
+    ):sig(x.year-y.year);
+}
 Log* logFix(Log* head){
     //todo
 }
