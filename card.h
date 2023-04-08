@@ -7,37 +7,38 @@
 #include <string.h>
 #include<stdbool.h>
 #include<stdarg.h>
-struct Time{
+#include<windows.h>
+char* getstr(); //system
+typedef struct Time{
     int year, month, day, hour, minute;
-};
-typedef struct Time Time;
-void setTime(Time,int,int,int,int,int);
+}Time;
+void setTime(Time,int,int,int,int,int); //card4
 
-struct Log{
+typedef struct Log{
     Time time;
-    float money;
+    double money;
     struct Log *next;
-};
-typedef struct Log Log;
+}Log;
+#define LENLog sizeof(Log)
 Log* logCreate();
 Log* logDelete(Log*, Time);
 Log* logExtend(Log*);
-Log* logSearch(Log*, int,...);
-Log* logSearchs(Log*, int,...);
-Log* logFix(Log*);
+Log* logSearch(Log*, ...);
+Log* logSearchs(Log*, ...);
+Log* logFix(Log*);  //card4
 
-struct Card{
+typedef struct Card{
     char *name;
     char *number;
     char *password; 
     short level;
-    float remaining_sum,comsumption;
+    double remaining_sum,comsumption;
     Time createTime,validTime;
     bool isLost;
     Log *rechargeLog,*comsumeLog;
     struct Card *next;
-};
-typedef struct Card Card;
+}Card;
+#define LENCard sizeof(Card)
 Card *cards;
 Card* cardCreate();
 Card* cardDelete(Card*, char*);     
@@ -45,28 +46,28 @@ Card* cardExtend(Card*);
 void cardSort(Card*);   
 Card* cardSearch(Card*, char*);    
 Card* cardSearchs(Card*, char*);    
-Card* cardFix(Card*);
+Card* cardFix(Card*);   //card4
 Card* cardLost(Card*,char*);
 bool cardLogIn(char*, char*);
-void cardRecharge(Card*, float); 
-void cardComsume(Card*, float);
+void cardRecharge(Card*, double); 
+void cardConsume(Card*, double);
 void cardFind(Card*, char*);
 
-struct Admin{
+typedef struct{
     char *username,*password;
     bool isSuper;
     struct Admin *next;
-};
-typedef struct Admin Admin;
+}Admin;
 Admin *admins;
 Admin* adminCreate();
 Admin* adminDelete(Admin*, char*);     
 Admin* adminExtend(Admin*);
 Admin* adminSearch(Admin*, char*);    
 
+bool isLoggedIn;
 int authority;
-bool authorize();
-void logIn();
+bool authorize();   //system
+void logIn();   //system
 void logOut();
 void backUp();
 void restore();

@@ -10,7 +10,7 @@ Card* cardFix(Card* c){
     printf("(1.用户名  2.会员卡卡号  3.会员卡等级  4.总消费金额\n");
     printf("5.创建时间  6.丢失状态  7.充值记录  8.消费记录)\n");
     int f,t,y,month,d,h,mi;
-    float money;
+    double money;
     char *s;
     scanf("%d",&f);
     switch(f){
@@ -37,7 +37,7 @@ Card* cardFix(Card* c){
         case 4:
             if(authorize()){
                 printf("请输入总消费金额：\n");
-                scanf("%f",&money);
+                scanf("%lf",&money);
                 c->comsumption=money;
                 printf("修改成功！\n");
             }
