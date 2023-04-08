@@ -40,7 +40,7 @@ Log类	交易记录
 
 Time time	交易时间
 
-float money	交易金额
+double money	交易金额
 
 Log* next	指向下一节点的指针
 
@@ -92,7 +92,7 @@ int n	参数个数（1或2）
 
 Time t	时间
 
-float	money	交易金额
+double	money	交易金额
 
 返回值：
 
@@ -122,9 +122,9 @@ char *password	会员卡密码
 
 short level	会员卡等级（与折扣有关）
 
-float remaining_sum	卡内余额
+double remaining_sum	卡内余额
 
-float comsumption	总消费金额（与等级有关）
+double comsumption	总消费金额（与等级有关）
 
 Time createTime	创建时间
 
@@ -248,7 +248,7 @@ bool	是否登录成功
 
 Card* c	指向待操作卡的指针
 
-float money	充值金额
+double money	充值金额
 
 #### cardConsume()
 
@@ -258,7 +258,7 @@ float money	充值金额
 
 Card* c	指向待操作卡的指针
 
-float money	消费金额
+double money	消费金额
 
 #### cardFind()
 

@@ -1,5 +1,4 @@
 #include"card.h"
-#define LENLog sizeof(Log)
 Log *logCreate()   
 {
     int n=0;
@@ -58,12 +57,12 @@ Log* logDelete(Log* head,Time detime)
         p1=p1->next;
     }
     return (head);
-}
-Log* logSearch(Log* head,int num,...)
+}/*
+Log* logSearch(Log* head,...)
 {
     Log* p1=head;
     va_list val;
-    
+    va_start(val,head);
     if(head!=NULL)
     {
         if(num==5)
@@ -87,14 +86,14 @@ Log* logSearch(Log* head,int num,...)
         if(num==1)
         {
             va_start(val,1);
-            if(head->money==va_arg(val,float))
+            if(head->money==va_arg(val,double))
             {
                 return (head);
             }
             
             while(p1->next!=NULL)
             {
-                if(p1->money==va_arg(val,float))
+                if(p1->money==va_arg(val,double))
                 {
                     return (p1);
                 }
@@ -108,8 +107,7 @@ Log* logSearch(Log* head,int num,...)
     return NULL;
 
 
-}
-#define LENCard sizeof(Card)
+}*/
 Card* cardCreate()
 {
     int n=0;
@@ -134,7 +132,7 @@ Card* cardCreate()
         else
         p2->next=p1;
         p2=p1;
-        p1=(Log*)malloc(LENCard);
+        p1=(Card*)malloc(LENCard);
        
         p1->level=0;
         strcpy(p1->name,"");
@@ -158,7 +156,7 @@ Card* cardExtend(Card* head)
     {
         p1=p1->next;
     }
-    p1=p1->next=(Log*)malloc(LENLog);
+    p1=p1->next=(Card*)malloc(LENCard);
     p1->level=0;
     strcpy(p1->name,"");
     strcpy(p1->number,"");
@@ -194,5 +192,6 @@ Card* cardDelete(Card* head,char dename[])
     return NULL;
 }
 Admin* adminSearch(Admin* head,char* s){
-
+    //todo
+    return NULL;
 }
