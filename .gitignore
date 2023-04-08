@@ -1,4 +1,3 @@
-*.json
-*.exe
 /build
 /.vscode
+*.exe
