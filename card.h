@@ -48,10 +48,10 @@ Card* cardSearch(Card*, char*);
 Card* cardSearchs(Card*, char*);    
 Card* cardFix(Card*);   //card4
 Card* cardLost(Card*,char*);
-bool cardLogIn(char*, char*);
-void cardRecharge(Card*, double); 
-void cardConsume(Card*, double);
-void cardFind(Card*, char*);
+bool cardLogIn(char*, char*);//card3.c
+void cardRecharge(Card*, double); //card3.c
+void cardConsume(Card*, double);//card2.c
+void cardFind(Card*, char*);//card2.c
 
 typedef struct{
     char *username,*password;
@@ -59,10 +59,10 @@ typedef struct{
     struct Admin *next;
 }Admin;
 Admin *admins;
-Admin* adminCreate();
-Admin* adminDelete(Admin*, char*);     
-Admin* adminExtend(Admin*);
-Admin* adminSearch(Admin*, char*);    
+Admin* adminCreate();//card3.c
+Admin* adminDelete(Admin*, char*);   //card3.c  
+Admin* adminExtend(Admin*);//card2.c
+Admin* adminSearch(Admin*, char*); //card2.c   
 
 bool isLoggedIn;
 int authority;
