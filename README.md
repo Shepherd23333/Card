@@ -34,7 +34,23 @@ int h	时
 
 int mi	分
 
-Log类	交易记录
+#### timeComp()
+
+比较时间先后
+
+参数：
+
+Time x	待比较的时间1
+
+TIme y	待比较的时间2
+
+返回值：(int)
+
+| x>y | x=y | x<y |
+| --- | --- | --- |
+| 1   | 0   | -1  |
+
+## Log类	交易记录
 
 ### 成员
 
@@ -88,15 +104,29 @@ Log* 新链表头指针
 
 Log* head	链表头指针
 
-int n	参数个数（1或2）
-
 Time t	时间
 
-double	money	交易金额
+double money	交易金额
 
 返回值：
 
-Log* 指向符合条件的元素的指针
+Log* 指向符合条件的第一个元素的指针
+
+#### logSearchs()
+
+在Log链表中按时间或金额查找某些数据
+
+参数：
+
+Log* head	链表头指针
+
+Time t	时间
+
+double money	交易金额
+
+返回值：
+
+Log* 指针数组，储存所有指向符合条件的元素的指针
 
 #### logFix()
 

@@ -8,12 +8,12 @@
 #include<stdbool.h>
 #include<stdarg.h>
 #include<windows.h>
-char* getstr(); //system
+#include<math.h>
 typedef struct Time{
     int year, month, day, hour, minute;
 }Time;
 void setTime(Time,int,int,int,int,int); //card4
-
+int timeComp(Time,Time);
 typedef struct Log{
     Time time;
     double money;
@@ -39,11 +39,11 @@ typedef struct Card{
     struct Card *next;
 }Card;
 #define LENCard sizeof(Card)
-Card *cards;
+Card *cards;    //全局Card动态链表，用于存放用户数据
 Card* cardCreate();//card1
 Card* cardDelete(Card*, char*);//card1     
 Card* cardExtend(Card*);//card1
-void cardSort(Card*);   //card2.c
+Card* cardSort(Card*);   //card2.c
 Card* cardSearch(Card*, char*); //card1   
 Card* cardSearchs(Card*, char*);    
 Card* cardFix(Card*);   //card4
@@ -53,12 +53,13 @@ void cardRecharge(Card*, double); //card3.c
 void cardConsume(Card*, double);//card2.c
 void cardFind(Card*, char*);//card2.c
 
+char* getstr(); //system
 typedef struct Admin{
     char *username,*password;
     bool isSuper;
     struct Admin *next;
 }Admin;
-Admin *admins;
+Admin *admins;  //全局Admin动态链表，用于存放管理员数据
 Admin* adminCreate();//card3.c
 Admin* adminDelete(Admin*, char*);   //card3.c  
 Admin* adminExtend(Admin*);//card2.c

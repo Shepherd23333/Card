@@ -1,17 +1,16 @@
 #include"card.h"
 char* getstr(){
-    char* str;
-    char* _str;
+    char *str,*_str;
     int i = 1;
-    str = (char*)malloc(sizeof(char) * (i + 1));
-    while((str[i - 1] = getchar()!='\n')){
-        i ++;
-        _str = (char*)malloc(strlen(str) + 1);
-        str[i - 1] = '\0';
+    str = (char*)malloc(sizeof(char)*(i+1));
+    while((str[i-1]=getchar())!='\n'){
+        i++;
+        _str = (char*)malloc(strlen(str)+1);
+        str[i-1]='\0';
         strcpy(_str, str);
         free(str);
-        str = (char*)malloc(sizeof(char) * (i + 1));
-        if(NULL == str){
+        str = (char*)malloc(sizeof(char)*(i+1));
+        if(!str){
             free(_str);
             printf("No enough memory!");
             return NULL;
@@ -19,7 +18,7 @@ char* getstr(){
         strcpy(str, _str);
         free(_str);
     }
-    str[i - 1] = '\0';  
+    str[i-1]='\0';  
     return str;
 }
 void logIn(){
@@ -44,6 +43,9 @@ void logIn(){
         }
     }
     system("pause");
+}
+void read(){
+    //todo
 }
 bool authorize(){
     if(authority!=2){
