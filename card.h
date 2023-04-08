@@ -53,7 +53,7 @@ void cardRecharge(Card*, double);
 void cardConsume(Card*, double);
 void cardFind(Card*, char*);
 
-typedef struct{
+typedef struct Admin{
     char *username,*password;
     bool isSuper;
     struct Admin *next;
