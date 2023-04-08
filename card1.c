@@ -218,14 +218,14 @@ Card* cardLost(Card* head, char* lostmessage)
     {
         if((strcmp(head->name,lostmessage)==0)||(strcmp(head->number,lostmessage)==0))
         {
-            head->isLost=0;
+            head->isLost=1;
             return head;
         }
         while(p1->next!=NULL)
         {
             if((strcmp(p1->name,lostmessage)==0)||(strcmp(p1->number,lostmessage)==0))
             {
-                head->isLost=0;
+                head->isLost=1;
                 return head;
             }
             p1=p1->next;
