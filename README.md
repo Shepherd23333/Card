@@ -130,7 +130,7 @@ Log* 指针数组，储存所有指向符合条件的元素的指针
 
 #### logFix()
 
-修复Log链表中某个数据（可以删除）
+修改Log链表中某个数据（可以删除）
 
 参数：
 
@@ -147,6 +147,8 @@ Log*	新链表头指针
 char *name	用户姓名
 
 char *number	会员卡卡号
+
+char* phone	手机号
 
 char *password	会员卡密码
 
@@ -186,7 +188,7 @@ Card*	链表头指针
 
 Card* head	链表头指针
 
-char* number	卡号
+char* number/phone	卡号/手机号
 
 返回值：
 
@@ -214,7 +216,7 @@ Card* head	链表头指针
 
 char* flag	排序关键词选项
 
-返回值： 
+返回值：
 
 Card*	新链表头指针
 
@@ -226,6 +228,13 @@ Card*	新链表头指针
 
 Card* head	链表头指针
 
+char* name/number/phone	用户名/卡号/手机号
+
+short level	会员等级
+
+Time createTime	创建时间
+
+Log* consumeLog	消费记录
 
 返回值：
 
@@ -239,6 +248,13 @@ Card*	指向符合条件的第一个数据的指针
 
 Card* head	链表头指针
 
+char* name/number/phone	用户名/卡号/手机号
+
+short level	会员等级
+
+Time createTime	创建时间
+
+Log* consumeLog	消费记录
 
 返回值：
 
@@ -246,7 +262,7 @@ Card* 指针数组，储存所有指向符合条件的元素的指针
 
 #### cardFix()
 
-修复Card链表中某个数据
+修改Card链表中某个数据
 
 参数：
 
@@ -256,15 +272,13 @@ Card* head	链表头指针
 
 Card*	新链表头指针
 
-#### cardLost()
+#### cardSignUp()
 
-会员卡挂失
+注册会员卡（包含对已挂失卡的操作）
 
 参数：
 
 Card* head	链表头指针
-
-char* number	卡号
 
 返回值：
 
@@ -276,13 +290,27 @@ Card*	新链表头指针
 
 参数：
 
-char* number	卡号
+char* number/phone	卡号/手机号
 
 char* password	密码
 
 返回值：
 
 bool	是否登录成功
+
+#### cardLost()
+
+会员卡挂失
+
+参数：
+
+Card* head	链表头指针
+
+char* number/phone	卡号/
+
+返回值：
+
+Card*	新链表头指针
 
 #### cardRecharge()
 
@@ -306,13 +334,13 @@ double money	消费金额
 
 #### cardFind()
 
-找回会员卡密码
+找回会员卡
 
 参数：
 
 Card* head	链表头指针
 
-char* number	用户名/卡号
+char* number	卡号
 
 ## Admin类	系统账户
 

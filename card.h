@@ -12,7 +12,7 @@
 typedef struct Time{
     int year, month, day, hour, minute;
 }Time;
-void setTime(Time,int,int,int,int,int); //card4
+void setTime(Time*,int,int,int,int,int); //card4
 int timeComp(Time,Time);
 typedef struct Log{
     Time time;
@@ -28,7 +28,7 @@ Log* logSearchs(Log*, ...);
 Log* logFix(Log*);  //card4
 
 typedef struct Card{
-    char *name,*number,*password; 
+    char *name,*number,*phone,*password; 
     short level;
     double remaining_sum,consumption;
     Time createTime,validTime;
@@ -45,11 +45,13 @@ Card* cardSort(Card*,char*);   //card2.c
 Card* cardSearch(Card*, ...); //card1   
 Card* cardSearchs(Card*, ...);    
 Card* cardFix(Card*);   //card4
-Card* cardLost(Card*,char*);//card1
+Card* cardSignUp(Card*); 
 bool cardLogIn(char*, char*);//card3.c
+void cardNewPhone(Card*,char*);
+void cardLost(Card*,char*);//card1
+void cardFind(Card*, char*);//card2.c
 void cardRecharge(Card*, double); //card3.c
 void cardConsume(Card*, double);//card2.c
-void cardFind(Card*, char*);//card2.c
 
 char* getstr(); //system
 typedef struct Admin{

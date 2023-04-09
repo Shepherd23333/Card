@@ -21,7 +21,7 @@ Card* cardExtend(Card *head) {
     }
     p->next = p_new;
     printf("会员卡添加成功！");
-}*/
+}*//*
 void cardSort(Card* head)
 {
     Card *p, *q, *tail;
@@ -47,7 +47,9 @@ void cardSort(Card* head)
             }
         }
     }while(exchange); //当存在交换时继续排序
-}
+}*/
+
+
 //登录管理员账号之后界面
 void menu()
 {
@@ -116,13 +118,3 @@ void test01()
     while(n != 0);
     
 }
-
-
-
-
-
-
-
-
-
-

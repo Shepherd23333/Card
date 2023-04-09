@@ -190,7 +190,7 @@ Card* cardDelete(Card* head,char* demessage)
     }
     else 
     return NULL;
-}
+}/*
 Card* cardSearch(Card* head, char* semessage)
 {
     Card* p1=head;
@@ -209,7 +209,7 @@ Card* cardSearch(Card* head, char* semessage)
             p1=p1->next;
         }
     }
-}
+}*/
 Card* cardLost(Card* head, char* lostmessage)
 {
     Card* p1=head;
@@ -231,6 +231,10 @@ Card* cardLost(Card* head, char* lostmessage)
         }
     }
 } 
+void write()
+{
+    
+}
 
 Admin *adminSearch(Admin* head,char* s){
 
