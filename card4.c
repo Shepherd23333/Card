@@ -52,7 +52,7 @@ Card* cardFix(Card* c){
             if(authorize()){
                 printf("请输入总消费金额：\n");
                 scanf("%lf",&money);
-                c->comsumption=money;
+                c->consumption=money;
                 printf("修改成功！\n");
             }
             break;
@@ -65,7 +65,7 @@ Card* cardFix(Card* c){
             }
             break;
         case 6:
-            //todo
+            if()
             break;
         case 7:
             //todo

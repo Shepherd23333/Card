@@ -70,7 +70,6 @@ Log* logSearch(Log* head,...)
             va_start(val,5);
             if((head->time.year==va_arg(val,int))&&(head->time.month==va_arg(val,int))&&(head->time.day==va_arg(val,int))&&(head->time.hour==va_arg(val,int))&&(head->time.minute==va_arg(val,int)))
             {
-                //printf("%d年%d月%d日%d:%d\n",head->time.year,head->time.month,head->time.day,head->time.hour,head->time.minute);
                 return (head);
             }
             while(p1->next!=NULL)
@@ -103,7 +102,7 @@ Log* logSearch(Log* head,...)
         return (head);
     }
     else
-    //printf("用户为空\n");
+
     return NULL;
 
 
@@ -119,10 +118,10 @@ Card* cardCreate()
     strcpy(p1->name,"");
     strcpy(p1->number,"");
     strcpy(p1->password,"");
-    p1->remaining_sum=0.0f,p1->comsumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
+    p1->remaining_sum=0.0f,p1->consumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
     p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
     p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
-    p1->comsumeLog->time.year=0,p1->comsumeLog->time.month=0,p1->comsumeLog->time.day=0,p1->comsumeLog->time.hour=0,p1->comsumeLog->time.minute=0,p1->comsumeLog->money=0.0f;
+    p1->consumeLog->time.year=0,p1->consumeLog->time.month=0,p1->consumeLog->time.day=0,p1->consumeLog->time.hour=0,p1->consumeLog->time.minute=0,p1->consumeLog->money=0.0f;
     head=NULL;
     while(p1->level!=9)
     {
@@ -138,10 +137,10 @@ Card* cardCreate()
         strcpy(p1->name,"");
         strcpy(p1->number,"");
         strcpy(p1->password,"");
-        p1->remaining_sum=0.0f,p1->comsumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
+        p1->remaining_sum=0.0f,p1->consumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
         p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
         p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
-        p1->comsumeLog->time.year=0,p1->comsumeLog->time.month=0,p1->comsumeLog->time.day=0,p1->comsumeLog->time.hour=0,p1->comsumeLog->time.minute=0,p1->comsumeLog->money=0.0f;
+        p1->consumeLog->time.year=0,p1->consumeLog->time.month=0,p1->consumeLog->time.day=0,p1->consumeLog->time.hour=0,p1->consumeLog->time.minute=0,p1->consumeLog->money=0.0f;
         p1->isLost=0;
     head=NULL;
     }
@@ -162,10 +161,10 @@ Card* cardExtend(Card* head)
     strcpy(p1->name,"");
     strcpy(p1->number,"");
     strcpy(p1->password,"");
-    p1->remaining_sum=0.0f,p1->comsumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
+    p1->remaining_sum=0.0f,p1->consumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
     p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
     p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
-    p1->comsumeLog->time.year=0,p1->comsumeLog->time.month=0,p1->comsumeLog->time.day=0,p1->comsumeLog->time.hour=0,p1->comsumeLog->time.minute=0,p1->comsumeLog->money=0.0f;
+    p1->consumeLog->time.year=0,p1->consumeLog->time.month=0,p1->consumeLog->time.day=0,p1->consumeLog->time.hour=0,p1->consumeLog->time.minute=0,p1->consumeLog->money=0.0f;
     p1->isLost=0;
     } 
     return (head);
@@ -233,6 +232,6 @@ Card* cardLost(Card* head, char* lostmessage)
     }
 } 
 
-Admin* adminSearch(Admin* head,char* s){
+Admin *adminSearch(Admin* head,char* s){
 
 }

@@ -138,7 +138,7 @@ Log* head	链表头指针
 
 返回值：
 
-Card*	新链表头指针
+Log*	新链表头指针
 
 ## Card类	会员卡
 
@@ -154,7 +154,7 @@ short level	会员卡等级（与折扣有关）
 
 double remaining_sum	卡内余额
 
-double comsumption	总消费金额（与等级有关）
+double consumption	总消费金额（与等级有关）
 
 Time createTime	创建时间
 
@@ -164,7 +164,7 @@ bool isLost	是否丢失（已丢失的卡无法使用）
 
 Log* rechargeLog	充值记录
 
-Log* comsumeLog	消费记录
+Log* consumeLog	消费记录
 
 Card *next	指向下一节点的指针
 
@@ -186,7 +186,7 @@ Card*	链表头指针
 
 Card* head	链表头指针
 
-char* name/number	用户姓名或卡号
+char* number	卡号
 
 返回值：
 
@@ -212,7 +212,9 @@ Card*	新链表头指针
 
 Card* head	链表头指针
 
-返回值：
+char* flag	排序关键词选项
+
+返回值： 
 
 Card*	新链表头指针
 
@@ -224,11 +226,23 @@ Card*	新链表头指针
 
 Card* head	链表头指针
 
-char* name/number	用户姓名或卡号
 
 返回值：
 
-Card*	指向符合条件的数据的指针
+Card*	指向符合条件的第一个数据的指针
+
+#### cardSearchs()
+
+在Card链表中查找某些数据
+
+参数：
+
+Card* head	链表头指针
+
+
+返回值：
+
+Card* 指针数组，储存所有指向符合条件的元素的指针
 
 #### cardFix()
 
@@ -250,7 +264,7 @@ Card*	新链表头指针
 
 Card* head	链表头指针
 
-char* name/number	用户姓名或卡号
+char* number	卡号
 
 返回值：
 
@@ -262,7 +276,7 @@ Card*	新链表头指针
 
 参数：
 
-char* name/number	用户名/卡号
+char* number	卡号
 
 char* password	密码
 
@@ -298,7 +312,7 @@ double money	消费金额
 
 Card* head	链表头指针
 
-char* name/number	用户名/卡号
+char* number	用户名/卡号
 
 ## Admin类	系统账户
 
@@ -365,6 +379,8 @@ Admin*	指向符合条件的数据的指针
 ## 系统
 
 int authority	权限等级（1：管理员，2：超级管理员）
+
+bool isLoggenIn	管理员是否登录
 
 #### authorize()
 

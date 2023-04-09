@@ -28,14 +28,12 @@ Log* logSearchs(Log*, ...);
 Log* logFix(Log*);  //card4
 
 typedef struct Card{
-    char *name;
-    char *number;
-    char *password; 
+    char *name,*number,*password; 
     short level;
-    double remaining_sum,comsumption;
+    double remaining_sum,consumption;
     Time createTime,validTime;
     bool isLost;
-    Log *rechargeLog,*comsumeLog;
+    Log *rechargeLog,*consumeLog;
     struct Card *next;
 }Card;
 #define LENCard sizeof(Card)
@@ -43,9 +41,9 @@ Card *cards;    //全局Card动态链表，用于存放用户数据
 Card* cardCreate();//card1
 Card* cardDelete(Card*, char*);//card1     
 Card* cardExtend(Card*);//card1
-Card* cardSort(Card*);   //card2.c
-Card* cardSearch(Card*, char*); //card1   
-Card* cardSearchs(Card*, char*);    
+Card* cardSort(Card*,char*);   //card2.c
+Card* cardSearch(Card*, ...); //card1   
+Card* cardSearchs(Card*, ...);    
 Card* cardFix(Card*);   //card4
 Card* cardLost(Card*,char*);//card1
 bool cardLogIn(char*, char*);//card3.c
