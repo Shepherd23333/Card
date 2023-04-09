@@ -48,21 +48,76 @@ void cardSort(Card* head)
         }
     }while(exchange); //当存在交换时继续排序
 }
-//登录用户的会员卡之后的界面
+//登录管理员账号之后界面
 void menu()
 {
-    printf("**************************************\n");
-    printf("******1.查询交易记录*******************\n");//按时间和金额查找某个数据
-    printf("******2.查询卡内余额*******************\n");
-    printf("******3.查询总消费金额*****************\n");
-    printf("******4.会员卡挂失*********************\n");
-    printf("******5.修改账户信息*******************\n");//
-    printf("**************************************\n");
-    printf("**************************************\n");
-
-   
+    printf("*****************菜单管理****************\n");
+    printf("      1.新会员登记       2.会员信息维护\n");
+    printf("      3.续费             4.消费\n");
+    printf("      5.退卡             6.挂失\n");
+    printf("      7.查询             8.排序\n");
+    printf("      9.统计             10.系统维护\n");
+    printf("      11.帮助            0.退出\n");
+    printf("**********欢迎使用会员卡计费系统**********\n");
+    //姓名，卡号，密码，
+    //按时间和金额查找某个数据（包括充值和消费记录）
 }
-//登录管理员账号之后界面
+void test01() 
+{
+    int n=0;
+    do{
+    
+        menu();
+        printf("请选择要测试的操作：");
+        scanf("%d", &n);
+        switch(n)
+        {
+            case 1:
+                
+                break;
+            case 2:
+                
+                break;
+            case 3:
+                
+                break;
+            case 4:
+                
+                break;
+            case 5:
+                
+                break;
+            case 6:
+                Card* cardLost(Card*,char*);
+                break;
+            case 7:
+                
+                break;
+            case 8:
+                
+                break;
+            case 9:
+                
+                break;
+            case 10:
+                
+                break;
+            case 11:
+                
+                break;
+            case 0:
+                printf("退出系统\n");
+                break;
+            default:
+            printf("ERROR\n");
+                break;
+        }
+    }
+    while(n != 0);
+    
+}
+
+
 
 
 
