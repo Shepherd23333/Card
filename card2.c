@@ -106,7 +106,8 @@ void test01()
                 
                 break;
             case 0:
-                return;
+                printf("ÍË³öÏµÍ³\n");
+                break;
             default:
             printf("ERROR\n");
                 break;
