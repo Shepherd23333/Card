@@ -21,16 +21,24 @@ char* getstr(){
     str[i-1]='\0';  
     return str;
 }
-void logIn(){
+bool isTime(int y,int mo,int d,int h,int mi){
+    if(y>=1970&&1<=mo&&mo<=12){
+        int b=y%4?0:(y%25||y%400==0);
+        int ds[]={31,28+b,31,30,31,30,31,31,30,31,30,31};
+        return 0<d&&d<=ds[mo]&&0<=h&&h<24&&0<=mi&&mi<60;
+    }
+    return 0;
+}
+void adminLogIn(){
     printf("ÇëÊäÈëÕËºÅ£¨ÊäÈëNULLÍË³öÏµÍ³£©£º\n");
     char* u;
     u=getstr();
     if(!strcmp(u,"NULL"))
         exit(0);
     Admin *a=adminSearch(admins,u);
-    if(a==NULL){
+    if(a==NULL)
         printf("¹ÜÀíÔ±ÕÊ»§²»´æÔÚ£¡\n");
-    }else{
+    else{
         printf("ÇëÊäÈëÃÜÂë£º\n");
         char *p;
         p=getstr();
@@ -38,9 +46,8 @@ void logIn(){
             authority=(*a).isSuper+1;
             printf("µÇÂ¼³É¹¦£¡\n");
             isLoggedIn=1;
-        }else{
-            printf("ÃÜÂë´íÎó£¡\n");
-        }
+        }else
+            printf("ÃÜÂë´íÎó£¡\n"); 
     }
     system("pause");
 }

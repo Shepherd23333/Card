@@ -22,7 +22,7 @@ int minute	分
 
 参数：
 
-Time t	待修改的时间
+Time* t	指向待修改时间的指针
 
 int y	年
 
@@ -98,13 +98,13 @@ Log* 新链表头指针
 
 #### logSearch()
 
-在Log链表中按时间或金额查找某个数据
+在Log链表中按时间区间或金额查找某个数据
 
 参数：
 
 Log* head	链表头指针
 
-Time t	时间
+Time t1,t2	时间区间的端点（包含）
 
 double money	交易金额
 
@@ -114,13 +114,13 @@ Log* 指向符合条件的第一个元素的指针
 
 #### logSearchs()
 
-在Log链表中按时间或金额查找某些数据
+在Log链表中按时间区间或金额查找某些数据
 
 参数：
 
 Log* head	链表头指针
 
-Time t	时间
+Time t1,t2	时间区间的端点（包含）
 
 double money	交易金额
 
@@ -130,7 +130,7 @@ Log* 指针数组，储存所有指向符合条件的元素的指针
 
 #### logFix()
 
-修改Log链表中某个数据（可以删除）
+修改Log链表中某个数据
 
 参数：
 
@@ -156,7 +156,7 @@ short level	会员卡等级（与折扣有关）
 
 double remaining_sum	卡内余额
 
-double consumption	总消费金额（与等级有关）
+double total_charge	总充值金额（与等级有关）
 
 Time createTime	创建时间
 
@@ -232,9 +232,7 @@ char* name/number/phone	用户名/卡号/手机号
 
 short level	会员等级
 
-Time createTime	创建时间
-
-Log* consumeLog	消费记录
+Time t1,t2	时间区间的端点（包含）
 
 返回值：
 
@@ -252,9 +250,7 @@ char* name/number/phone	用户名/卡号/手机号
 
 short level	会员等级
 
-Time createTime	创建时间
-
-Log* consumeLog	消费记录
+Time t1,t2	时间区间的端点（包含）
 
 返回值：
 
@@ -284,7 +280,7 @@ Card* head	链表头指针
 
 Card*	新链表头指针
 
-#### cardLogIn()
+#### cardadminLogIn()
 
 登录会员卡
 
@@ -414,7 +410,7 @@ bool isLoggenIn	管理员是否登录
 
 验证权限
 
-#### logIn()
+#### adminLogIn()
 
 系统登录
 

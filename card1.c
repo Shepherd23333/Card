@@ -118,7 +118,7 @@ Card* cardCreate()
     strcpy(p1->name,"");
     strcpy(p1->number,"");
     strcpy(p1->password,"");
-    p1->remaining_sum=0.0f,p1->consumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
+    p1->remaining_sum=0.0f,p1->total_charge=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
     p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
     p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
     p1->consumeLog->time.year=0,p1->consumeLog->time.month=0,p1->consumeLog->time.day=0,p1->consumeLog->time.hour=0,p1->consumeLog->time.minute=0,p1->consumeLog->money=0.0f;
@@ -137,7 +137,7 @@ Card* cardCreate()
         strcpy(p1->name,"");
         strcpy(p1->number,"");
         strcpy(p1->password,"");
-        p1->remaining_sum=0.0f,p1->consumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
+        p1->remaining_sum=0.0f,p1->total_charge=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
         p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
         p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
         p1->consumeLog->time.year=0,p1->consumeLog->time.month=0,p1->consumeLog->time.day=0,p1->consumeLog->time.hour=0,p1->consumeLog->time.minute=0,p1->consumeLog->money=0.0f;
@@ -161,7 +161,7 @@ Card* cardExtend(Card* head)
     strcpy(p1->name,"");
     strcpy(p1->number,"");
     strcpy(p1->password,"");
-    p1->remaining_sum=0.0f,p1->consumption=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
+    p1->remaining_sum=0.0f,p1->total_charge=0.0f,p1->createTime.year=0,p1->createTime.month=0,p1->createTime.day=0,p1->createTime.hour=0,p1->createTime.minute=0;
     p1->validTime.year=0,p1->validTime.month=0,p1->validTime.day=0,p1->validTime.hour=0, p1->validTime.minute=0;
     p1->rechargeLog->time.year=0,p1->rechargeLog->time.month=0,p1->rechargeLog->time.day=0,p1->rechargeLog->time.hour=0,p1->rechargeLog->time.minute=0,p1->rechargeLog->money=0.0f;
     p1->consumeLog->time.year=0,p1->consumeLog->time.month=0,p1->consumeLog->time.day=0,p1->consumeLog->time.hour=0,p1->consumeLog->time.minute=0,p1->consumeLog->money=0.0f;

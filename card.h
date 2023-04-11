@@ -10,27 +10,27 @@
 #include<windows.h>
 #include<math.h>
 typedef struct Time{
-    int year, month, day, hour, minute;
+    unsigned year, month, day, hour, minute;
 }Time;
-void setTime(Time*,int,int,int,int,int); //card4
-int timeComp(Time,Time);
+int timeComp(Time,Time);    //card4
 typedef struct Log{
     Time time;
     double money;
     struct Log *next;
 }Log;
 #define LENLog sizeof(Log)
-Log* logCreate();//card1
-Log* logDelete(Log*, Time);//card1
-Log* logExtend(Log*);//card1
-Log* logSearch(Log*, ...);//card1
-Log* logSearchs(Log*, ...);
+Log* logCreate();   //card1
+Log* logDelete(Log*, Time); //card1
+Log* logExtend(Log*);   //card1
+void logPrint(Log*);
+Log* logSearch(Log*, ...);  //card1
+Log* logSearchs(Log*, int*,...);
 Log* logFix(Log*);  //card4
 
 typedef struct Card{
     char *name,*number,*phone,*password; 
     short level;
-    double remaining_sum,consumption;
+    double remaining_sum,total_charge;
     Time createTime,validTime;
     bool isLost;
     Log *rechargeLog,*consumeLog;
@@ -38,38 +38,44 @@ typedef struct Card{
 }Card;
 #define LENCard sizeof(Card)
 Card *cards;    //全局Card动态链表，用于存放用户数据
-Card* cardCreate();//card1
-Card* cardDelete(Card*, char*);//card1     
-Card* cardExtend(Card*);//card1
-Card* cardSort(Card*,char*);   //card2.c
-Card* cardSearch(Card*, ...); //card1   
-Card* cardSearchs(Card*, ...);    
+Card* cardCreate(); //card1
+Card* cardDelete(Card*, char*); //card1     
+Card* cardExtend(Card*);    //card1
+void cardPrint(Card*);
+Card* cardSort(Card*,char*);    //card2
+Card* cardSearch(Card*, ...);   //card1   
+Card* cardSearchs(Card*, int*, ...);    
 Card* cardFix(Card*);   //card4
 Card* cardSignUp(Card*); 
-bool cardLogIn(char*, char*);//card3.c
+bool cardLogIn(char*, char*);   //card3
+bool identify(Card*);
 void cardNewPhone(Card*,char*);
-void cardLost(Card*,char*);//card1
-void cardFind(Card*, char*);//card2.c
-void cardRecharge(Card*, double); //card3.c
-void cardConsume(Card*, double);//card2.c
+void cardLost(Card*,char*); //card1
+void cardFind(Card*, char*);    //card2
+void cardRecharge(Card*, double);   //card3
+void cardConsume(Card*, double);    //card2
 
 char* getstr(); //system
+bool isTime(int,int,int,int,int);   //system
 typedef struct Admin{
     char *username,*password;
     bool isSuper;
     struct Admin *next;
 }Admin;
 Admin *admins;  //全局Admin动态链表，用于存放管理员数据
-Admin* adminCreate();//card3.c
-Admin* adminDelete(Admin*, char*);   //card3.c  
-Admin* adminExtend(Admin*);//card2.c
-Admin* adminSearch(Admin*, char*); //card2.c   
+Admin* adminCreate();   //card3
+Admin* adminDelete(Admin*, char*);  //card3
+Admin* adminExtend(Admin*); //card2
+Admin* adminSearch(Admin*, char*);  //card2  
+Admin* adminFix(Admin*);
+void adminLogIn();   //system
+Admin* adminSignUp(Admin*);
+void adminLogOut();
 
 bool isLoggedIn;
 int authority;
-bool authorize();   //system
-void logIn();   //system
 void logOut();
+bool authorize();   //system
 void backUp();
 void restore();
 void read();

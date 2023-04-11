@@ -6,7 +6,7 @@ int main(){
     printf("*****************************\n");
     printf("ÇëµÇÂ¼ÏµÍ³ÕË»§£º\n");
     while(!isLoggedIn)
-        logIn();
+        adminLogIn();
     system("cls");
 
     system("pause");
