@@ -29,6 +29,18 @@ bool isTime(int y,int mo,int d,int h,int mi){
     }
     return 0;
 }
+void read(){
+    //todo
+}
+void initialize(){
+    printf("系统初始化中，请等待……\n");
+    admins=adminCreate();
+    cards=cardCreate();
+    read();
+    printf("初始化完成！\n");
+    Sleep(1500);
+    system("cls");
+}
 void adminLogIn(){
     printf("请输入账号（输入NULL退出系统）：\n");
     char* u;
@@ -51,12 +63,25 @@ void adminLogIn(){
     }
     system("pause");
 }
-void read(){
-    //todo
+void System(){
+    printf("*****************************\n");
+    printf("*****会员卡交易系统 v1.0*****\n");
+    printf("*****************************\n");
+    printf("请选择操作：\n");
+    printf("（0.退出系统  1.注册超级管理员账户  2.登录（超级）管理员账户）\n");
+    int f;
+    scanf("%d",&f);
+    if(f)
+        f==1?(admins=SASignUp(admins)):adminLogIn();
+    else
+        exit(0);
+    system("cls");
+    if(!isLoggedIn)
+        System();
 }
 bool authorize(){
     if(authority!=2){
-        printf("错误：拒绝访问。\n该操作需要超级管理员权限。\n");
+        printf("错误：拒绝访问！\n该操作需要超级管理员权限。\n");
         return 0;
     }
     return 1;

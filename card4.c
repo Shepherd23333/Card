@@ -13,7 +13,7 @@ int timeComp(Time x,Time y){
     ):sig(x.month-y.month)
     ):sig(x.year-y.year);
 }
-Log* logFix(Log* head){
+void logFix(Log* head){
     logPrint(head);
     printf("请指定需要修改的交易记录：\n");
     double money;
@@ -60,7 +60,7 @@ Log* logFix(Log* head){
     }else
         printf("错误：非法数据！\n");
 }
-Card* cardFix(Card* c){
+void cardFix(Card* c){
     printf("请选择你要修改的内容（允许同时修改多项数据，输入0结束修改）：\n");
     printf("(1.用户名  2.会员卡卡号  3.用户手机号  4.会员卡等级\n");
     printf("5.总充值金额  6.创建时间  7.丢失状态  8.充值记录\n");

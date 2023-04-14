@@ -25,7 +25,7 @@ Log* logExtend(Log*);   //card1
 void logPrint(Log*);
 Log* logSearch(Log*, ...);  //card1
 Log* logSearchs(Log*, int*,...);
-Log* logFix(Log*);  //card4
+void logFix(Log*);  //card4
 
 typedef struct Card{
     char *name,*number,*phone,*password; 
@@ -45,9 +45,10 @@ void cardPrint(Card*);
 Card* cardSort(Card*,char*);    //card2
 Card* cardSearch(Card*, ...);   //card1   
 Card* cardSearchs(Card*, int*, ...);    
-Card* cardFix(Card*);   //card4
+void cardFix(Card*);   //card4
 Card* cardSignUp(Card*); 
 bool cardLogIn(char*, char*);   //card3
+void cardLogOut();
 bool identify(Card*);
 void cardNewPhone(Card*,char*);
 void cardLost(Card*,char*); //card1
@@ -69,6 +70,7 @@ Admin* adminExtend(Admin*); //card2
 Admin* adminSearch(Admin*, char*);  //card2  
 Admin* adminFix(Admin*);
 void adminLogIn();   //system
+Admin* SASignUp(Admin*);
 Admin* adminSignUp(Admin*);
 void adminLogOut();
 
@@ -80,5 +82,7 @@ void backUp();
 void restore();
 void read();
 void write();
+void initialize();
+void System();
 
 #endif
