@@ -90,7 +90,7 @@ void test01()
                 
                 break;
             case 6:
-                Card* cardLost(Card*,char*);
+                //Card* cardLost(Card*,char*);
                 break;
             case 7:
                 

@@ -4,35 +4,17 @@
 
 ### 成员
 
-int year	年
+unsigned year	年
 
-int month	月
+unsigned month	月
 
-int day	日
+unsigned day	日
 
-int hour	时
+unsigned hour	时
 
-int minute	分
+unsigned minute	分
 
 ### 成员函数
-
-#### setTime()
-
-修改时间
-
-参数：
-
-Time* t	指向待修改时间的指针
-
-int y	年
-
-int mo	月
-
-int d	日
-
-int h	时
-
-int mi	分
 
 #### timeComp()
 
@@ -96,6 +78,22 @@ Log* head	链表头指针
 
 Log* 新链表头指针
 
+#### logPrint()
+
+输出指定Log类数据的内容
+
+参数：
+
+Log* l	指向指定Log类数据的指针
+
+#### logPrints()
+
+输出Log链表所有数据内容
+
+参数：
+
+Log* head	链表头指针
+
 #### logSearch()
 
 在Log链表中按时间区间或金额查找某个数据
@@ -135,10 +133,6 @@ Log* 指针数组，储存所有指向符合条件的元素的指针
 参数：
 
 Log* head	链表头指针
-
-返回值：
-
-Log*	新链表头指针
 
 ## Card类	会员卡
 
@@ -186,8 +180,6 @@ Card*	链表头指针
 
 参数：
 
-Card* head	链表头指针
-
 char* number/phone	卡号/手机号
 
 返回值：
@@ -198,23 +190,25 @@ Card*	新链表头指针
 
 在Card链表后接入一个Card类数据
 
-参数：
-
-Card* head	链表头指针
-
 返回值：
 
 Card*	新链表头指针
 
-#### cardSort()
+#### cardPrint()
 
-依次按关键词给Card链表排序
+输出指定Card类数据的内容
 
 参数：
 
-Card* head	链表头指针
+Card* c	指向指定Card类数据的指针
 
-char* flag	排序关键词选项
+#### cardPrints()
+
+输出Card链表内所有数据的内容
+
+#### cardSort()
+
+依次按关键词给Card链表排序
 
 返回值：
 
@@ -244,7 +238,7 @@ Card*	指向符合条件的第一个数据的指针
 
 参数：
 
-Card* head	链表头指针
+int* cnt	符合条件的数据个数
 
 char* name/number/phone	用户名/卡号/手机号
 
@@ -262,7 +256,7 @@ Card* 指针数组，储存所有指向符合条件的元素的指针
 
 参数：
 
-Card* head	链表头指针
+Card* c	指向待修改Card类数据的指针
 
 返回值：
 
@@ -272,15 +266,7 @@ Card*	新链表头指针
 
 注册会员卡（包含对已挂失卡的操作）
 
-参数：
-
-Card* head	链表头指针
-
-返回值：
-
-Card*	新链表头指针
-
-#### cardadminLogIn()
+#### cardLogIn()
 
 登录会员卡
 
@@ -292,7 +278,39 @@ char* password	密码
 
 返回值：
 
-bool	是否登录成功
+Card*	指向登录成功的Card的指针
+
+#### cardLogOut()
+
+退出会员卡登录
+
+#### cardIdentify()
+
+验证会员卡用户身份
+
+参数：
+
+Card* c	使用中的Card
+
+返回值：
+
+bool	是否为注册用户本人
+
+#### cardUpdatePhone()
+
+更换会员卡绑定的手机
+
+参数：
+
+Card* c	使用中的Card
+
+#### cardUpdatePassword()
+
+更换会员卡密码
+
+参数：
+
+Card* c	使用中的Card
 
 #### cardLost()
 
@@ -300,13 +318,15 @@ bool	是否登录成功
 
 参数：
 
-Card* head	链表头指针
+char* number/phone	卡号/手机号
 
-char* number/phone	卡号/
+#### cardFind()
 
-返回值：
+找回会员卡
 
-Card*	新链表头指针
+参数：
+
+char* number	卡号
 
 #### cardRecharge()
 
@@ -328,16 +348,6 @@ Card* c	指向待操作卡的指针
 
 double money	消费金额
 
-#### cardFind()
-
-找回会员卡
-
-参数：
-
-Card* head	链表头指针
-
-char* number	卡号
-
 ## Admin类	系统账户
 
 ### 成员
@@ -352,7 +362,7 @@ Admin* next	指向下一节点的指针
 
 ### 成员函数
 
-#### AdminCreate()
+#### adminCreate()
 
 创建Admin动态链表
 
@@ -360,13 +370,11 @@ Admin* next	指向下一节点的指针
 
 Admin*	链表头指针
 
-#### AdminDelete()
+#### adminDelete()
 
 删除Admin链表中某一节点
 
 参数
-
-Admin* head	链表头指针
 
 char* username	账户名
 
@@ -374,13 +382,9 @@ char* username	账户名
 
 Admin*	新链表头指针
 
-#### AdminExtend()
+#### adminExtend()
 
 在Admin链表后接入一个Admin类数据
-
-参数：
-
-Admin* head	链表头指针
 
 返回值：
 
@@ -392,13 +396,35 @@ Admin*	新链表头指针
 
 参数：
 
-Admin* head	链表头指针
-
 char* username	账户名
 
 返回值：
 
 Admin*	指向符合条件的数据的指针
+
+#### adminFix()
+
+修改Admin链表中某个数据
+
+参数：
+
+Admin* a	指向待修改Admin数据的指针
+
+#### adminLogIn()
+
+管理员登录
+
+#### SASignUp()
+
+超级管理员注册
+
+#### adminSignUp()
+
+管理员注册
+
+#### adminLogOut()
+
+管理员退出
 
 ## 系统
 
@@ -406,17 +432,15 @@ int authority	权限等级（1：管理员，2：超级管理员）
 
 bool isLoggenIn	管理员是否登录
 
-#### authorize()
-
-验证权限
-
-#### adminLogIn()
-
-系统登录
+bool isCardLoggedIn	是否有会员卡登录
 
 #### logOut()
 
-退出登录
+退出系统
+
+#### authorize()
+
+验证权限
 
 #### backUp()
 
@@ -433,3 +457,11 @@ bool isLoggenIn	管理员是否登录
 #### write()
 
 文件写入
+
+#### initialize()
+
+程序初始化
+
+#### System()
+
+系统菜单

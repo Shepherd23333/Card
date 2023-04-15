@@ -29,9 +29,6 @@ bool isTime(int y,int mo,int d,int h,int mi){
     }
     return 0;
 }
-void read(){
-    //todo
-}
 void initialize(){
     printf("系统初始化中，请等待……\n");
     admins=adminCreate();
@@ -47,7 +44,7 @@ void adminLogIn(){
     u=getstr();
     if(!strcmp(u,"NULL"))
         exit(0);
-    Admin *a=adminSearch(admins,u);
+    Admin *a=adminSearch(u);
     if(a==NULL)
         printf("管理员帐户不存在！\n");
     else{
@@ -72,7 +69,7 @@ void System(){
     int f;
     scanf("%d",&f);
     if(f)
-        f==1?(admins=SASignUp(admins)):adminLogIn();
+        f==1?SASignUp():adminLogIn();
     else
         exit(0);
     system("cls");

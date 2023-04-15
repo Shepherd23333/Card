@@ -62,10 +62,10 @@ void logFix(Log* head){
 }
 void cardFix(Card* c){
     printf("请选择你要修改的内容（允许同时修改多项数据，输入0结束修改）：\n");
-    printf("(1.用户名  2.会员卡卡号  3.用户手机号  4.会员卡等级\n");
-    printf("5.总充值金额  6.创建时间  7.丢失状态  8.充值记录\n");
-    printf("9.消费记录)\n");
-    int f[10]={0},t,y,mo,d,h,mi;
+    printf("(1.用户名  2.会员卡卡号  3.用户手机号  4.会员卡密码\n");
+    printf("5.会员卡等级  6.总充值金额  7.创建时间  8.丢失状态\n");
+    printf("9.充值记录  10.消费记录)\n");
+    int f[11]={0},t,y,mo,d,h,mi;
     double money;
     char *s;
     scanf("%d",&t);
@@ -73,24 +73,24 @@ void cardFix(Card* c){
         f[t]=1;
         scanf("%d",&t);
     }
-    for(int i=1;i<10;i++)
+    for(int i=1;i<11;i++)
         if(f[i])
             switch(i){
                 case 1:
                     printf("请输入新用户名：\n");
                     s=getstr();
-                    if(!isalpha(s[0]))
-                        printf("错误：非法数据！\n");
-                    else{
+                    if(isalpha(s[0])||s[0]<=-1731190){
                         strcpy(c->name,s);
                         printf("修改成功！\n");
                     }
+                    else
+                        printf("错误：非法数据！\n");
                     break;
                 case 2:
                     if(authorize()){
                         printf("请输入新卡号：\n");
                         s=getstr();
-                        if(s[0]!='c')
+                        if(s[0]!='c'||strspn(s+1,"0123456789")!=strlen(s+1))
                             printf("错误：非法数据！\n");
                         else if(!cardSearch(cards,s)){
                             strcpy(c->number,s);
@@ -103,7 +103,7 @@ void cardFix(Card* c){
                     if(authorize()){
                         printf("请输入新手机号：\n");
                         s=getstr();
-                        if(strlen(s)!=11)
+                        if(strlen(s)!=11||strspn(s,"0123456789")!=strlen(s))
                             printf("错误：非法数据！\n");
                         else if(!cardSearch(cards,s)){
                             strcpy(c->phone,s);
@@ -111,9 +111,19 @@ void cardFix(Card* c){
                         }else
                             printf("错误：该手机号已被使用！\n");
                     }else
-                        cardNewPhone(cards,c->number);
+                        cardUpdatePhone(c);
                     break;
                 case 4:
+                    if(authority!=2)
+                        cardUpdatePassword(c);
+                    else{
+                        printf("请输入新密码：\n");
+                        s=getstr();
+                        strcpy(c->password,s);
+                        printf("修改成功！\n");
+                    }
+                    break;
+                case 5:
                     if(authorize()){
                         printf("请输入会员卡等级：\n");
                         scanf("%d",&t);
@@ -124,7 +134,7 @@ void cardFix(Card* c){
                             printf("错误：非法数据！\n");
                     }
                     break;
-                case 5:
+                case 6:
                     if(authorize()){
                         printf("请输入总充值金额：\n");
                         scanf("%lf",&money);
@@ -136,7 +146,7 @@ void cardFix(Card* c){
                         }
                     }
                     break;
-                case 6:
+                case 7:
                     if(authorize()){
                         printf("请输入创建时间：\n");
                         scanf("%d\\%d\\%d %d:%d",&y,&mo,&d,&h,&mi);
@@ -148,23 +158,25 @@ void cardFix(Card* c){
                             printf("错误：非法数据！\n");
                     }
                     break;
-                case 7:
+                case 8:
                     if(authority!=2){
                         printf("请输入要找回的会员卡卡号或用户手机号：\n");
                         s=getstr();
-                        cardFind(c,s);
+                        cardFind(s);
                     }else{
                         c->isLost=!c->isLost;
                         printf("修改成功！\n");
                     }
                     break;
-                case 8:
+                case 9:
                     if(authorize())
                         logFix(c->rechargeLog);
                     break;
-                case 9:
+                case 10:
                     if(authorize())
-                        logfix(c->consumeLog);
+                        logFix(c->consumeLog);
+                    break;
+                default:
                     break;
             }
     system("pause");

@@ -19,10 +19,11 @@ typedef struct Log{
     struct Log *next;
 }Log;
 #define LENLog sizeof(Log)
-Log* logCreate();   //card1
+Log* logCreate();   //card3
 Log* logDelete(Log*, Time); //card1
 Log* logExtend(Log*);   //card1
 void logPrint(Log*);
+void logPrints(Log*);
 Log* logSearch(Log*, ...);  //card1
 Log* logSearchs(Log*, int*,...);
 void logFix(Log*);  //card4
@@ -38,21 +39,23 @@ typedef struct Card{
 }Card;
 #define LENCard sizeof(Card)
 Card *cards;    //全局Card动态链表，用于存放用户数据
-Card* cardCreate(); //card1
-Card* cardDelete(Card*, char*); //card1     
-Card* cardExtend(Card*);    //card1
+Card* cardCreate(); //card3
+Card* cardDelete(char*); //card1     
+Card* cardExtend();    //card1
 void cardPrint(Card*);
-Card* cardSort(Card*,char*);    //card2
+void cardPrints();
+Card* cardSort();    //card2
 Card* cardSearch(Card*, ...);   //card1   
-Card* cardSearchs(Card*, int*, ...);    
+Card* cardSearchs(int*, ...);    
 void cardFix(Card*);   //card4
-Card* cardSignUp(Card*); 
-bool cardLogIn(char*, char*);   //card3
+void cardSignUp(); 
+Card* cardLogIn(char*, char*);   //card3
 void cardLogOut();
-bool identify(Card*);
-void cardNewPhone(Card*,char*);
-void cardLost(Card*,char*); //card1
-void cardFind(Card*, char*);    //card2
+bool cardIdentify(Card*);
+void cardUpdatePhone(Card*);
+void cardUpdatePassword(Card*);
+void cardLost(char*); //card1
+void cardFind(char*);    //card2
 void cardRecharge(Card*, double);   //card3
 void cardConsume(Card*, double);    //card2
 
@@ -63,25 +66,25 @@ typedef struct Admin{
     bool isSuper;
     struct Admin *next;
 }Admin;
-Admin *admins;  //全局Admin动态链表，用于存放管理员数据
+Admin *admins;  //全局Admin动态链表，用    存放管理员数据
 Admin* adminCreate();   //card3
-Admin* adminDelete(Admin*, char*);  //card3
-Admin* adminExtend(Admin*); //card2
-Admin* adminSearch(Admin*, char*);  //card2  
-Admin* adminFix(Admin*);
+Admin* adminDelete(char*);  //card3
+Admin* adminExtend(); //card2
+Admin* adminSearch(char*);  //card2  
+void adminFix(Admin*);
 void adminLogIn();   //system
-Admin* SASignUp(Admin*);
-Admin* adminSignUp(Admin*);
+void SASignUp();
+void adminSignUp();
 void adminLogOut();
 
-bool isLoggedIn;
+bool isLoggedIn,isCardLoggedIn;
 int authority;
 void logOut();
 bool authorize();   //system
 void backUp();
 void restore();
-void read();
-void write();
+void read();//card1
+void write();//card1
 void initialize();
 void System();
 
