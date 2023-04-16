@@ -1,4 +1,5 @@
 #include"card.h"
+#include"md5.h"
 char* getstr(){
     char *str,*_str;
     int i = 1;
@@ -12,7 +13,7 @@ char* getstr(){
         str = (char*)malloc(sizeof(char)*(i+1));
         if(!str){
             free(_str);
-            printf("No enough memory!");
+            printf("错误：内存溢出!");
             return NULL;
         }
         strcpy(str, _str);
@@ -39,26 +40,48 @@ void initialize(){
     system("cls");
 }
 void adminLogIn(){
-    printf("请输入账号（输入NULL退出系统）：\n");
+    printf("请输入账号（输入NULL返回系统）：\n");
     char* u;
     u=getstr();
-    if(!strcmp(u,"NULL"))
-        exit(0);
+    if(!strcmp(u,"NULL")){
+        system("cls");
+        System();
+    }
     Admin *a=adminSearch(u);
-    if(a==NULL)
+    if(!a)
         printf("管理员帐户不存在！\n");
     else{
         printf("请输入密码：\n");
         char *p;
         p=getstr();
-        if(!strcmp(p,(*a).password)){
-            authority=(*a).isSuper+1;
+        if(!strcmp(p,a->password)){
+            authority=a->isSuper+1;
             printf("登录成功！\n");
             isLoggedIn=1;
         }else
             printf("密码错误！\n"); 
     }
     system("pause");
+}
+void SASignUp(){
+    printf("请输入密钥：\n");
+    char *s;
+    s=getstr();
+    if(!strcmp(md5C(s),"79e70d8cf6d56c831544a24ee970d5ed")){
+        printf("验证成功！\n");
+        char *u,*p;
+        printf("请输入账户名：\n");
+        u=getstr();
+        if(!adminSearch(u)){
+            printf("请输入密码：\n");
+            p=getstr();
+            Admin *a=adminExtend(),t={u,p,1,NULL};
+            *a=t;
+            printf("注册成功！\n");
+        }else
+            printf("错误：该账户名已存在！\n");
+    }else
+        printf("密钥错误！\n");
 }
 void System(){
     printf("*****************************\n");

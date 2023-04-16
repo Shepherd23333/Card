@@ -1,7 +1,7 @@
 #ifndef _CARD_H_
 #define _CARD_H_
 
-//所有变量及函数的内容在README.md
+//details in README.md
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -38,7 +38,7 @@ typedef struct Card{
     struct Card *next;
 }Card;
 #define LENCard sizeof(Card)
-Card *cards;    //全局Card动态链表，用于存放用户数据
+Card *cards;    //global Card list
 Card* cardCreate(); //card3
 Card* cardDelete(char*); //card1     
 Card* cardExtend();    //card1
@@ -66,7 +66,7 @@ typedef struct Admin{
     bool isSuper;
     struct Admin *next;
 }Admin;
-Admin *admins;  //全局Admin动态链表，用    存放管理员数据
+Admin *admins;  //global Admin list
 Admin* adminCreate();   //card3
 Admin* adminDelete(char*);  //card3
 Admin* adminExtend(); //card2
@@ -83,9 +83,9 @@ void logOut();
 bool authorize();   //system
 void backUp();
 void restore();
-void read();//card1
-void write();//card1
-void initialize();
-void System();
+void read();    //card1
+void write();   //card1
+void initialize();  //system
+void System();  //system
 
 #endif

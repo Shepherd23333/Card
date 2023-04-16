@@ -79,7 +79,7 @@ void cardFix(Card* c){
                 case 1:
                     printf("请输入新用户名：\n");
                     s=getstr();
-                    if(isalpha(s[0])||s[0]<=-1731190){
+                    if(isalpha(s[0])&&(s[0]!='c'||strlen(s)==1||strspn(s+1,"0123456789")!=strlen(s+1))||s[0]<0){
                         strcpy(c->name,s);
                         printf("修改成功！\n");
                     }
@@ -90,7 +90,7 @@ void cardFix(Card* c){
                     if(authorize()){
                         printf("请输入新卡号：\n");
                         s=getstr();
-                        if(s[0]!='c'||strspn(s+1,"0123456789")!=strlen(s+1))
+                        if(s[0]!='c'||strlen(s)==1||strspn(s+1,"0123456789")!=strlen(s+1))
                             printf("错误：非法数据！\n");
                         else if(!cardSearch(cards,s)){
                             strcpy(c->number,s);

@@ -33,7 +33,7 @@ Log *logExtend(Log *head)
         p1 = p1->next = (Log *)malloc(LENLog);
         p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute, p1->money;
     }
-    return (head);
+    return (p1);
 }
 Log *logDelete(Log *head, Time detime)
 {
@@ -167,7 +167,7 @@ Card *cardExtend(Card *head)
         p1->consumeLog->time.year = 0, p1->consumeLog->time.month = 0, p1->consumeLog->time.day = 0, p1->consumeLog->time.hour = 0, p1->consumeLog->time.minute = 0, p1->consumeLog->money = 0.0f;
         p1->isLost = 0;
     }
-    return (head);
+    return (p1);
 }
 Card* cardDelete(char* demessage)
 {
