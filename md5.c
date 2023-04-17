@@ -1,8 +1,10 @@
 //copy from github:pod32g/MD5 and have some changes
-#include "md5.h"
 #include "card.h"
+#include<stdint.h>
 //just formatting
 
+// leftrotate function definition
+#define LEFTROTATE(x, c) (((x) << (c)) | ((x) >> (32 - (c))))
 // Constants are the integer part of the sines of integers (in radians) * 2^32.
 const uint32_t k[64] = {
     0xd76aa478, 0xe8c7b756, 0x242070db, 0xc1bdceee ,
@@ -119,7 +121,6 @@ void md5I(const uint8_t *initial_msg, size_t initial_len, uint8_t *digest) {
 }
 
 //define new function to use
-
 char* md5C(char* s){
     int l=strlen(s);
     uint8_t re[16];

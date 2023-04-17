@@ -1,5 +1,4 @@
 #include"card.h"
-#include"md5.h"
 char* getstr(){
     char *str,*_str;
     int i = 1;

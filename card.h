@@ -61,6 +61,7 @@ void cardConsume(Card*, double);    //card2
 
 char* getstr(); //system
 bool isTime(int,int,int,int,int);   //system
+char* md5C(char*);  //md5
 typedef struct Admin{
     char *username,*password;
     bool isSuper;

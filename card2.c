@@ -27,12 +27,12 @@ Card* cardSort()
     Card *p, *q, *tail;
     int exchange; //交换标志
     if(cards->next == NULL){ //空链表直接返回
-        return;
+        return cards;
     }
     do{
         exchange = 0; //初始化交换标志
         tail = cards; //尾节点指向头节点
-        p = cards->next; //p指向第一个节点
+        p = cards->next; //p指向第一个节点 //?
         while(p->next != NULL){ //遍历链表
             q = p->next; //q指向下一个节点
             if(p->number > q->number){ //如果p节点大于q节点
@@ -56,7 +56,9 @@ void cardFind(char* n)    //card2
 
 
 
-void cardConsume(Card*, double);    //card2
+void cardConsume(Card* c, double m){
+    
+}   //card2
 //登录管理员账号之后界面
 void menu()//会员卡系统界面
 {

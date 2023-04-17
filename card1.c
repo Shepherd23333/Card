@@ -5,7 +5,8 @@ Log *logCreate()
     Log *head;
     Log *p1, *p2;
     p1 = p2 = (Log *)malloc(LENLog);
-    p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute, p1->money;
+    //Time t={0,0,0,0,0};p1->time=t;
+    p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute, p1->money=0;
     head = NULL;
     while (p1->time.year != 0)
     {
@@ -16,7 +17,7 @@ Log *logCreate()
             p2->next = p1;
         p2 = p1;
         p1 = (Log *)malloc(LENLog);
-        p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute, p1->money;
+        p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute=0, p1->money=0;
     }
     p2->next = NULL;
     return (head);
@@ -31,7 +32,7 @@ Log *logExtend(Log *head)
             p1 = p1->next;
         }
         p1 = p1->next = (Log *)malloc(LENLog);
-        p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute, p1->money;
+        p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute=0, p1->money=0;
     }
     return (p1);
 }
@@ -40,10 +41,10 @@ Log *logDelete(Log *head, Time detime)
     Log *p1 = head;
     Log *p2;
     if ((head->time.year == detime.year) && (head->time.month == detime.month) && (head->time.day == detime.day) && (head->time.hour == detime.hour) && (head->time.minute == detime.minute))
-    {
+    {//if(!timeComp(head->time,detime))
         head = head->next;
         free(p1);
-        return (head);
+        return (head);//return ºóº¯Êý½áÊø
     }
     while (p1->next != NULL)
     {
@@ -177,7 +178,7 @@ Card* cardDelete(char* demessage)
         while (p1->next != NULL)
         {
             Card *p2 = p1->next;
-            if (strcmp(p1->next->name, demessage) || strcmp(p1->next->number, demessage) == 0)
+            if (!strcmp(p1->next->name, demessage) || !strcmp(p1->next->number, demessage) )
             {
                 p1->next = p1->next->next;
                 free(p2);
@@ -282,7 +283,7 @@ void write()
             cards->consumeLog = cards->consumeLog->next;
         }
 
-        cards = cards->next;
+        cards = cards->next;//cards has changed
     }
     fclose(fp);
 
@@ -296,7 +297,7 @@ void write()
         fwrite(&admins->username, 80, 1, fp);
         fwrite(&admins->password, 60, 1, fp);
         fwrite(&admins->isSuper, 1, 1, fp);
-        admins = admins->next;
+        admins = admins->next;//admins has changed
     }
     fclose(fp);
 }
@@ -308,7 +309,7 @@ void read()
     {
         printf("File open error\n");
         exit(0);
-    }
+    }//if(!cards) cards=cardCreate();
     while (cards != NULL)
     {
         fread(&cards->name, 80, 1, fp);
