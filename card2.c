@@ -22,7 +22,7 @@ Card* cardExtend(Card *head) {
     p->next = p_new;
     printf("会员卡添加成功！");
 }*/
-Card* cardSort()
+/*Card* cardSort()
 {
     Card *p, *q, *tail;
     int exchange; //交换标志
@@ -47,16 +47,146 @@ Card* cardSort()
             }
         }
     }while(exchange); //当存在交换时继续排序
+}*/
+Card *cardSort()//用把这里的head改成cards吗？
+{      
+    printf("请选择按以下哪种方式排序（可以多选）\n");
+    printf("1.按缴费总额升序排序    2.按消费金额升序排序\n");
+    printf("3.按缴费总额降序排序    4.按消费金额降序排序\n");
+    printf("5.按会员卡等级升序排序  6.按会员卡等级降序排序\n");
+    printf("7.按会员卡卡号升序排序  8.按会员卡卡号降序排序\n");
+    printf("9.按手机号升序排序      10.按手机号降序排序\n");
+    int t;
+    scanf("%d", &t);//怎么多选
+    switch(t)
+    case 1:                           
+            Card *q,*tail,*p=(Card*)malloc(sizeof(Card)); //按缴费总额排序
+            p->next=head;
+            head=p;
+            tail=NULL;                                                  //定义 tail
+            while(tail!=head->next)
+            {
+                p=head;
+                q=p->next;
+                while(q->next!=tail)
+                {                                                        //判断 q是否为空
+                    if(p->next->total_charge>q->next->total_charge)
+                    {
+                        p->next=q->next;                                 //比较大小，排序
+                        q->next=q->next->next;
+                        p->next->next=q;
+                    }
+                    p=p->next;
+                    q=p->next;
+                }
+                tail=q;
+            }
+            head=head->next;
+            free(p);
+            return head;                                                  //返回值
+            break;
+    case 3:                           
+            Card *q,*tail,*p=(Card*)malloc(sizeof(Card)); //按缴费总额排序
+            p->next=head;
+            head=p;
+            tail=NULL;                                                  //定义 tail
+            while(tail!=head->next)
+            {
+                p=head;
+                q=p->next;
+                while(q->next!=tail)
+                {                                                        //判断 q是否为空
+                    if(p->next->total_charge<q->next->total_charge)
+                    {
+                        p->next=q->next;                                 //比较大小，排序
+                        q->next=q->next->next;
+                        p->next->next=q;
+                    }
+                    p=p->next;
+                    q=p->next;
+                }
+                tail=q;
+            }
+            head=head->next;
+            free(p);
+            return head;  
+            break;
+    case 2:                                                
+            card *q,*tail,*p=(card*)malloc(sizeof(card));                 //按消费金额排序
+            p->next=head;
+            head=p;
+            tail=NULL;                                                     //定义 tail
+            while(tail!=head->next)
+            {
+                p=head;
+                q=p->next;
+                while(q->next!=tail)
+                {
+                    if(p->next->total_charge-remaining_sum>q->next->total_charge-remaining_sum)
+                    {                                                    //比较大小，排序
+                        p->next=q->next;
+                        q->next=q->next->next;
+                        p->next->next=q;
+                    }
+                    p=p->next;
+                    q=p->next;
+                }
+                tail=q;
+            }
+            head=head->next;
+            free(p);
+            return head;                                        //返回值
+            break;   
+    case 4:                                                
+            card *q,*tail,*p=(card*)malloc(sizeof(card));                 //按消费金额排序
+            p->next=head;
+            head=p;
+            tail=NULL;                                                     //定义 tail
+            while(tail!=head->next)
+            {
+                p=head;
+                q=p->next;
+                while(q->next!=tail)
+                {
+                    if(p->next->total_charge-remaining_sum<q->next->total_charge-remaining_sum)
+                    {                                                    //比较大小，排序
+                        p->next=q->next;
+                        q->next=q->next->next;
+                        p->next->next=q;
+                    }
+                    p=p->next;
+                    q=p->next;
+                }
+                tail=q;
+            }
+            head=head->next;
+            free(p);
+            return head;                                        //返回值
+            break;          
+
 }
 
-void cardFind(char* n)    //card2
+
+
+
+
+void cardFind(char* c)    //card2//解冻
 {
-      
+    if(c->isLost!=1)
+    {
+        printf("此卡未进行挂失，无法进行找回操作\n");
+    }
+    else
+    if(cardIdentity(c))   //bool isLost	是否丢失（已丢失的卡无法使用）
+    {
+        c->isLost=0;
+    }
+    else 
+    {
+        printf("未通过验证，无法进行找回操作\n");
+    }
+    
 }
-
-
-
- 
 void cardConsume(Card* c,double m)//会员卡消费及其折扣
 {	                                                     	
 	Card *p=c;
@@ -94,22 +224,16 @@ void cardConsume(Card* c,double m)//会员卡消费及其折扣
 	printf("结算成功，任意键继续!");
 	getch();
 }
-
-
-
-
-
- //card2
 //登录管理员账号之后界面
 void menu()//会员卡系统界面
 {
     printf("-----------------菜单管理----------------\n");
     printf("      1.新会员注册       2.登录\n");
-    printf("      3.挂失             4.输出信息\n");
+    printf("      3.  空           4.输出信息\n");
     printf("      5.查询信息         6.数据排序\n");
-    printf("      7.数据统计         8.找回\n");
-    printf("      9.帮助             10.系统维护\n");
-    printf("      11.退卡            0.退出\n");
+    printf("      7.数据统计         8.空\n");
+    printf("      9.  空               10.系统维护\n");
+    printf("      11.空            0.退出\n");
     printf("----------欢迎使用会员卡计费系统----------\n");
     //姓名，卡号，密码，
     //按时间和金额查找某个数据（包括充值和消费记录）
@@ -132,53 +256,76 @@ void test01()
                 char* numorphone;
                 char* password;
                 printf("请输入会员卡卡号或手机号： \n");
-                scanf("%s",numorphone);
+                numorphone=getstr();
                 printf("请输入会员卡密码： \n");
-                scanf("%s",password);
+                password=getstr();
                 Card *c=cardLogIn(numorphone,password);
-                printf("请选择要进行的操作： \n");
-                printf("1.修改信息   2.消费\n");
-                printf("3.充值       0.退出\n");
-                int a=0;
-                scanf("%d", &a);
-                switch(a)//还没有传参呢
+                if(!c)
                 {
-                    case 1:
+                    printf("登录失败！");
+                    break;
+                }
+                else
+                {
+                    printf("请选择要进行的操作： \n");
+                    printf("1.修改信息   2.消费\n");
+                    printf("3.充值       4.挂失\n");
+                    printf("5.找回       6.退卡\n");
+                    printf("0.退出\n");
+                    int a=0;
+                    scanf("%d", &a);
+                    switch (a) // 还没有传参呢
+                    {
+                        case 1://修改信息
                         cardFix(c);
                         break;
-                    case 2:
+                        case 2://消费
                         double m;
                         printf("请输入花费金额：");
                         scanf("%lf", &m);
-                        cardConsume(c,m);
+                        cardConsume(c, m);
                         break;
-                    case 3:
+                        case 3://充值
                         double n;
                         printf("请输入充值金额：");
                         scanf("%lf", &n);
-                        cardRecharge(c,n);
+                        cardRecharge(c, n);
                         break;
-                    case 0:
+                        case 4: // 挂失
+                        if (cardIdentify(c))
+                        {
+                            cardLost(c);
+                            printf("挂失成功，任意键继续!");
+                            getch();
+                        }
+                        break;
+                        case 5://找回
+                        if(cardIdentify(c)){
+                            cardFind(c);//随机数
+                        }
+                        break;
+                        case 6://退卡
+                        if (cardIdentify(c))
+                        {
+                            cards=cardDelete(c);
+                            printf("退卡成功，任意键继续!");
+                            getch();
+                        }
+                        else
+                        {
+                        printf("会员卡身份验证错误，请重试！任意键继续\n");//重试怎么回到Identify那里呀
+                        getch();
+                        }
+                        case 0:
                         cardLogOut();
                         printf("已退出此账号\n");
                         break;
-                    default:
+                        default:
                         printf("ERROR\n");
-                        break;    
+                        break;
+                    }
+                    break;
                 }
-                break;
-            case 3://挂失
-
-                char *c;
-                printf("请输入会员卡卡号或手机号： ")； scanf("%s", c);
-                if (cardIdentify(c))
-                {
-                        cardLost(c);
-                        printf("挂失成功，任意键继续!");
-                        getch();
-                }
-
-                break;
             case 4://输出信息 
                 printf("1.输出所有信息     2.输出指定数据内容\n");
                 scanf("%d", &aa);
@@ -199,42 +346,18 @@ void test01()
                 //cardSearch();
                 break;
             case 6://数据排序
-                //cardSort();
+                card* c=cardSort();
+                cardPrints(c);
                 break;
             case 7://数据统计
                 //cardSearchs();
                 break;
-            case 8://找回
-                    char* c;
-                    printf("请输入要找回的会员卡卡号或手机号： \n")；
-                    scanf("%s",c);
-                    printf("请输入要找回的会员卡密码： \n")；
-                    if(cardIdentify(c))//密码的输入接收是在cardIdentity()这个函数里面写吗？
-                    cardFind(c);
-                break;
+            
             case 9:
                 
                 break;
-            case 10:
-                
-                break;
-            case 11://退卡
-                    char* c;
-                    printf("请输入会员卡卡号或手机号： ")；
-                    scanf("%s",c);
-                    printf("请输入要找回的会员卡密码： \n")；
-                    if(cardIdentify(c))
-                    {
-                        cardDelete(c); 
-                        printf("挂失成功，任意键继续!");
-                        getch();
-                    }
-                    else
-                    {
-                        printf("会员卡密码错误，请重试！任意键继续\n");
-                        //重试需要返回输入密码那里，要改
-                        getch();
-                    }
+            case 10://系统维护
+                cards=cardFix();//传什么参，廖哥帮帮，真不会
                 break;
             case 0:
                 printf("退出系统\n");
