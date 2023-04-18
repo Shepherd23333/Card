@@ -56,9 +56,51 @@ void cardFind(char* n)    //card2
 
 
 
-void cardConsume(Card* c, double m){
-    
-}   //card2
+ 
+void cardConsume(Card* c,double m)//会员卡消费及其折扣
+{	                                                     	
+	Card *p=c;
+    double cost=m;                  
+	system("cls");      
+	if(p->short level>=5)//short level	会员卡等级（与折扣有关）
+	{                                                         
+		printf("您的会员卡已经五级，本次消费9折优惠。\n"); 
+		printf("本次实际消费%.2f元！",cost*0.9);              
+		cost*=0.9;
+		if((p->remaining_sum-cost)<0)
+		{                                                     //判断余额是否充足
+			printf("对不起，余额不足，请及时充值！");
+			getchar();
+			menu();            
+		}
+		//p->cost+=cost;  //怎么用log消费记录，廖哥 ？                                      
+		p->remaining_sum-=cost;                                       //消费
+		getchar();
+	}
+	else
+	{
+		if((p->remaining_sum-cost)<0)
+		{                                 //同上
+			printf("对不起，余额不足，请及时充值！");
+			getchar();
+			menu();
+		}
+		//p->cost+=cost;//同上
+		p->remaining_sum-=cost;  
+	}
+	//modify_file(p);// 调用保存修改会员信息函数是哪个？                                  
+	system("cls");                                         
+	//display_one(p);  //调用显示一条函数是哪个？我懵了
+	printf("结算成功，任意键继续!");
+	getch();
+	menu();                                               //调用菜单函数
+}
+
+
+
+
+
+ //card2
 //登录管理员账号之后界面
 void menu()//会员卡系统界面
 {
@@ -72,13 +114,14 @@ void menu()//会员卡系统界面
     printf("----------欢迎使用会员卡计费系统----------\n");
     //姓名，卡号，密码，
     //按时间和金额查找某个数据（包括充值和消费记录）
+    
 }
 void test01() 
 {
     int n=0,aa=0;
     do{
         menu();
-        printf("请选择要测试的操作：");
+        printf("请选择操作：");
         scanf("%d", &n);
         switch(n)
         {
@@ -86,7 +129,14 @@ void test01()
                 cardSignUp();
                 break;
             case 2:
-                //cardLogIn();
+                char* numorphone;
+                char* password;
+                
+                printf("请输入会员卡卡号或手机号： \n");
+                scanf("%s",numorphone);
+                printf("请输入会员卡密码： \n");
+                scanf("%s",password);
+                Card *c=cardLogIn(numorphone,password);
                 printf("请选择要进行的操作： \n");
                 printf("1.修改信息   2.消费\n");
                 printf("3.充值       0.退出\n");
@@ -95,13 +145,19 @@ void test01()
                 switch(a)//还没有传参呢
                 {
                     case 1:
-                        //cardFix();
+                        cardFix(c);
                         break;
                     case 2:
-                        //cardConsume();
+                        double m;
+                        printf("请输入花费金额：");
+                        scanf("%lf", &m);
+                        cardConsume(c,m);
                         break;
                     case 3:
-                        //cardRecharge();
+                        double n;
+                        printf("请输入充值金额：");
+                        scanf("%lf", &n);
+                        cardRecharge(c,n);
                         break;
                     case 0:
                         cardLogOut();
