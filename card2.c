@@ -51,7 +51,7 @@ Card* cardSort()
 
 void cardFind(char* n)    //card2
 {
-
+      
 }
 
 
@@ -85,7 +85,7 @@ void cardConsume(Card* c,double m)//会员卡消费及其折扣
 			getchar();
 			menu();
 		}
-		//p->cost+=cost;//同上
+		//p->cost+=cost;   //同上
 		p->remaining_sum-=cost;  
 	}
 	//modify_file(p);// 调用保存修改会员信息函数是哪个？                                  
@@ -93,7 +93,6 @@ void cardConsume(Card* c,double m)//会员卡消费及其折扣
 	//display_one(p);  //调用显示一条函数是哪个？我懵了
 	printf("结算成功，任意键继续!");
 	getch();
-	menu();                                               //调用菜单函数
 }
 
 
@@ -120,18 +119,18 @@ void test01()
 {
     int n=0,aa=0;
     do{
+        system("cls");
         menu();
         printf("请选择操作：");
         scanf("%d", &n);
         switch(n)
         {
-            case 1:
+            case 1://注册
                 cardSignUp();
                 break;
-            case 2:
+            case 2://会员登录
                 char* numorphone;
                 char* password;
-                
                 printf("请输入会员卡卡号或手机号： \n");
                 scanf("%s",numorphone);
                 printf("请输入会员卡密码： \n");
@@ -168,14 +167,19 @@ void test01()
                         break;    
                 }
                 break;
-            case 3:
-                if(authorize())
+            case 3://挂失
+
+                char *c;
+                printf("请输入会员卡卡号或手机号： ")； scanf("%s", c);
+                if (cardIdentify(c))
                 {
-                     //cardLost();
+                        cardLost(c);
+                        printf("挂失成功，任意键继续!");
+                        getch();
                 }
+
                 break;
-            case 4:
-                
+            case 4://输出信息 
                 printf("1.输出所有信息     2.输出指定数据内容\n");
                 scanf("%d", &aa);
                 switch(aa)
@@ -191,20 +195,22 @@ void test01()
                         break;
                 }
                 break;
-            case 5:
+            case 5://查询信息
                 //cardSearch();
                 break;
-            case 6:
+            case 6://数据排序
                 //cardSort();
                 break;
-            case 7:
+            case 7://数据统计
                 //cardSearchs();
                 break;
-            case 8:
-            if(authorize())
-                {
-                     //cardFind();
-                }
+            case 8://找回
+                    char* c;
+                    printf("请输入要找回的会员卡卡号或手机号： \n")；
+                    scanf("%s",c);
+                    printf("请输入要找回的会员卡密码： \n")；
+                    if(cardIdentify(c))//密码的输入接收是在cardIdentity()这个函数里面写吗？
+                    cardFind(c);
                 break;
             case 9:
                 
@@ -212,10 +218,24 @@ void test01()
             case 10:
                 
                 break;
-            case 11:
-                //cardDelete(); //没传参   
+            case 11://退卡
+                    char* c;
+                    printf("请输入会员卡卡号或手机号： ")；
+                    scanf("%s",c);
+                    printf("请输入要找回的会员卡密码： \n")；
+                    if(cardIdentify(c))
+                    {
+                        cardDelete(c); 
+                        printf("挂失成功，任意键继续!");
+                        getch();
+                    }
+                    else
+                    {
+                        printf("会员卡密码错误，请重试！任意键继续\n");
+                        //重试需要返回输入密码那里，要改
+                        getch();
+                    }
                 break;
-               
             case 0:
                 printf("退出系统\n");
                 break;
