@@ -42,8 +42,8 @@ Card *cards;    //global Card list
 Card* cardCreate(); //card3
 Card* cardDelete(char*); //card1     
 Card* cardExtend();    //card1
-void cardPrint(Card*);
-void cardPrints();
+void cardPrint(Card*);  //card2
+void cardPrints();     //card2
 Card* cardSort();    //card2
 Card* cardSearch(Card*, ...);   //card1   
 Card* cardSearchs(int*, ...);    
@@ -67,11 +67,12 @@ typedef struct Admin{
     bool isSuper;
     struct Admin *next;
 }Admin;
+#define LENAdmin sizeof(Admin)
 Admin *admins;  //global Admin list
 Admin* adminCreate();   //card3
 Admin* adminDelete(char*);  //card3
 Admin* adminExtend(); //card2
-Admin* adminSearch(char*);  //card2  
+Admin* adminSearch(char*);  //card1  
 void adminFix(Admin*);
 void adminLogIn();   //system
 void SASignUp();

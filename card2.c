@@ -48,6 +48,28 @@ Card* cardExtend(Card *head) {
         }
     }while(exchange); //当存在交换时继续排序
 }*/
+//还未修改稍等
+void cardPrint(Card* c);  //card2
+{
+    Card *member = c;
+    printf("序号  姓名  性别  电话  余额\n");//把会员信息对应上并都输入进去，时间什么的也写上
+    if (member)
+    {
+        printf("%s %s %s %.1f %.1f\n\n", member->name, member->sex, member->phone, member->money,member->paysum);
+    }
+    else
+        printf("该会员不存在\n");
+}
+void cardPrints();     //card2
+{
+    vip *member=NULL;
+    int count = 1;
+    for (member = head; member != NULL; member = member->next)
+    {
+        printf("%d %s %s %s %.1f %.1f\n", count++, member->name, member->sex, member->phone, member->money,member->paysum);
+    }
+    printf("\n\n");
+}
 Card *cardSort()//用把这里的head改成cards吗？
 {      
     printf("请选择按以下哪种方式排序（可以多选）\n");
@@ -224,16 +246,23 @@ void cardConsume(Card* c,double m)//会员卡消费及其折扣
 	printf("结算成功，任意键继续!");
 	getch();
 }
-
-
-
-
-
-
-Admin* adminSearch(char*)
+Admin *adminExtend(Admin *head)  //card2
 {
-    
+    Admin *p1 = head;
+    if (head != NULL)
+    {
+        while (p1->next!= NULL)
+        {
+            p1 = p1->next;
+        }
+        p1 = p1->next = (Admin *)malloc(LENAdmin);
+        strcpy(p1->username, "");
+        strcpy(p1->password, "");
+        p1->isSuper=false;
+    }
+    return (p1);
 }
+
 
 //登录管理员账号之后界面
 void menu()//会员卡系统界面
