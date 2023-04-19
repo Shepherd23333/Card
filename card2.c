@@ -224,6 +224,17 @@ void cardConsume(Card* c,double m)//会员卡消费及其折扣
 	printf("结算成功，任意键继续!");
 	getch();
 }
+
+
+
+
+
+
+Admin* adminSearch(char*)
+{
+    
+}
+
 //登录管理员账号之后界面
 void menu()//会员卡系统界面
 {
