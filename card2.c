@@ -41,6 +41,22 @@ void cardPrint(Card* c)  //card2
         printf("\u662f\n");
     else
         printf("\u5426\n");
+    printf("消费记录\n");
+    Log* q = cur->consumeLog;
+    while (q != NULL) {
+        printf("  时间： %u\\%02u\\%02u\\%02u\\%02u,金额: %d\n", q->time.year, q->time.month,q->time.day,q->time.hour,q->time.minute, q->money);
+        q = q->next;
+    }
+    printf("\n");
+        cur = cur->next;
+    }
+    printf("充值记录\n");
+    Log* w = cur->rechargeLog;
+    while (w != NULL) {
+        printf("  时间：%u\\%02u\\%02u\\%02u\\%02u,金额: %d\n",  w->time.year, w->time.month,w->time.day,w->time.hour,w->time.minute,w->money);
+        w = w->next;
+    }
+    printf("\n");
     }    
 }
 
@@ -65,6 +81,22 @@ void cardPrints()
         printf("\u662f\n");
     else
         printf("\u5426\n");
+    printf("消费记录\n");
+    Log* q = cur->consumeLog;
+    while (q != NULL) {
+        printf("  时间：%u\\%02u\\%02u\\%02u\\%02u,金额: %d\n",  q->time.year, q->time.month,q->time.day,q->time.hour,q->time.minute, q->money);
+        q = q->next;
+    }
+    printf("\n");
+        cur = cur->next;
+    }
+    printf("充值记录\n");
+    Log* w = cur->rechargeLog;
+    while (w != NULL) {
+        printf("  时间：%u\\%02u\\%02u\\%02u\\%02u,金额: %d\n",  w->time.year, w->time.month,w->time.day,w->time.hour,w->time.minute,w->money);
+        w = w->next;
+    }
+    printf("\n");
         cur = cur->next;
     }
 }
@@ -342,7 +374,8 @@ void menu()
         char* password;
         Card* c;
         int a=0;
-        Log* l;//right?
+        Log* l1=consumeLog;//right?
+        Log* l2=rechargeLog;
         double m,k;
         switch(n)
         {
@@ -377,15 +410,19 @@ void menu()
                         case 2://consume
                         printf("\u8bf7\u8f93\u5165\u82b1\u8d39\u91d1\u989d\uff1a");
                         scanf("%lf", &m);
+                        if (m <= 0) {
+                           printf("\u6d88\u8d39\u91d1\u989d\u5fc5\u987b\u5927\u4e8e\u0030\uff01\n");
+                           return;
+                        }
                         cardConsume(c, m);
                         //buqueding
-                        l=logExtend(c->consumeLog);
+                        l1=logExtend(c->consumeLog);
                         break;
                         case 3://recharge
                         printf("\u8bf7\u8f93\u5165\u5145\u503c\u91d1\u989d\uff1a");
                         scanf("%lf", &k);
                         cardRecharge(c, k);
-                        l=logExtend(c->rechargeLog);
+                        l2=logExtend(c->rechargeLog);
                         break;
                         case 4: // cardLost
                         if (cardIdentify(c))

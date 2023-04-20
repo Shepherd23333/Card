@@ -83,7 +83,7 @@ void adminLogOut(); //system
 bool isLoggedIn,isCardLoggedIn;
 int authority;
 void logOut();//card1
-bool authorize();   //system
+bool authorize();//system
 void backUp();//card1
 void restore();//card1
 void read_file();//card1
