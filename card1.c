@@ -58,9 +58,9 @@ Log *logDelete(Log *head, Time detime)
         p1 = p1->next;
     }
     return (head);
-} /*
+} 
  Log* logSearch(Log* head,...)
- {
+ {  
      Log* p1=head;
      va_list val;
      va_start(val,head);
@@ -107,7 +107,7 @@ Log *logDelete(Log *head, Time detime)
      return NULL;
 
 
- }*/
+ }
 Card *cardCreate()
 {
     int n = 0;
@@ -383,7 +383,7 @@ void backup()
     time(&current);
     tm *bctime = localtime(&current);
     sprintf(bctime,"%s", asctime(bctime));
-    printf("%s", bctime);
+
     if((f1=fopen("data.txt", "rb"))==NULL)
     {
         printf("File not found\n");
@@ -398,6 +398,34 @@ void backup()
     {
         char ch=fgetc(f1);
         fputc(ch,f2);
+    }
+    fclose(f1);
+    fclose(f2);
+}
+void restore()
+{
+    FILE* f1;
+    FILE* f2;
+    typedef struct tm tm;
+    time_t current;
+    time(&current);
+    tm *bctime = localtime(&current);
+    sprintf(bctime,"restore%s", asctime(bctime));
+
+    if((f1=fopen("file.txt", "rb"))==NULL)
+    {
+        printf("File not found\n");
+        return;
+    }
+    if((f2=fopen("bctime.txt","rb"))==NULL)
+    {
+        printf("File not found\n");
+        return;
+    }
+    while(!feof(f2))
+    {
+        char ch=fgetc(f2);
+        fputc(ch,f1);
     }
     fclose(f1);
     fclose(f2);
