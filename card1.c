@@ -373,6 +373,35 @@ void read()
     fclose(fp);
 
 }
+#include<time.h>
+void backup()
+{
+    FILE* f1;
+    FILE* f2;
+    typedef struct tm tm;
+    time_t current;
+    time(&current);
+    tm *bctime = localtime(&current);
+    sprintf(bctime,"%s", asctime(bctime));
+    printf("%s", bctime);
+    if((f1=fopen("data.txt", "rb"))==NULL)
+    {
+        printf("File not found\n");
+        return;
+    }
+    if((f2=fopen("bctime.txt","wb"))==NULL)
+    {
+        printf("File not found\n");
+        return;
+    }
+    while(!feof(f1))
+    {
+        char ch=fgetc(f1);
+        fputc(ch,f2);
+    }
+    fclose(f1);
+    fclose(f2);
+}
 
 
 Admin *adminSearch(char *s)
