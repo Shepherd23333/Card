@@ -51,6 +51,7 @@ Card* cardExtend(Card *head) {
 //还未修改稍等
 void cardPrint(Card* c);  //card2
 {
+    if(c==NULL) return;
     Card *member = c;
     printf("序号  姓名  性别  电话  余额\n");//把会员信息对应上并都输入进去，时间什么的也写上
     if (member)
@@ -70,7 +71,7 @@ void cardPrints();     //card2
     }
     printf("\n\n");
 }
-Card *cardSort()//用把这里的head改成cards吗？
+Card *cardSort()//用把这里的head改成cards吗？用！
 {      
     printf("请选择按以下哪种方式排序（可以多选）\n");
     printf("1.按缴费总额升序排序    2.按消费金额升序排序\n");
@@ -83,12 +84,12 @@ Card *cardSort()//用把这里的head改成cards吗？
     switch(t)
     case 1:                           
             Card *q,*tail,*p=(Card*)malloc(sizeof(Card)); //按缴费总额排序
-            p->next=head;
-            head=p;
+            p->next=cards;
+            cards=p;
             tail=NULL;                                                  //定义 tail
-            while(tail!=head->next)
+            while(tail!=cards->next)
             {
-                p=head;
+                p=cards;
                 q=p->next;
                 while(q->next!=tail)
                 {                                                        //判断 q是否为空
@@ -103,18 +104,18 @@ Card *cardSort()//用把这里的head改成cards吗？
                 }
                 tail=q;
             }
-            head=head->next;
+            cards=cards->next;
             free(p);
-            return head;                                                  //返回值
+            return cards;                                                  //返回值
             break;
     case 3:                           
             Card *q,*tail,*p=(Card*)malloc(sizeof(Card)); //按缴费总额排序
-            p->next=head;
-            head=p;
+            p->next=cards;
+            cards=p;
             tail=NULL;                                                  //定义 tail
-            while(tail!=head->next)
+            while(tail!=cards->next)
             {
-                p=head;
+                p=cards;
                 q=p->next;
                 while(q->next!=tail)
                 {                                                        //判断 q是否为空
@@ -129,18 +130,18 @@ Card *cardSort()//用把这里的head改成cards吗？
                 }
                 tail=q;
             }
-            head=head->next;
+            cards=cards->next;
             free(p);
-            return head;  
+            return cards;  
             break;
     case 2:                                                
             card *q,*tail,*p=(card*)malloc(sizeof(card));                 //按消费金额排序
-            p->next=head;
-            head=p;
+            p->next=cards;
+            cards=p;
             tail=NULL;                                                     //定义 tail
-            while(tail!=head->next)
+            while(tail!=cards->next)
             {
-                p=head;
+                p=cards;
                 q=p->next;
                 while(q->next!=tail)
                 {
@@ -155,18 +156,18 @@ Card *cardSort()//用把这里的head改成cards吗？
                 }
                 tail=q;
             }
-            head=head->next;
+            cards=cards->next;
             free(p);
-            return head;                                        //返回值
+            return cards;                                        //返回值
             break;   
     case 4:                                                
             card *q,*tail,*p=(card*)malloc(sizeof(card));                 //按消费金额排序
-            p->next=head;
-            head=p;
+            p->next=cards;
+            cards=p;
             tail=NULL;                                                     //定义 tail
-            while(tail!=head->next)
+            while(tail!=cards->next)
             {
-                p=head;
+                p=cards;
                 q=p->next;
                 while(q->next!=tail)
                 {
@@ -181,27 +182,44 @@ Card *cardSort()//用把这里的head改成cards吗？
                 }
                 tail=q;
             }
-            head=head->next;
+            cards=cards->next;
             free(p);
-            return head;                                        //返回值
+            return cards;                                        //返回值
             break;          
 
 }
 
+void logPrint(Log* l) 
+{
+    if (l == NULL) return;
+    printf("交易时间：%u年%02u月%02u日%02u时%02u分\n", l->time.year, l->time.month, l->time.day, l->time.hour, l->time.minute);
+    printf("交易金额：%.2lf元\n", l->money);
+}
+void logPrints(Log* head)
+{
+    if (head == NULL) return;
+    Log* cur = head;
+    while (cur != NULL) 
+    {
 
-
+        printf("交易时间：%u年%02u月%02u日%02u时%02u分\n", cur->time.year, cur->time.month, cur->time.day, cur->time.hour, cur->time.minute);
+        printf("交易金额：%.2lf元\n", cur->money);
+        cur = cur->next;
+    }
+}
 
 
 void cardFind(char* c)    //card2//解冻
 {
-    if(c->isLost!=1)
+    Card* p=cardSearch(c);
+    if(p->isLost!=1)
     {
         printf("此卡未进行挂失，无法进行找回操作\n");
     }
     else
-    if(cardIdentity(c))   //bool isLost	是否丢失（已丢失的卡无法使用）
+    if(cardIdentity(p))   //bool isLost	是否丢失（已丢失的卡无法使用）
     {
-        c->isLost=0;
+        p->isLost=0;
     }
     else 
     {

@@ -22,8 +22,8 @@ typedef struct Log{
 Log* logCreate();   //card3
 Log* logDelete(Log*, Time); //card1
 Log* logExtend(Log*);   //card1
-void logPrint(Log*);
-void logPrints(Log*);
+void logPrint(Log*);//card2
+void logPrints(Log*);//card2
 Log* logSearch(Log*, ...);  //card1
 Log* logSearchs(Log*, int*,...);
 void logFix(Log*);  //card4
