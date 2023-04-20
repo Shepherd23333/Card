@@ -1,199 +1,10 @@
 #include"card.h"
-/*
-Card* cardExtend(Card *head) {
-    Card card;
-    printf("请输入会员卡信息：");
-    printf("会员卡号：");
-    scanf("%s", card.number);
-    printf("姓名：");
-    scanf("%s", card.name);
-    printf("余额：");
-    scanf("%f", &card.remaining_sum);
-
-    Card *p_new = (Card *)malloc(sizeof(Card));
-    p_new->Card = card;//这句中的data还不会改，赶紧学
-    p_new->next = NULL;
-//总消费金额（与等级有关）还没写
-//等级还没写
-    Card*p = head;
-    while (p->next) {
-        p = p->next;
-    }
-    p->next = p_new;
-    printf("会员卡添加成功！");
-}*/
-/*Card* cardSort()
-{
-    Card *p, *q, *tail;
-    int exchange; //交换标志
-    if(cards->next == NULL){ //空链表直接返回
-        return cards;
-    }
-    do{
-        exchange = 0; //初始化交换标志
-        tail = cards; //尾节点指向头节点
-        p = cards->next; //p指向第一个节点 //?
-        while(p->next != NULL){ //遍历链表
-            q = p->next; //q指向下一个节点
-            if(p->number > q->number){ //如果p节点大于q节点
-                tail->next = q; //将q节点插入到尾节点后面
-                p->next = q->next;
-                q->next = p;
-                tail = q; //更新尾节点
-                exchange = 1; //设置交换标志
-            }else{ //否则不做任何操作
-                tail = p;
-                p = p->next;
-            }
-        }
-    }while(exchange); //当存在交换时继续排序
-}*/
-//还未修改稍等
-void cardPrint(Card* c);  //card2
-{
-    if(c==NULL) return;
-    Card *member = c;
-    printf("序号  姓名  性别  电话  余额\n");//把会员信息对应上并都输入进去，时间什么的也写上
-    if (member)
-    {
-        printf("%s %s %s %.1f %.1f\n\n", member->name, member->sex, member->phone, member->money,member->paysum);
-    }
-    else
-        printf("该会员不存在\n");
-}
-void cardPrints();     //card2
-{
-    vip *member=NULL;
-    int count = 1;
-    for (member = head; member != NULL; member = member->next)
-    {
-        printf("%d %s %s %s %.1f %.1f\n", count++, member->name, member->sex, member->phone, member->money,member->paysum);
-    }
-    printf("\n\n");
-}
-Card *cardSort()//用把这里的head改成cards吗？用！
-{      
-    printf("请选择按以下哪种方式排序（可以多选）\n");
-    printf("1.按缴费总额升序排序    2.按消费金额升序排序\n");
-    printf("3.按缴费总额降序排序    4.按消费金额降序排序\n");
-    printf("5.按会员卡等级升序排序  6.按会员卡等级降序排序\n");
-    printf("7.按会员卡卡号升序排序  8.按会员卡卡号降序排序\n");
-    printf("9.按手机号升序排序      10.按手机号降序排序\n");
-    int t;
-    scanf("%d", &t);//怎么多选
-    switch(t)
-    case 1:                           
-            Card *q,*tail,*p=(Card*)malloc(sizeof(Card)); //按缴费总额排序
-            p->next=cards;
-            cards=p;
-            tail=NULL;                                                  //定义 tail
-            while(tail!=cards->next)
-            {
-                p=cards;
-                q=p->next;
-                while(q->next!=tail)
-                {                                                        //判断 q是否为空
-                    if(p->next->total_charge>q->next->total_charge)
-                    {
-                        p->next=q->next;                                 //比较大小，排序
-                        q->next=q->next->next;
-                        p->next->next=q;
-                    }
-                    p=p->next;
-                    q=p->next;
-                }
-                tail=q;
-            }
-            cards=cards->next;
-            free(p);
-            return cards;                                                  //返回值
-            break;
-    case 3:                           
-            Card *q,*tail,*p=(Card*)malloc(sizeof(Card)); //按缴费总额排序
-            p->next=cards;
-            cards=p;
-            tail=NULL;                                                  //定义 tail
-            while(tail!=cards->next)
-            {
-                p=cards;
-                q=p->next;
-                while(q->next!=tail)
-                {                                                        //判断 q是否为空
-                    if(p->next->total_charge<q->next->total_charge)
-                    {
-                        p->next=q->next;                                 //比较大小，排序
-                        q->next=q->next->next;
-                        p->next->next=q;
-                    }
-                    p=p->next;
-                    q=p->next;
-                }
-                tail=q;
-            }
-            cards=cards->next;
-            free(p);
-            return cards;  
-            break;
-    case 2:                                                
-            card *q,*tail,*p=(card*)malloc(sizeof(card));                 //按消费金额排序
-            p->next=cards;
-            cards=p;
-            tail=NULL;                                                     //定义 tail
-            while(tail!=cards->next)
-            {
-                p=cards;
-                q=p->next;
-                while(q->next!=tail)
-                {
-                    if(p->next->total_charge-remaining_sum>q->next->total_charge-remaining_sum)
-                    {                                                    //比较大小，排序
-                        p->next=q->next;
-                        q->next=q->next->next;
-                        p->next->next=q;
-                    }
-                    p=p->next;
-                    q=p->next;
-                }
-                tail=q;
-            }
-            cards=cards->next;
-            free(p);
-            return cards;                                        //返回值
-            break;   
-    case 4:                                                
-            card *q,*tail,*p=(card*)malloc(sizeof(card));                 //按消费金额排序
-            p->next=cards;
-            cards=p;
-            tail=NULL;                                                     //定义 tail
-            while(tail!=cards->next)
-            {
-                p=cards;
-                q=p->next;
-                while(q->next!=tail)
-                {
-                    if(p->next->total_charge-remaining_sum<q->next->total_charge-remaining_sum)
-                    {                                                    //比较大小，排序
-                        p->next=q->next;
-                        q->next=q->next->next;
-                        p->next->next=q;
-                    }
-                    p=p->next;
-                    q=p->next;
-                }
-                tail=q;
-            }
-            cards=cards->next;
-            free(p);
-            return cards;                                        //返回值
-            break;          
-
-}
 
 void logPrint(Log* l) 
 {
     if (l == NULL) return;
-    printf("交易时间：%u年%02u月%02u日%02u时%02u分\n", l->time.year, l->time.month, l->time.day, l->time.hour, l->time.minute);
-    printf("交易金额：%.2lf元\n", l->money);
+    printf("\u4ea4\u6613\u65f6\u95f4\uff1a%u\\%02u\\%02u %02u:%02u\n", l->time.year, l->time.month, l->time.day, l->time.hour, l->time.minute);
+    printf("\u4ea4\u6613\u91d1\u989d\uff1a%.2lf\n", l->money);
 }
 void logPrints(Log* head)
 {
@@ -202,117 +13,351 @@ void logPrints(Log* head)
     while (cur != NULL) 
     {
 
-        printf("交易时间：%u年%02u月%02u日%02u时%02u分\n", cur->time.year, cur->time.month, cur->time.day, cur->time.hour, cur->time.minute);
-        printf("交易金额：%.2lf元\n", cur->money);
+        printf("\u4ea4\u6613\u65f6\u95f4\uff1a%u\\%02u\\%02u %02u:%02u\n", cur->time.year, cur->time.month, cur->time.day, cur->time.hour, cur->time.minute);
+        printf("\u4ea4\u6613\u91d1\u989d\uff1a%.2lf\n", cur->money);
+        cur = cur->next;
+    }
+}
+void cardPrint(Card* c)  //card2
+{
+    if(c==NULL) 
+    {
+    printf("\u8be5\u4f1a\u5458\u4e0d\u5b58\u5728\n");
+    return;
+    }
+    else
+    {
+    Card *cur = c;
+    printf("\u59d3\u540d\uff1a %s\n", cur->name);
+    printf("\u5361\u53f7\uff1a %s\n", cur->number);
+    printf("\u624b\u673a\u53f7\uff1a %s\n", cur->phone);
+    printf("\u5bc6\u7801\uff1a %s\n", cur->password);
+    printf("\u7b49\u7ea7\uff1a %d\n", cur->level);
+    printf("\u4f59\u989d\uff1a %.2lf\n", cur->remaining_sum);
+    printf("\u603b\u5145\u503c\uff1a %.2lf\n", cur->total_charge);
+    printf("\u603b\u6d88\u8d39\uff1a %.2lf\n", cur->total_charge - cur->remaining_sum);
+    printf("\u521b\u5efa\u65f6\u95f4\uff1a %u\\%02u\\%02u\\%02u\\%02u\n", cur->createTime.year, cur->createTime.month, cur->createTime.day, cur->createTime.hour, cur->createTime.minute);
+    printf("\u6709\u6548\u65f6\u95f4\uff1a %u\\%02u\\%02u\\%02u\\%02u\n", cur->createTime.year, cur->createTime.month, cur->createTime.day, cur->createTime.hour, cur->createTime.minute);
+    printf("\u662f\u5426\u6302\u5931\uff1a ");
+    if (cur->isLost)
+        printf("\u662f\n");
+    else
+        printf("\u5426\n");
+    }
+        
+}
+
+void cardPrints() 
+{
+    if (cards == NULL) return;
+    Card* cur = cards;
+    while (cur != NULL) 
+    {
+    printf("\u59d3\u540d\uff1a %s\n", cur->name);
+    printf("\u5361\u53f7\uff1a %s\n", cur->number);
+    printf("\u624b\u673a\u53f7\uff1a %s\n", cur->phone);
+    printf("\u5bc6\u7801\uff1a %s\n", cur->password);
+    printf("\u7b49\u7ea7\uff1a %d\n", cur->level);
+    printf("\u4f59\u989d\uff1a %.2lf\n", cur->remaining_sum);
+    printf("\u603b\u5145\u503c\uff1a %.2lf\n", cur->total_charge);
+    printf("\u603b\u6d88\u8d39\uff1a %.2lf\n", cur->total_charge - cur->remaining_sum);
+    printf("\u521b\u5efa\u65f6\u95f4\uff1a %u\\%02u\\%02u\\%02u\\%02u\n", cur->createTime.year, cur->createTime.month, cur->createTime.day, cur->createTime.hour, cur->createTime.minute);
+    printf("\u6709\u6548\u65f6\u95f4\uff1a %u\\%02u\\%02u\\%02u\\%02u\n", cur->createTime.year, cur->createTime.month, cur->createTime.day, cur->createTime.hour, cur->createTime.minute);
+    printf("\u662f\u5426\u6302\u5931\uff1a ");
+    if (cur->isLost)
+        printf("\u662f\n");
+    else
+        printf("\u5426\n");
         cur = cur->next;
     }
 }
 
-
-void cardFind(char* c)    //card2//解冻
+Card* cardSort() 
 {
-    Card* p=cardSearch(c);
-    if(p->isLost!=1)
+    printf("\u8bf7\u9009\u62e9\u5347\u5e8f\u6216\u964d\u5e8f\u6392\u5217\uff08\u0030\u8868\u793a\u5347\u5e8f\uff0c\u0031\u8868\u793a\u964d\u5e8f\uff09\n");
+    int turn,sortNum=0;
+    scanf("%d",&turn);
+    printf("\u8bf7\u9009\u62e9\u6309\u4ee5\u4e0b\u54ea\u79cd\u65b9\u5f0f\u6392\u5e8f\uff08\u53ef\u4ee5\u591a\u9009\uff09\n");
+    printf("1.\u59d3\u540d      2.\u5361\u53f7\n");
+    printf("3.\u624b\u673a\u53f7    4.\u7b49\u7ea7\n");
+    printf("5.\u7f34\u8d39\u603b\u989d  6.\u6d88\u8d39\u91d1\u989d\n");
+    printf("7.\u5361\u5185\u4f59\u989d\n");
+    int sortIndex[10];
+    while(scanf("%d", &sortIndex[sortNum])!=EOF)
     {
-        printf("此卡未进行挂失，无法进行找回操作\n");
+        sortNum++;
+    }
+    if (cards == NULL || sortIndex == NULL || sortNum == 0) return cards;
+    Card* arr[10000];
+    int len = 0;
+    Card* cur = cards;
+    while (cur != NULL) 
+    {
+        arr[len++] = cur;
+        cur = cur->next;
+    }
+    for (int i = 0; i < sortNum; i++) {
+    
+        switch(sortIndex[i])
+         {
+            case 1://byname
+                for (int i = 0; i < len; i++)
+                {
+                    for (int j = 0; j < len - i - 1; j++)
+                    {
+                        if (strcmp(arr[j]->name, arr[j+1]->name) > 0)
+                        {
+                            Card* tmp = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = tmp;
+                        }
+                    }
+                }
+                 break;
+            case 2://bynumber
+                for (int i = 0; i < len; i++)
+                {
+                    for (int j = 0; j < len - i - 1; j++)
+                    {
+                        if (strcmp(arr[j]->number, arr[j+1]->number) > 0)
+                        {
+                            Card* tmp = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = tmp;
+                        }
+                    }
+                }
+                 break;
+            case 3://byphone
+                for (int i = 0; i < len; i++)
+                {
+                    for (int j = 0; j < len - i - 1; j++)
+                    {
+                        if (strcmp(arr[j]->phone, arr[j+1]->phone) > 0)
+                        {
+                            Card* tmp = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = tmp;
+                        }
+                    }
+                }
+                break;
+            case 4://bylevel
+                for (int i = 0; i < len; i++)
+                {
+                    for (int j = 0; j < len - i - 1; j++)
+                    {
+                        if (arr[j]->level > arr[j+1]->level)
+                        {
+                            Card* tmp = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = tmp;
+                        }
+                    }
+                }
+                break;
+            case 5://bytotal_charge
+                for (int i = 0; i < len; i++)
+                {
+                    for (int j = 0; j < len - i - 1; j++)
+                    {
+                        if (arr[j]->total_charge > arr[j+1]->total_charge)
+                        {
+                            Card* tmp = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = tmp;
+                        }
+                    }
+                }
+                break;
+            case 6://bycost
+                for (int i = 0; i < len; i++)
+                {
+                    for (int j = 0; j < len - i - 1; j++)
+                    {
+                        if (arr[j]->total_charge-arr[j]->remaining_sum > arr[j+1]->total_charge-arr[j+1]->remaining_sum)
+                        {
+                            Card* tmp = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = tmp;
+                        }
+                    }
+                } 
+                break;
+                
+            case 7:  //byremaining_sum
+                for (int i = 0; i < len; i++)
+                {
+                    for (int j = 0; j < len - i - 1; j++)
+                    {
+                        if (arr[j]->remaining_sum > arr[j+1]->remaining_sum)
+                        {
+                            Card* tmp = arr[j];
+                            arr[j] = arr[j+1];
+                            arr[j+1] = tmp;
+                        }
+                    }
+                }
+                break;
+            default:
+                printf("\u65e0\u6cd5\u8bc6\u522b\u7684\u6392\u5e8f\u9009\u9879\uff1a%d\n", sortIndex[i]); 
+                break;
+        }
+    }
+    
+    Card* head = arr[0];
+    cur = arr[0];
+    if(turn==0)
+    {
+        for (int i = 1; i < len; i++)
+        {
+            cur->next = arr[i];
+            cur = cur->next;
+        }
+        cur->next = NULL;
+        return head;
     }
     else
-    if(cardIdentity(p))   //bool isLost	是否丢失（已丢失的卡无法使用）
+    {
+        for (int i = len-1; i > 0; i--)
+        {
+            cur->next = arr[i];
+            cur = cur->next;
+        }
+        cur->next = NULL;
+        return head;
+    }
+}
+
+void cardFind(char* c)    //card2
+{
+    Card* p=c;
+    if(p->isLost!=1)
+    {
+        printf("\u6b64\u5361\u672a\u8fdb\u884c\u6302\u5931\uff0c\u65e0\u6cd5\u8fdb\u884c\u627e\u56de\u64cd\u4f5c\n");
+    }
+    else
+    if(cardIdentify(p))   
     {
         p->isLost=0;
     }
     else 
     {
-        printf("未通过验证，无法进行找回操作\n");
+        printf("\u672a\u901a\u8fc7\u9a8c\u8bc1\uff0c\u65e0\u6cd5\u8fdb\u884c\u627e\u56de\u64cd\u4f5c\n");
     }
     
 }
-void cardConsume(Card* c,double m)//会员卡消费及其折扣
+void cardConsume(Card* c,double m)
 {	                                                     	
 	Card *p=c;
     double cost=m;                  
 	system("cls");      
-	if(p->short level>=5)//short level	会员卡等级（与折扣有关）
+	if(p->level>=5)//short level	
 	{                                                         
-		printf("您的会员卡已经五级，本次消费9折优惠。\n"); 
-		printf("本次实际消费%.2f元！",cost*0.9);              
+		printf("\u60a8\u7684\u4f1a\u5458\u5361\u5df2\u7ecf\u4e94\u7ea7\uff0c\u672c\u6b21\u6d88\u8d39\u0039\u6298\u4f18\u60e0\u3002\n"); 
+		printf("\u672c\u6b21\u5b9e\u9645\u6d88\u8d39%.2f\u5143\uff01",cost*0.9);              
 		cost*=0.9;
 		if((p->remaining_sum-cost)<0)
-		{                                                     //判断余额是否充足
-			printf("对不起，余额不足，请及时充值！");
+		{                                                     
+			printf("\u5bf9\u4e0d\u8d77\uff0c\u4f59\u989d\u4e0d\u8db3\uff0c\u8bf7\u53ca\u65f6\u5145\u503c\uff01");
 			getchar();
 			menu();            
-		}
-		//p->cost+=cost;  //怎么用log消费记录，廖哥 ？                                      
-		p->remaining_sum-=cost;                                       //消费
+		}                                      
+		p->remaining_sum-=cost;                                       
 		getchar();
 	}
 	else
 	{
 		if((p->remaining_sum-cost)<0)
-		{                                 //同上
-			printf("对不起，余额不足，请及时充值！");
+		{                                 
+			printf("\u5bf9\u4e0d\u8d77\uff0c\u4f59\u989d\u4e0d\u8db3\uff0c\u8bf7\u53ca\u65f6\u5145\u503c\uff01");
 			getchar();
 			menu();
 		}
-		//p->cost+=cost;   //同上
+		  
 		p->remaining_sum-=cost;  
-	}
-	//modify_file(p);// 调用保存修改会员信息函数是哪个？                                  
+	}                                  
+	printf("\u7ed3\u7b97\u6210\u529f\uff01");
+    system("pause");
 	system("cls");                                         
-	//display_one(p);  //调用显示一条函数是哪个？我懵了
-	printf("结算成功，任意键继续!");
 	getch();
 }
-Admin *adminExtend(Admin *head)  //card2
+Admin *adminExtend()  //card2
 {
-    Admin *p1 = head;
-    if (head != NULL)
+    Admin *p1 = admins;
+    if (admins != NULL)
     {
         while (p1->next!= NULL)
-        {
             p1 = p1->next;
-        }
-        p1 = p1->next = (Admin *)malloc(LENAdmin);
-        strcpy(p1->username, "");
-        strcpy(p1->password, "");
-        p1->isSuper=false;
+        p1->next = (Admin *)calloc(1,LENAdmin);
     }
-    return (p1);
+    return (p1->next);
 }
+
+void cardUpdatePhone(Card* c)
+{
+       Card *p=c;
+       if (cardIdentify(p))
+       {
+        printf("\u8bf7\u8f93\u5165\u65b0\u624b\u673a\u53f7\uff1a\n");
+        char* s = getstr();
+        if (s[0] != 'c' || strlen(s) == 1 || strspn(s + 1, "0123456789") != strlen(s + 1))
+            printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
+        else if (!cardSearch(cards, s))
+        {
+            strcpy(c->number, s);
+            printf("\u4fee\u6539\u6210\u529f\uff01\n");
+        }
+        else
+            printf("\u9519\u8bef\uff1a\u8be5\u5361\u53f7\u5df2\u5b58\u5728\uff01\n");
+       }
+}
+void cardUpdatePassword(Card* c)
+{
+       
+       if (cardIdentify(c))
+       {
+        printf("\u8bf7\u8f93\u5165\u65b0\u5bc6\u7801\uff1a\n");
+        char *s = getstr();
+        strcpy(c->password, s);
+        printf("\u4fee\u6539\u6210\u529f\uff01\n");
+       }
+}
+
+
+
+
+
 
 
 //登录管理员账号之后界面
 void menu()//会员卡系统界面
 {
-    printf("-----------------菜单管理----------------\n");
+    printf("\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u83dc\u5355\u7ba1\u7406\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\n");
     printf("      1.新会员注册       2.登录\n");
-    printf("      3.  空           4.输出信息\n");
-    printf("      5.查询信息         6.数据排序\n");
-    printf("      7.数据统计         8.空\n");
-    printf("      9.  空               10.系统维护\n");
-    printf("      11.空            0.退出\n");
-    printf("----------欢迎使用会员卡计费系统----------\n");
-    //姓名，卡号，密码，
-    //按时间和金额查找某个数据（包括充值和消费记录）
-    
-}
-void test01() 
-{
+    printf("      3.输出信息         4.查询信息\n");
+    printf("      5.数据排序         6.数据统计\n");
+    printf("      7.系统维护         0.退出\n");
+    printf("----------欢迎使用会员卡计费系统----------\n");//找回密码要不要写
     int n=0,aa=0;
-    do{
-        system("cls");
-        menu();
-        printf("请选择操作：");
+        printf("请选择功能：");
         scanf("%d", &n);
+        if(n==0)
+        {
+            adminLogOut();
+            return;
+        }
+        char* numorphone;
+        char* password;
+        Card* c;
+        int a=0;
+        double m,k;
         switch(n)
         {
-            case 1://注册
+            case 1://cardSignUp
                 cardSignUp();
                 break;
-            case 2://会员登录
-                char* numorphone;
-                char* password;
+            case 2://cardLogIn
                 printf("请输入会员卡卡号或手机号： \n");
                 numorphone=getstr();
                 printf("请输入会员卡密码： \n");
@@ -329,25 +374,27 @@ void test01()
                     printf("1.修改信息   2.消费\n");
                     printf("3.充值       4.挂失\n");
                     printf("5.找回       6.退卡\n");
+                    printf("7.换手机号   8.更改密码\n");
                     printf("0.退出\n");
-                    int a=0;
                     scanf("%d", &a);
-                    switch (a) // 还没有传参呢
+                    switch (a)
                     {
                         case 1://修改信息
                         cardFix(c);
                         break;
                         case 2://消费
-                        double m;
                         printf("请输入花费金额：");
                         scanf("%lf", &m);
                         cardConsume(c, m);
+                        //dd
+                        Log* a=logExtend(c->consumeLog);
                         break;
                         case 3://充值
-                        double n;
+
                         printf("请输入充值金额：");
-                        scanf("%lf", &n);
-                        cardRecharge(c, n);
+                        scanf("%lf", &k);
+                        cardRecharge(c, k);
+                        logExtend(c->rechargeLog);
                         break;
                         case 4: // 挂失
                         if (cardIdentify(c))
@@ -374,6 +421,10 @@ void test01()
                         printf("会员卡身份验证错误，请重试！任意键继续\n");//重试怎么回到Identify那里呀
                         getch();
                         }
+                        case 7://换绑手机号
+                           cardUpdatePhone(c);
+                        case 8://更换密码
+                           cardUpdatePassword(c);
                         case 0:
                         cardLogOut();
                         printf("已退出此账号\n");
@@ -384,47 +435,59 @@ void test01()
                     }
                     break;
                 }
-            case 4://输出信息 
-                printf("1.输出所有信息     2.输出指定数据内容\n");
+            case 3://输出所有信息 
+                cardPrints();
+                break;
+            case 4://查询信息
+                //cardSearch();
+                break;
+            case 5://数据排序
+                cards=cardSort();
+                cardPrints();
+                break;
+            case 6://数据统计
+                //cardSearchs();
+                break;
+            case 7://系统维护
+                //cards=cardFix();//传什么参，廖哥帮帮，真不会
+                printf("1.密码维护\n");
+                printf("2.数据备份\n");
+                printf("3.数据恢复\n");
+                printf("0.退出\n");
+                printf("请选择功能\n");
                 scanf("%d", &aa);
                 switch(aa)
                 {
-                    case 1:
-                        cardPrints();
+                    case 1://密码维护
+                        printf("请输入卡号或手机号\n");
+                        numorphone=getstr();
+                        cardFix(numorphone);
+                        printf("密码维护成功，任意键继续!\n");
+                        getch();
                         break;
-                    case 2:
-                        //cardPrint();//传啥参呢
+                    case 2://数据备份
+                        backUp();
+                        printf("数据备份成功，任意键继续!\n");
+                        getch();
+                        break;
+                    case 3://数据恢复
+                        restore();
+                        printf("数据恢复成功，任意键继续!\n");
+                        getch();
+                        break;
+                    case 0://退出
+                        printf("退出成功，任意键继续!\n");
+                        getch();
                         break;
                     default:
                         printf("ERROR\n");
                         break;
                 }
                 break;
-            case 5://查询信息
-                //cardSearch();
-                break;
-            case 6://数据排序
-                card* c=cardSort();
-                cardPrints(c);
-                break;
-            case 7://数据统计
-                //cardSearchs();
-                break;
-            
-            case 9:
-                
-                break;
-            case 10://系统维护
-                cards=cardFix();//传什么参，廖哥帮帮，真不会
-                break;
-            case 0:
-                printf("退出系统\n");
-                break;
             default:
                 printf("ERROR\n");
                 break;
         }
-    }
-    while(n != 0);
-    
+        system("cls");
+        menu();
 }

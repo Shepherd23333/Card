@@ -76,7 +76,7 @@ Log* head	链表头指针
 
 返回值：
 
-Log* 新链表头指针
+Log* 新链表尾指针
 
 #### logPrint()
 

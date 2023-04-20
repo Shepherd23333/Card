@@ -1,52 +1,60 @@
 #include "card.h"
+Time t={0,0,0,0,0};
 Log *logCreate()
 {
     int n = 0;
-    Log *head;
-    Log *p1, *p2;
-    p1 = p2 = (Log *)malloc(LENLog);
-    //Time t={0,0,0,0,0};p1->time=t;
-    p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute, p1->money=0;
-    head = NULL;
-    while (p1->time.year != 0)
-    {
-        n = n + 1;
-        if (n == 1)
-            head = p1;
-        else
-            p2->next = p1;
-        p2 = p1;
-        p1 = (Log *)malloc(LENLog);
-        p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute=0, p1->money=0;
-    }
-    p2->next = NULL;
-    return (head);
-}
-Log *logExtend(Log *head)
-{
-    Log *p1 = head;
-    if (head != NULL)
-    {
-        while (p1->next != NULL)
-        {
-            p1 = p1->next;
-        }
-        p1 = p1->next = (Log *)malloc(LENLog);
-        p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute=0, p1->money=0;
-    }
+    Log *p1;
+    // Log *p1, *p2;
+    // p1 = p2 = (Log *)malloc(LENLog);
+    p1=(Log *)malloc(LENLog);
+    p1->time=t;
+    p1->money=0.0;
+    // p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute, p1->money=0;
+    // head = NULL;
+    // while (p1->time.year != 0)
+    // {
+    //     n = n + 1;
+    //     if (n == 1)
+    //         head = p1;
+    //     else
+    //         p2->next = p1;
+    //     p2 = p1;
+    //     p1 = (Log *)malloc(LENLog);
+    //     p1->time.year = 0, p1->time.month = 0, p1->time.day = 0, p1->time.hour = 0, p1->time.minute=0, p1->money=0;
+    // }
+    // p2->next = NULL;
     return (p1);
 }
-Log *logDelete(Log *head, Time detime)
+
+Log *logExtend(Log *head)
+{
+    Log* p_log=head;
+    Log *p1;
+    p1=(Log *)malloc(LENLog);
+    p1->time=t;
+    p1->money=0.0;
+    p1->next=NULL;
+    
+    while(p_log!=NULL)
+    {
+        p_log=p_log->next;
+    }
+    p_log->next=p1;
+    return (p1);
+
+}
+
+Log *logDelete(Log* head, Time detime)
 {
     Log *p1 = head;
     Log *p2;
-    if ((head->time.year == detime.year) && (head->time.month == detime.month) && (head->time.day == detime.day) && (head->time.hour == detime.hour) && (head->time.minute == detime.minute))
+    if (!(timeComp(head->time,detime)))
     {//if(!timeComp(head->time,detime))
         head = head->next;
         free(p1);
-        return (head);//return ºóº¯Êý½áÊø
+        return (head);
     }
-    while (p1->next != NULL)
+    while (p1!= NULL)
     {
         p2 = p1->next;
         if ((p1->next->time.year == detime.year) && (p1->next->time.month == detime.month) && (p1->next->time.day == detime.day) && (p1->next->time.hour == detime.hour) && (p1->next->time.minute == detime.minute))
@@ -58,52 +66,52 @@ Log *logDelete(Log *head, Time detime)
         p1 = p1->next;
     }
     return (head);
-} 
+}
+
+
  Log* logSearch(Log* head,...)
  {  
      Log* p1=head;
      va_list val;
      va_start(val,head);
+     Time t=va_arg(val,Time);
+     double money=va_arg(val,double);
      if(head!=NULL)
      {
-         if(num==5)
+        while(p1!=NULL)
          {
-             va_start(val,5);
-             if((head->time.year==va_arg(val,int))&&(head->time.month==va_arg(val,int))&&(head->time.day==va_arg(val,int))&&(head->time.hour==va_arg(val,int))&&(head->time.minute==va_arg(val,int)))
-             {
-                 return (head);
-             }
-             while(p1->next!=NULL)
+            if(t.month*t.day*t.hour*t.minute!=0)
+            {
+                if(timeComp(p1->time,t))
+                {
+                    va_end(val);
+                    return p1;
+                }
+                p1=p1->next;
+            }
+            else
+            {
+                if(p1->time.year==t.year)
+                {
+                    va_end(val);
+                    return p1;
+                }
+            }    
+         }
+         p1=head;
+         while(p1!=NULL)
          {
-             if((p1->time.year==va_arg(val,int))&&(p1->time.month==va_arg(val,int))&&(p1->time.day==va_arg(val,int))&&(p1->time.hour==va_arg(val,int))&&(p1->time.minute==va_arg(val,int)))
-             {
-                 return p1;
-             }
-             p1=p1->next;
+            if(p1->money==money)
+            {
+                va_end(val);
+                return p1;
+            }
+            p1=p1->next;
          }
-
-         }
-         if(num==1)
-         {
-             va_start(val,1);
-             if(head->money==va_arg(val,double))
-             {
-                 return (head);
-             }
-
-             while(p1->next!=NULL)
-             {
-                 if(p1->money==va_arg(val,double))
-                 {
-                     return (p1);
-                 }
-                 p1=p1->next;
-             }
-         }
-         return (head);
+        
      }
      else
-
+     va_end(val);
      return NULL;
 
 
@@ -111,57 +119,60 @@ Log *logDelete(Log *head, Time detime)
 Card *cardCreate()
 {
     int n = 0;
-    Card *head;
-    Card *p1, *p2;
-    p1 = p2 = (Card *)malloc(LENCard);
-
+    Card *p1;
+    // Card *p1, *p2;
+    // p1 = p2 = (Card *)malloc(LENCard);
+    p1=(Card *)malloc(LENCard);
     p1->level = 0;
-    strcpy(p1->name, "");
-    strcpy(p1->number, "");
-    strcpy(p1->password, "");
+    p1->name=(char *)malloc(sizeof(p1->name));
+    p1->number=(char *)malloc(sizeof(p1->number));
+    p1->phone=(char *)malloc(sizeof(p1->phone));
+    p1->password=(char *)malloc(sizeof(p1->password));
     p1->remaining_sum = 0.0f, p1->total_charge = 0.0f, p1->createTime.year = 0, p1->createTime.month = 0, p1->createTime.day = 0, p1->createTime.hour = 0, p1->createTime.minute = 0;
     p1->validTime.year = 0, p1->validTime.month = 0, p1->validTime.day = 0, p1->validTime.hour = 0, p1->validTime.minute = 0;
     p1->rechargeLog->time.year = 0, p1->rechargeLog->time.month = 0, p1->rechargeLog->time.day = 0, p1->rechargeLog->time.hour = 0, p1->rechargeLog->time.minute = 0, p1->rechargeLog->money = 0.0f;
     p1->consumeLog->time.year = 0, p1->consumeLog->time.month = 0, p1->consumeLog->time.day = 0, p1->consumeLog->time.hour = 0, p1->consumeLog->time.minute = 0, p1->consumeLog->money = 0.0f;
-    head = NULL;
-    while (p1->level != 9)
-    {
-        n = n + 1;
-        if (n == 1)
-            head = p1;
-        else
-            p2->next = p1;
-        p2 = p1;
-        p1 = (Card *)malloc(LENCard);
+    // head = NULL;
+    // while (p1->level != 9)
+    // {
+    //     n = n + 1;
+    //     if (n == 1)
+    //         head = p1;
+    //     else
+    //         p2->next = p1;
+    //     p2 = p1;
+    //     p1 = (Card *)malloc(LENCard);
 
-        p1->level = 0;
-        strcpy(p1->name, "");
-        strcpy(p1->number, "");
-        strcpy(p1->password, "");
-        p1->remaining_sum = 0.0f, p1->total_charge = 0.0f, p1->createTime.year = 0, p1->createTime.month = 0, p1->createTime.day = 0, p1->createTime.hour = 0, p1->createTime.minute = 0;
-        p1->validTime.year = 0, p1->validTime.month = 0, p1->validTime.day = 0, p1->validTime.hour = 0, p1->validTime.minute = 0;
-        p1->rechargeLog->time.year = 0, p1->rechargeLog->time.month = 0, p1->rechargeLog->time.day = 0, p1->rechargeLog->time.hour = 0, p1->rechargeLog->time.minute = 0, p1->rechargeLog->money = 0.0f;
-        p1->consumeLog->time.year = 0, p1->consumeLog->time.month = 0, p1->consumeLog->time.day = 0, p1->consumeLog->time.hour = 0, p1->consumeLog->time.minute = 0, p1->consumeLog->money = 0.0f;
-        p1->isLost = 0;
-        head = NULL;
-    }
-    p2->next = NULL;
-    return (head);
+    //     p1->level = 0;
+    //     p1->name=(char *)malloc(sizeof(p1->name));
+    //     p1->number=(char *)malloc(sizeof(p1->number));
+    //     p1->phone=(char *)malloc(sizeof(p1->phone));
+    //     p1->password=(char *)malloc(sizeof(p1->password));
+    //     p1->remaining_sum = 0.0f, p1->total_charge = 0.0f, p1->createTime.year = 0, p1->createTime.month = 0, p1->createTime.day = 0, p1->createTime.hour = 0, p1->createTime.minute = 0;
+    //     p1->validTime.year = 0, p1->validTime.month = 0, p1->validTime.day = 0, p1->validTime.hour = 0, p1->validTime.minute = 0;
+    //     p1->rechargeLog->time.year = 0, p1->rechargeLog->time.month = 0, p1->rechargeLog->time.day = 0, p1->rechargeLog->time.hour = 0, p1->rechargeLog->time.minute = 0, p1->rechargeLog->money = 0.0f;
+    //     p1->consumeLog->time.year = 0, p1->consumeLog->time.month = 0, p1->consumeLog->time.day = 0, p1->consumeLog->time.hour = 0, p1->consumeLog->time.minute = 0, p1->consumeLog->money = 0.0f;
+    //     p1->isLost = 0;
+    //     head = NULL;
+    // }
+    // p2->next = NULL;
+    return (p1);
 }
-Card *cardExtend(Card *head)
+Card *cardExtend()
 {
-    Card *p1 = head;
-    if (head != NULL)
+    Card *p1 = cards;
+    if (p1 != NULL)
     {
-        while (p1->next != NULL)
+        while (p1 != NULL)
         {
             p1 = p1->next;
         }
         p1 = p1->next = (Card *)malloc(LENCard);
         p1->level = 0;
-        strcpy(p1->name, "");
-        strcpy(p1->number, "");
-        strcpy(p1->password, "");
+        p1->name=(char *)malloc(sizeof(p1->name));
+        p1->number=(char *)malloc(sizeof(p1->number));
+        p1->phone=(char *)malloc(sizeof(p1->phone));
+        p1->password=(char *)malloc(sizeof(p1->password));
         p1->remaining_sum = 0.0f, p1->total_charge = 0.0f, p1->createTime.year = 0, p1->createTime.month = 0, p1->createTime.day = 0, p1->createTime.hour = 0, p1->createTime.minute = 0;
         p1->validTime.year = 0, p1->validTime.month = 0, p1->validTime.day = 0, p1->validTime.hour = 0, p1->validTime.minute = 0;
         p1->rechargeLog->time.year = 0, p1->rechargeLog->time.month = 0, p1->rechargeLog->time.day = 0, p1->rechargeLog->time.hour = 0, p1->rechargeLog->time.minute = 0, p1->rechargeLog->money = 0.0f;
@@ -175,7 +186,7 @@ Card* cardDelete(char* demessage)
     Card *p1 = cards;
     if (p1 != NULL)
     {
-        while (p1->next != NULL)
+        while (p1 != NULL)
         {
             Card *p2 = p1->next;
             if (!strcmp(p1->next->name, demessage) || !strcmp(p1->next->number, demessage) )
@@ -189,26 +200,88 @@ Card* cardDelete(char* demessage)
     }
     else
         return NULL;
-} /*
- Card* cardSearch(Card* head, char* semessage)
+}
+
+
+bool cardComp(char* strings[],Card* point)
+{
+    for (int i = 0; i <5;i++)
+    {
+        if ((!strcmp(strings[i], point->name))||(!strcmp(strings[i], point->phone))||(!strcmp(strings[i], point->number)))
+            return true;
+    }
+    return false;
+}
+
+Card* cardSearch_level(Card*,short);
+Card* cardSearch_consume(Card*,double);
+
+ Card* cardSearch_char(Card* head,...)
+{
+     Card* p1=head;
+     char* strs[5]={""};
+     va_list val;
+     va_start(val,head); 
+     for (int i=0; i<5;i++)
+     {
+         strs[i]=va_arg(val,char*);
+     }
+    
+     if(head!=NULL)
+     {
+         if(cardComp(strs,head))
+         {
+             va_end(val);
+             return head;
+         }
+         while(p1!=NULL)
+         {
+             if((cardComp(strs,p1)))
+             {
+                 va_end(val);
+                 return p1;
+             }
+             p1=p1->next;
+         }
+     }
+     va_end(val);
+     return NULL;
+ }
+
+ Card* cardSearch_level(Card* head,short lev)
+ {
+    Card* p1=head;
+    if(head!=NULL)
+    {
+        while (p1!=NULL)
+        {
+            if(p1->level==lev)
+            {
+                return p1;
+            }
+            p1=p1->next;
+        }
+    }
+    return NULL;
+ }
+ Card* cardSearch_consume(Card* head,double consume)
  {
      Card* p1=head;
      if(head!=NULL)
      {
-         if((strcmp(head->name,semessage)==0)||(strcmp(head->number,semessage)==0))
+         while (p1!=NULL)
          {
-             return head;
-         }
-         while(p1->next!=NULL)
-         {
-             if((strcmp(p1->name,semessage)==0)||(strcmp(p1->number,semessage)==0))
+             if(p1->remaining_sum==consume)
              {
                  return p1;
              }
              p1=p1->next;
          }
      }
- }*/
+     return NULL;
+ }
+
+
 void cardLost(char* lostmessage)
 {
     Card *p1 = cards;
@@ -219,7 +292,7 @@ void cardLost(char* lostmessage)
             cards->isLost = 1;
             
         }
-        while (p1->next != NULL)
+        while (p1!= NULL)
         {
             if ((strcmp(p1->name, lostmessage) == 0) || (strcmp(p1->number, lostmessage) == 0))
             {
@@ -230,60 +303,62 @@ void cardLost(char* lostmessage)
         }
     }
 }
-void write()
+void write_file()
 {
+    Card *p_cards = cards;
+    Admin *p_admins = admins;
     FILE *fp;
     if ((fp = fopen("data\\card.txt", "wb")) == NULL)
     {
         printf("File open error\n");
         exit(0);
     }
-    while (cards != NULL)
+    while (p_cards != NULL)
     {
-        fwrite(&cards->name, 80, 1, fp);
-        fwrite(&cards->number, 40, 1, fp);
-        fwrite(&cards->phone, 44, 1, fp);
-        fwrite(&cards->password, 60, 1, fp);
-        fwrite(&cards->level, 2, 1, fp);
-        fwrite(&cards->remaining_sum, 8, 1, fp);
-        fwrite(&cards->total_charge, 8, 1, fp);
+        fwrite(&p_cards->name, 80, 1, fp);
+        fwrite(&p_cards->number, 40, 1, fp);
+        fwrite(&p_cards->phone, 44, 1, fp);
+        fwrite(&p_cards->password, 60, 1, fp);
+        fwrite(&p_cards->level, 2, 1, fp);
+        fwrite(&p_cards->remaining_sum, 8, 1, fp);
+        fwrite(&p_cards->total_charge, 8, 1, fp);
 
-        fwrite(&cards->createTime.year, 4, 1, fp);
-        fwrite(&cards->createTime.month, 4, 1, fp);
-        fwrite(&cards->createTime.day, 4, 1, fp);
-        fwrite(&cards->createTime.hour, 4, 1, fp);
-        fwrite(&cards->createTime.minute, 4, 1, fp);
+        fwrite(&p_cards->createTime.year, 4, 1, fp);
+        fwrite(&p_cards->createTime.month, 4, 1, fp);
+        fwrite(&p_cards->createTime.day, 4, 1, fp);
+        fwrite(&p_cards->createTime.hour, 4, 1, fp);
+        fwrite(&p_cards->createTime.minute, 4, 1, fp);
 
-        fwrite(&cards->validTime.year, 4, 1, fp);
-        fwrite(&cards->validTime.month, 4, 1, fp);
-        fwrite(&cards->validTime.day, 4, 1, fp);
-        fwrite(&cards->validTime.hour, 4, 1, fp);
-        fwrite(&cards->validTime.minute, 4, 1, fp);
+        fwrite(&p_cards->validTime.year, 4, 1, fp);
+        fwrite(&p_cards->validTime.month, 4, 1, fp);
+        fwrite(&p_cards->validTime.day, 4, 1, fp);
+        fwrite(&p_cards->validTime.hour, 4, 1, fp);
+        fwrite(&p_cards->validTime.minute, 4, 1, fp);
 
-        fwrite(&cards->isLost, 1, 1, fp);
+        fwrite(&p_cards->isLost, 1, 1, fp);
 
-        while (cards->rechargeLog != NULL)
+        while (p_cards->rechargeLog != NULL)
         {
-            fwrite(&cards->rechargeLog->time.year, 4, 1, fp);
-            fwrite(&cards->rechargeLog->time.month, 4, 1, fp);
-            fwrite(&cards->rechargeLog->time.day, 4, 1, fp);
-            fwrite(&cards->rechargeLog->time.hour, 4, 1, fp);
-            fwrite(&cards->rechargeLog->time.minute, 4, 1, fp);
-            fwrite(&cards->rechargeLog->money, 8, 1, fp);
-            cards->rechargeLog = cards->rechargeLog->next;
+            fwrite(&p_cards->rechargeLog->time.year, 4, 1, fp);
+            fwrite(&p_cards->rechargeLog->time.month, 4, 1, fp);
+            fwrite(&p_cards->rechargeLog->time.day, 4, 1, fp);
+            fwrite(&p_cards->rechargeLog->time.hour, 4, 1, fp);
+            fwrite(&p_cards->rechargeLog->time.minute, 4, 1, fp);
+            fwrite(&p_cards->rechargeLog->money, 8, 1, fp);
+            p_cards->rechargeLog = p_cards->rechargeLog->next;
         }
-        while (cards->consumeLog != NULL)
+        while (p_cards->consumeLog != NULL)
         {
-            fwrite(&cards->consumeLog->time.year, 4, 1, fp);
-            fwrite(&cards->consumeLog->time.month, 4, 1, fp);
-            fwrite(&cards->consumeLog->time.day, 4, 1, fp);
-            fwrite(&cards->consumeLog->time.hour, 4, 1, fp);
-            fwrite(&cards->consumeLog->time.minute, 4, 1, fp);
-            fwrite(&cards->isLost, 1, 1, fp);
-            cards->consumeLog = cards->consumeLog->next;
+            fwrite(&p_cards->consumeLog->time.year, 4, 1, fp);
+            fwrite(&p_cards->consumeLog->time.month, 4, 1, fp);
+            fwrite(&p_cards->consumeLog->time.day, 4, 1, fp);
+            fwrite(&p_cards->consumeLog->time.hour, 4, 1, fp);
+            fwrite(&p_cards->consumeLog->time.minute, 4, 1, fp);
+            fwrite(&p_cards->isLost, 1, 1, fp);
+            p_cards->consumeLog = p_cards->consumeLog->next;
         }
 
-        cards = cards->next;//cards has changed
+        p_cards = p_cards->next;//cards has changed
     }
     fclose(fp);
 
@@ -292,88 +367,101 @@ void write()
         printf("File open error\n");
         exit(0);
     }
-    while (admins != NULL)
+    while (p_admins != NULL)
     {
-        fwrite(&admins->username, 80, 1, fp);
-        fwrite(&admins->password, 60, 1, fp);
-        fwrite(&admins->isSuper, 1, 1, fp);
-        admins = admins->next;//admins has changed
+        fwrite(&p_admins->username, 80, 1, fp);
+        fwrite(&p_admins->password, 60, 1, fp);
+        fwrite(&p_admins->isSuper, 1, 1, fp);
+        p_admins = p_admins->next;//admins has changed
     }
     fclose(fp);
 }
 
-void read()
+void read_file ()
 {
+   
     FILE *fp;
     if ((fp = fopen("data\\card.txt", "rb")) == NULL)
     {
-        printf("File open error\n");
+        printf("File card open error\n");
         exit(0);
     }//if(!cards) cards=cardCreate();
-    while (cards != NULL)
+    if(cards==NULL)
     {
-        fread(&cards->name, 80, 1, fp);
-        fread(&cards->number, 40, 1, fp);
-        fread(&cards->phone, 44, 1, fp);
-        fread(&cards->password, 60, 1, fp);
-        fread(&cards->level, 2, 1, fp);
-        fread(&cards->remaining_sum, 8, 1, fp);
-        fread(&cards->total_charge, 8, 1, fp);
+        cards=cardCreate();
+    }
+    if(admins==NULL)
+    {
+        admins=adminCreate();
+    }
+    Card* p_cards= cards;
+    Admin* p_admins= admins;
+    while (p_cards != NULL)
+    {
+        fread(&p_cards->name, 80, 1, fp);
+        fread(&p_cards->number, 40, 1, fp);
+        fread(&p_cards->phone, 44, 1, fp);
+        fread(&p_cards->password, 60, 1, fp);
+        fread(&p_cards->level, 2, 1, fp);
+        fread(&p_cards->remaining_sum, 8, 1, fp);
+        fread(&p_cards->total_charge, 8, 1, fp);
 
-        fread(&cards->createTime.year, 4, 1, fp);
-        fread(&cards->createTime.month, 4, 1, fp);
-        fread(&cards->createTime.day, 4, 1, fp);
-        fread(&cards->createTime.hour, 4, 1, fp);
-        fread(&cards->createTime.minute, 4, 1, fp);
+        fread(&p_cards->createTime.year, 4, 1, fp);
+        fread(&p_cards->createTime.month, 4, 1, fp);
+        fread(&p_cards->createTime.day, 4, 1, fp);
+        fread(&p_cards->createTime.hour, 4, 1, fp);
+        fread(&p_cards->createTime.minute, 4, 1, fp);
 
-        fread(&cards->validTime.year, 4, 1, fp);
-        fread(&cards->validTime.month, 4, 1, fp);
-        fread(&cards->validTime.day, 4, 1, fp);
-        fread(&cards->validTime.hour, 4, 1, fp);
-        fread(&cards->validTime.minute, 4, 1, fp);
+        fread(&p_cards->validTime.year, 4, 1, fp);
+        fread(&p_cards->validTime.month, 4, 1, fp);
+        fread(&p_cards->validTime.day, 4, 1, fp);
+        fread(&p_cards->validTime.hour, 4, 1, fp);
+        fread(&p_cards->validTime.minute, 4, 1, fp);
 
-        fread(&cards->isLost, 1, 1, fp);
+        fread(&p_cards->isLost, 1, 1, fp);
 
-        while (cards->rechargeLog != NULL)
+        while (p_cards->rechargeLog != NULL)
         {
-            fread(&cards->rechargeLog->time.year, 4, 1, fp);
-            fread(&cards->rechargeLog->time.month, 4, 1, fp);
-            fread(&cards->rechargeLog->time.day, 4, 1, fp);
-            fread(&cards->rechargeLog->time.hour, 4, 1, fp);
-            fread(&cards->rechargeLog->time.minute, 4, 1, fp);
-            fread(&cards->rechargeLog->money, 8, 1, fp);
-            cards->rechargeLog = cards->rechargeLog->next;
+            fread(&p_cards->rechargeLog->time.year, 4, 1, fp);
+            fread(&p_cards->rechargeLog->time.month, 4, 1, fp);
+            fread(&p_cards->rechargeLog->time.day, 4, 1, fp);
+            fread(&p_cards->rechargeLog->time.hour, 4, 1, fp);
+            fread(&p_cards->rechargeLog->time.minute, 4, 1, fp);
+            fread(&p_cards->rechargeLog->money, 8, 1, fp);
+            p_cards->rechargeLog = p_cards->rechargeLog->next;
         }
-        while (cards->consumeLog != NULL)
+        while (p_cards->consumeLog != NULL)
         {
-            fread(&cards->consumeLog->time.year, 4, 1, fp);
-            fread(&cards->consumeLog->time.month, 4, 1, fp);
-            fread(&cards->consumeLog->time.day, 4, 1, fp);
-            fread(&cards->consumeLog->time.hour, 4, 1, fp);
-            fread(&cards->consumeLog->time.minute, 4, 1, fp);
-            fread(&cards->isLost, 1, 1, fp);
-            cards->consumeLog = cards->consumeLog->next;
+            fread(&p_cards->consumeLog->time.year, 4, 1, fp);
+            fread(&p_cards->consumeLog->time.month, 4, 1, fp);
+            fread(&p_cards->consumeLog->time.day, 4, 1, fp);
+            fread(&p_cards->consumeLog->time.hour, 4, 1, fp);
+            fread(&p_cards->consumeLog->time.minute, 4, 1, fp);
+            fread(&p_cards->isLost, 1, 1, fp);
+            p_cards->consumeLog = p_cards->consumeLog->next;
         }
 
-        cards = cards->next;
+        p_cards = p_cards->next;//cards has changed
     }
     fclose(fp);
-    if ((fp = fopen("data\\admin.txt", "wb")) == NULL)
+    if ((fp = fopen("data\\admin.txt", "rb")) == NULL)
     {
-        printf("File open error\n");
+        printf("File admin open error\n");
         exit(0);
     }
-    while (admins!= NULL)
+    while (p_admins!= NULL)
     {
-        fread(&admins->username, 80, 1, fp);
-        fread(&admins->password, 60, 1, fp);
-        fread(&admins->isSuper, 1, 1, fp);
-        admins = admins->next;
+        fread(&p_admins->username, 80, 1, fp);
+        fread(&p_admins->password, 60, 1, fp);
+        fread(&p_admins->isSuper, 1, 1, fp);
+        p_admins = p_admins->next;//admins has changed
     }
     fclose(fp);
 
 }
 #include<time.h>
+
+
 void backup()
 {
     FILE* f1;
@@ -381,8 +469,8 @@ void backup()
     typedef struct tm tm;
     time_t current;
     time(&current);
-    tm *bctime = localtime(&current);
-    sprintf(bctime,"%s", asctime(bctime));
+    tm *point = localtime(&current);
+    char* bctime=asctime(point);
 
     if((f1=fopen("data.txt", "rb"))==NULL)
     {
@@ -402,17 +490,114 @@ void backup()
     fclose(f1);
     fclose(f2);
 }
+// void restore()
+// {
+//     FILE* f1;
+//     FILE* f2;
+//     typedef struct tm tm;
+//     time_t current;
+//     time(&current);
+//     tm *point = localtime(&current);
+//     char* bctime=asctime(point);
+
+//     if((f1=fopen("file.txt", "rb"))==NULL)//the name of the file needs to be changed
+//     {
+//         printf("File not found\n");
+//         return;
+//     }
+//     if((f2=fopen("bctime.txt","rb"))==NULL)
+//     {
+//         printf("File not found\n");
+//         return;
+//     }
+//     while(!feof(f2))
+//     {
+//         char ch=fgetc(f2);
+//         fputc(ch,f1);
+//     }
+//     fclose(f1);
+//     fclose(f2);
+// }
+#include<io.h>
+#define MAX_FILENAME_LENGTH 500
+void getFiles(char *path, char *suffixname)
+{
+	long   hFile = 0;
+	struct _finddata_t singlefileinfo;
+	strcat(path, "\\*");
+	if ((hFile = _findfirst(path, &singlefileinfo)) != -1)
+	{
+		do
+		{
+			if ((singlefileinfo.attrib & _A_SUBDIR))
+			{
+				if (strcmp(singlefileinfo.name, ".") != 0 && strcmp(singlefileinfo.name, "..") != 0)
+					continue;
+			}
+			else
+			{
+				int length = strlen(singlefileinfo.name);
+				char *filename = singlefileinfo.name;
+				int pos_lastdot = -1;
+				for(int j=length-1;j>0;j--)
+                    if(filename[j] == '.')
+                    {
+                        pos_lastdot = j;
+                        break;
+                    }
+                if (pos_lastdot != -1)
+                {
+                    int actualsuffix_len = length - pos_lastdot;
+                    char actualsuffix[actualsuffix_len];
+                    if (actualsuffix_len == strlen(suffixname))
+                    {
+                        memcpy(actualsuffix,filename + pos_lastdot,actualsuffix_len);
+                        int flag = 1;
+                        for(int k=0;k<actualsuffix_len;k++)
+                            if(actualsuffix[k] != suffixname[k])
+                            {
+                                flag = -1;break;
+                            }
+                        if(flag == 1)
+                            printf("%s\n",filename);
+                    }
+                }
+			}
+		} while (_findnext(hFile, &singlefileinfo) == 0);
+		_findclose(hFile);
+	}
+}
+
+void print_file_name()
+{
+    
+        printf("%u8BF7%u8F93%u5165%u5907%u4EFD%u6587%u4EF6%u6240%u5728%u6587%u4EF6%u5939\n");
+        char path[MAX_FILENAME_LENGTH];
+
+        char *str1 = gets(path);
+
+      
+        char suffixname[6]=".txt";
+        
+        getFiles(str1,suffixname);
+} 
 void restore()
 {
+    print_file_name();
+    printf("Please select a backup file and enter its name\n");
+    
+    char file_name[25];
+    gets(file_name);
+    
     FILE* f1;
     FILE* f2;
     typedef struct tm tm;
     time_t current;
     time(&current);
-    tm *bctime = localtime(&current);
-    sprintf(bctime,"restore%s", asctime(bctime));
+    tm *point = localtime(&current);
+    char* bctime=asctime(point);
 
-    if((f1=fopen("file.txt", "rb"))==NULL)
+    if((f1=fopen("file_name", "rb"))==NULL)//the name of the file needs to be changed
     {
         printf("File not found\n");
         return;
@@ -430,8 +615,101 @@ void restore()
     fclose(f1);
     fclose(f2);
 }
+void logOut()
+{
+    exit(0);
+}
+
+void adminSignUp()
+{
+    Admin* ap=adminExtend();
+
+    printf("qing shu ru guan li yuan zhang hao\n");
+    scanf("%s",ap->username);
+    printf("qing shu ru guan li yuan mi ma\n");
+    scanf("%s",ap->password);
+}
+
+
 
 
 Admin *adminSearch(char *s)
 {
+    Admin *ap=admins;
+    while(ap!=NULL)
+    {
+        if(strcmp(ap->username,s)==0)
+        {
+            return ap;
+        }
+        ap=ap->next;
+    }
+    return NULL;
 }
+
+//void cardUpdatePassword(Card* head){}
+
+//void cardUpdatePhone(Card* head){}
+
+
+
+char* generate_random()
+{
+    int test_num;
+    srand(time(NULL));
+    test_num=rand()%9999+1000;//generate random number-test_num
+    char* test_message;
+    test_message=(char*)malloc(sizeof(test_message));
+    sprintf(test_message,"%d",test_num);
+    return test_message;
+}
+
+char* send_message(Card* p,char* message)
+{
+    
+    char* mes1;
+    strcpy(mes1,message);
+    strcat(mes1,p->phone);
+    return mes1;
+}
+
+bool cardIdentify(Card* p)
+{   
+    
+    char* mes;
+    mes=(char*)malloc(sizeof(mes));
+   
+    strcpy(mes,generate_random());
+    
+    printf("Verification code sent successfully\n");
+    
+    char* str;
+    str=(char*)malloc(sizeof(str));
+    strcpy(str,send_message( p,mes));
+    
+    char mes3[4];
+     
+    strncpy(mes3,str,4);
+    
+    if(!(strcmp(mes3,mes)))
+    {
+        return true;
+    }
+    return false;
+    
+    
+    
+}
+
+void cardLogOut()
+{
+    void menu();
+}
+
+void cardSignUp()
+{
+    Card* psp=cardExtend();
+}
+
+
+                       

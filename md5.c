@@ -61,7 +61,7 @@ void md5I(const uint8_t *initial_msg, size_t initial_len, uint8_t *digest) {
     h3 = 0x10325476;
     //Pre-processing:
     //append "1" bit to message    
-    //append "0" bits until message length in bits ¡Ô 448 (mod 512)
+    //append "0" bits until message length in bits ï¿½ï¿½ 448 (mod 512)
     //append length mod (2^64) to message
     for (new_len = initial_len + 1; new_len % (512/8) != 448/8; new_len++);
     msg = (uint8_t*)malloc(new_len + 8);
@@ -76,7 +76,7 @@ void md5I(const uint8_t *initial_msg, size_t initial_len, uint8_t *digest) {
     // Process the message in successive 512-bit chunks:
     //for each 512-bit chunk of message:
     for(offset=0; offset<new_len; offset += (512/8)) {
-        // break chunk into sixteen 32-bit words w[j], 0 ¡Ü j ¡Ü 15
+        // break chunk into sixteen 32-bit words w[j], 0 ï¿½ï¿½ j ï¿½ï¿½ 15
         for (i = 0; i < 16; i++)
             w[i] = to_int32(msg + offset + i*4);
         // Initialize hash value for this chunk:
@@ -136,3 +136,6 @@ char* md5C(char* s){
     }
     return result;
 }
+
+
+//??

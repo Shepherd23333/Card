@@ -1,40 +1,125 @@
 #include"card.h"
-Card* cardLogIn(char* s,char* password)
+void cardRecharge(Card** head, double money)  
 {
-     
-      
+    if (*head == NULL)  
+    {  
+        return;  
+    }
 
-}/*
-Card* cardRecharge(Card* ,double)
+    Card* card = *head;  
+    while (card != NULL)  
+    {  
+        if (card->level == 1)  
+        {  
+            if (card->remaining_sum >= money)  
+            {  
+                card->remaining_sum -= money;  
+                return;  
+            }  
+            else  
+            {  
+                return;  
+            }  
+        }  
+        else  
+        {  
+            double levelPrice = 100;  
+            double levelBalance = card->remaining_sum;  
+            card->remaining_sum = card->level * levelPrice + levelBalance;  
+            if (card->remaining_sum < 0)  
+            {  
+                printf("Error: level1 card balance is insufficient.\n");  
+                return;  
+            }  
+            card = card->next;  
+        }  
+    }  
 
-{
-FILE*fp;
-int num;
-int t;
-int i;
-int m=load();
-printf("\n 原来的会员信息:\n");
-display(); // 调用浏览函数
-printf("\n");
-fp=fopen("emploee_list","a");
-printf("请输入续费会员卡号:\n");
-scanf("%d",&num);
-for(i=0;i<m;i++)
-if(num==em[i].num)
-{
-printf("\n已找到此人?其记录为?\n");
-printf("\n卡号\t姓名\t缴费金额\t消费金额\n");
-printf("\n%d\t%s\t%d\t%d\t%d\n",em[i].num,em[i].name, em[i].wage,em[i].xiao);printf("\n输入续费金额?\n");
-scanf("%d",&t);
-em[i].wage= em[i].wage+t;
-printf("\n续后金额?\t%d\n",em[i].wage);
-printf("\n续费成功!\n");
 }
+
+Card *cardLogIn(char *numorphone, char *password)
+{
+    Card *c = NULL;
+    int q = 0;
+    
+    Card *ptr = cards;
+    for (; ptr != NULL; ptr = ptr->next)
+    {
+        if (strcmp(ptr->number, numorphone) == 0 || strcmp(ptr->phone, numorphone) == 0)
+        { 
+            c = ptr;
+            break;
+        }
+    }
+    if (c == NULL)
+    {
+        printf("");
+        return NULL;
+    }
+    else if (strcmp(c->password, password) != 0)
+    {
+        printf("");
+        c = NULL;
+        printf("");
+        scanf("%d",&q);
+        switch (q)
+        {
+        case 1:
+            printf(" \n");
+            password = getstr();
+            if (strcmp(c->password, password) != 0)
+            {
+                printf("");
+                return NULL;
+            }
+            else
+            {
+                printf("");
+                return c;
+            }
+            break;
+        case 0:
+            return NULL;
+            break;
+        }
+    }
+    else
+    {
+        printf("");
+        return c;
+    }
 }
-*/
 
+Admin* adminCreate()
+{
+    Admin *head=(Admin*)malloc(LENAdmin);
+    head->username=(char*)malloc(sizeof(char));
+    head->password=(char*)malloc(sizeof(char));
+    head->isSuper=0;
+    head->next=NULL;
+    return head;
+}
 
+Admin* adminDelete(char* u)  
+{
+    Admin *p1 = admins;  
+    if(p1 == NULL)  
+    {  
+        return NULL;  
+    }
 
+    while(p1 != NULL)  
+    {  
+        Card *p2 = p1->next;  
+        if(!strcmp(p1->next->username,u)||!strcmp(p1->next->password,u))  
+        {  
+            p1->next = p1->next->next;  
+            free(p2);  
+            return admins;  
+        }  
+        p1 = p1->next;  
+    }
 
+    return NULL;  
 
-
+}

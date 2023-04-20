@@ -14,8 +14,8 @@ int timeComp(Time x,Time y){
     ):sig(x.year-y.year);
 }
 void logFix(Log* head){
-    logPrint(head);
-    printf("请指定需要修改的交易记录：\n");
+    logPrints(head);
+    printf("\u8bf7\u6307\u5b9a\u9700\u8981\u4fee\u6539\u7684\u4ea4\u6613\u8bb0\u5f55\uff1a\n");
     double money;
     int y,mo,d,h,mi,t;
     scanf("%lf %d\\%d\\%d %d:%d",&money,&y,&mo,&d,&h,&mi);
@@ -23,8 +23,8 @@ void logFix(Log* head){
         Time ti={y,mo,d,h,mi};
         Log *l;
         if(l=logSearch(head,money,ti)){
-            printf("请选择你要修改的内容（允许同时修改多项数据，输入0结束修改）：\n");
-            printf("(1.交易金额  2.交易时间）\n");
+            printf("\u8bf7\u9009\u62e9\u4f60\u8981\u4fee\u6539\u7684\u5185\u5bb9\uff08\u5141\u8bb8\u540c\u65f6\u4fee\u6539\u591a\u9879\u6570\u636e\uff0c\u8f93\u51650\u7ed3\u675f\u4fee\u6539\uff09\uff1a\n");
+            printf("(1.\u4ea4\u6613\u91d1\u989d  2.\u4ea4\u6613\u65f6\u95f4)\n");
             int f[3]={0};
             scanf("%d",&t);
             while(t){
@@ -35,36 +35,36 @@ void logFix(Log* head){
                 if(f[i])
                     switch(i){
                         case 1:
-                            printf("请输入交易金额：\n");
+                            printf("\u8bf7\u8f93\u5165\u4ea4\u6613\u91d1\u989d\uff1a\n");
                             scanf("%lf",&money);
                             if(money<0)
-                                printf("错误：非法数据！\n");
+                                printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
                             else{
                                 l->money=money;
-                                printf("修改成功！\n");
+                                printf("\u4fee\u6539\u6210\u529f\uff01\n");
                             }
                             break;
                         case 2:
-                            printf("请输入交易时间：\n");
+                            printf("\u8bf7\u8f93\u5165\u4ea4\u6613\u65f6\u95f4\uff1a\n");
                             scanf("%d\\%d\\%d %d:%d",&y,&mo,&d,&h,&mi);
                             if(isTime(y,mo,d,h,mi)){
                                 Time tim={y,mo,d,h,mi};
                                 l->time=tim;
-                                printf("修改成功！\n");
+                                printf("\u4fee\u6539\u6210\u529f\uff01\n");
                             }else
-                                printf("错误：非法数据！\n");
+                                printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
                             break;
                     }
         }else
-            printf("错误：找不到该数据！\n");
+            printf("\u9519\u8bef\uff1a\u627e\u4e0d\u5230\u8be5\u6570\u636e\uff01\n");
     }else
-        printf("错误：非法数据！\n");
+        printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
 }
 void cardFix(Card* c){
-    printf("请选择你要修改的内容（允许同时修改多项数据，输入0结束修改）：\n");
-    printf("(1.用户名  2.会员卡卡号  3.用户手机号  4.会员卡密码\n");
-    printf("5.会员卡等级  6.总充值金额  7.创建时间  8.丢失状态\n");
-    printf("9.充值记录  10.消费记录)\n");
+    printf("\u8bf7\u9009\u62e9\u4f60\u8981\u4fee\u6539\u7684\u5185\u5bb9\uff08\u5141\u8bb8\u540c\u65f6\u4fee\u6539\u591a\u9879\u6570\u636e\uff0c\u8f93\u51650\u7ed3\u675f\u4fee\u6539\uff09\uff1a\n");
+    printf("(1.\u7528\u6237\u540d  2.\u4f1a\u5458\u5361\u5361\u53f7  3.\u7528\u6237\u624b\u673a\u53f7  4.\u4f1a\u5458\u5361\u5bc6\u7801\n");
+    printf("5.\u4f1a\u5458\u5361\u7b49\u7ea7  6.\u603b\u5145\u503c\u91d1\u989d  7.\u521b\u5efa\u65f6\u95f4  8.\u4e22\u5931\u72b6\u6001\n");
+    printf("9.\u5145\u503c\u8bb0\u5f55  10.\u6d88\u8d39\u8bb0\u5f55)\n");
     int f[11]={0},t,y,mo,d,h,mi;
     double money;
     char *s;
@@ -77,39 +77,39 @@ void cardFix(Card* c){
         if(f[i])
             switch(i){
                 case 1:
-                    printf("请输入新用户名：\n");
+                    printf("\u8bf7\u8f93\u5165\u65b0\u7528\u6237\u540d\uff1a\n");
                     s=getstr();
                     if(isalpha(s[0])&&(s[0]!='c'||strlen(s)==1||strspn(s+1,"0123456789")!=strlen(s+1))||s[0]<0){
                         strcpy(c->name,s);
-                        printf("修改成功！\n");
+                        printf("\u4fee\u6539\u6210\u529f\uff01\n");
                     }
                     else
-                        printf("错误：非法数据！\n");
+                        printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
                     break;
                 case 2:
                     if(authorize()){
-                        printf("请输入新卡号：\n");
+                        printf("\u8bf7\u8f93\u5165\u65b0\u5361\u53f7\uff1a\n");
                         s=getstr();
                         if(s[0]!='c'||strlen(s)==1||strspn(s+1,"0123456789")!=strlen(s+1))
-                            printf("错误：非法数据！\n");
+                            printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
                         else if(!cardSearch(cards,s)){
                             strcpy(c->number,s);
-                            printf("修改成功！\n");
+                            printf("\u4fee\u6539\u6210\u529f\uff01\n");
                         }else
-                            printf("错误：该卡号已存在！\n");
+                            printf("\u9519\u8bef\uff1a\u8be5\u5361\u53f7\u5df2\u5b58\u5728\uff01\n");
                     }
                     break;
                 case 3:
-                    if(authorize()){
-                        printf("请输入新手机号：\n");
+                    if(authority!=2){
+                        printf("\u8bf7\u8f93\u5165\u65b0\u624b\u673a\u53f7\uff1a\n");
                         s=getstr();
                         if(strlen(s)!=11||strspn(s,"0123456789")!=strlen(s))
-                            printf("错误：非法数据！\n");
+                            printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
                         else if(!cardSearch(cards,s)){
                             strcpy(c->phone,s);
-                            printf("修改成功！\n");
+                            printf("\u4fee\u6539\u6210\u529f\uff01\n");
                         }else
-                            printf("错误：该手机号已被使用！\n");
+                            printf("\u9519\u8bef\uff1a\u8be5\u624b\u673a\u53f7\u5df2\u88ab\u4f7f\u7528\uff01\n");
                     }else
                         cardUpdatePhone(c);
                     break;
@@ -117,55 +117,55 @@ void cardFix(Card* c){
                     if(authority!=2)
                         cardUpdatePassword(c);
                     else{
-                        printf("请输入新密码：\n");
-                        s=getstr();
+                        printf("\u8bf7\u8f93\u5165\u65b0\u5bc6\u7801\uff1a\n");
+                        s=getPassword();
                         strcpy(c->password,s);
-                        printf("修改成功！\n");
+                        printf("\u4fee\u6539\u6210\u529f\uff01\n");
                     }
                     break;
                 case 5:
                     if(authorize()){
-                        printf("请输入会员卡等级：\n");
+                        printf("\u8bf7\u8f93\u5165\u4f1a\u5458\u5361\u7b49\u7ea7\uff1a\n");
                         scanf("%d",&t);
                         if(0<=t&&t<=8){
                             c->level=t;
-                            printf("修改成功！\n");
+                            printf("\u4fee\u6539\u6210\u529f\uff01\n");
                         }else
-                            printf("错误：非法数据！\n");
+                            printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
                     }
                     break;
                 case 6:
                     if(authorize()){
-                        printf("请输入总充值金额：\n");
+                        printf("\u8bf7\u8f93\u5165\u603b\u5145\u503c\u91d1\u989d\uff1a\n");
                         scanf("%lf",&money);
                         if(money<0)
-                            printf("错误：非法数据！\n");
+                            printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
                         else{
                             c->total_charge=money;
-                            printf("修改成功！\n");
+                            printf("\u4fee\u6539\u6210\u529f\uff01\n");
                         }
                     }
                     break;
                 case 7:
                     if(authorize()){
-                        printf("请输入创建时间：\n");
+                        printf("\u8bf7\u8f93\u5165\u521b\u5efa\u65f6\u95f4\uff1a\n");
                         scanf("%d\\%d\\%d %d:%d",&y,&mo,&d,&h,&mi);
                         if(isTime(y,mo,d,h,mi)){
                             Time ti={y,mo,d,h,mi};
                             c->createTime=ti;
-                            printf("修改成功！\n");
+                            printf("\u4fee\u6539\u6210\u529f\uff01\n");
                         }else
-                            printf("错误：非法数据！\n");
+                            printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
                     }
                     break;
                 case 8:
                     if(authority!=2){
-                        printf("请输入要找回的会员卡卡号或用户手机号：\n");
+                        printf("\u8bf7\u8f93\u5165\u8981\u627e\u56de\u7684\u4f1a\u5458\u5361\u5361\u53f7\u6216\u7528\u6237\u624b\u673a\u53f7\uff1a\n");
                         s=getstr();
                         cardFind(s);
                     }else{
                         c->isLost=!c->isLost;
-                        printf("修改成功！\n");
+                        printf("\u4fee\u6539\u6210\u529f\uff01\n");
                     }
                     break;
                 case 9:
