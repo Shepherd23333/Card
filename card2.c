@@ -1,5 +1,4 @@
 #include"card.h"
-
 void logPrint(Log* l) 
 {
     if (l == NULL) return;
@@ -12,7 +11,6 @@ void logPrints(Log* head)
     Log* cur = head;
     while (cur != NULL) 
     {
-
         printf("\u4ea4\u6613\u65f6\u95f4\uff1a%u\\%02u\\%02u %02u:%02u\n", cur->time.year, cur->time.month, cur->time.day, cur->time.hour, cur->time.minute);
         printf("\u4ea4\u6613\u91d1\u989d\uff1a%.2lf\n", cur->money);
         cur = cur->next;
@@ -43,8 +41,7 @@ void cardPrint(Card* c)  //card2
         printf("\u662f\n");
     else
         printf("\u5426\n");
-    }
-        
+    }    
 }
 
 void cardPrints() 
@@ -325,22 +322,16 @@ void cardUpdatePassword(Card* c)
 }
 
 
-
-
-
-
-
-//登录管理员账号之后界面
-void menu()//会员卡系统界面
+void menu()
 {
     printf("\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u83dc\u5355\u7ba1\u7406\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\n");
-    printf("      1.新会员注册       2.登录\n");
-    printf("      3.输出信息         4.查询信息\n");
-    printf("      5.数据排序         6.数据统计\n");
-    printf("      7.系统维护         0.退出\n");
-    printf("----------欢迎使用会员卡计费系统----------\n");//找回密码要不要写
+    printf("      \u0031\u002e\u65b0\u4f1a\u5458\u6ce8\u518c       \u0032\u002e\u767b\u5f55\n");
+    printf("      \u0033\u002e\u8f93\u51fa\u4fe1\u606f         \u0034\u002e\u67e5\u8be2\u4fe1\u606f\n");
+    printf("      \u0035\u002e\u6570\u636e\u6392\u5e8f         \u0036\u002e\u6570\u636e\u7edf\u8ba1\n");
+    printf("      \u0037\u002e\u7cfb\u7edf\u7ef4\u62a4         \u0030\u002e\u9000\u51fa\n");
+    printf("\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u6b22\u8fce\u4f7f\u7528\u4f1a\u5458\u5361\u8ba1\u8d39\u7cfb\u7edf\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\n");//找回密码要不要写
     int n=0,aa=0;
-        printf("请选择功能：");
+        printf("\u8bf7\u9009\u62e9\u529f\u80fd\uff1a");
         scanf("%d", &n);
         if(n==0)
         {
@@ -351,6 +342,7 @@ void menu()//会员卡系统界面
         char* password;
         Card* c;
         int a=0;
+        Log* l;//right?
         double m,k;
         switch(n)
         {
@@ -358,76 +350,97 @@ void menu()//会员卡系统界面
                 cardSignUp();
                 break;
             case 2://cardLogIn
-                printf("请输入会员卡卡号或手机号： \n");
+                printf("\u8bf7\u8f93\u5165\u4f1a\u5458\u5361\u5361\u53f7\u6216\u624b\u673a\u53f7\uff1a \n");
                 numorphone=getstr();
-                printf("请输入会员卡密码： \n");
+                printf("\u8bf7\u8f93\u5165\u4f1a\u5458\u5361\u5bc6\u7801\uff1a \n");
                 password=getstr();
                 Card *c=cardLogIn(numorphone,password);
                 if(!c)
                 {
-                    printf("登录失败！");
+                    printf("\u767b\u5f55\u5931\u8d25\uff01");
                     break;
                 }
                 else
                 {
-                    printf("请选择要进行的操作： \n");
-                    printf("1.修改信息   2.消费\n");
-                    printf("3.充值       4.挂失\n");
-                    printf("5.找回       6.退卡\n");
-                    printf("7.换手机号   8.更改密码\n");
-                    printf("0.退出\n");
+                    printf("\u8bf7\u9009\u62e9\u8981\u8fdb\u884c\u7684\u64cd\u4f5c\uff1a \n");
+                    printf("\u0031\u002e\u4fee\u6539\u4fe1\u606f   \u0032\u002e\u6d88\u8d39\n");
+                    printf("\u0033\u002e\u5145\u503c       \u0034\u002e\u6302\u5931\n");
+                    printf("\u0035\u002e\u627e\u56de       \u0036\u002e\u9000\u5361\n");
+                    printf("\u0037\u002e\u6362\u624b\u673a\u53f7   \u0038\u002e\u66f4\u6539\u5bc6\u7801\n");
+                    printf("\u0030\u002e\u9000\u51fa\n");
                     scanf("%d", &a);
                     switch (a)
                     {
-                        case 1://修改信息
+                        case 1://cardFix
                         cardFix(c);
                         break;
-                        case 2://消费
-                        printf("请输入花费金额：");
+                        case 2://consume
+                        printf("\u8bf7\u8f93\u5165\u82b1\u8d39\u91d1\u989d\uff1a");
                         scanf("%lf", &m);
                         cardConsume(c, m);
-                        //dd
-                        Log* a=logExtend(c->consumeLog);
+                        //buqueding
+                        l=logExtend(c->consumeLog);
                         break;
-                        case 3://充值
-
-                        printf("请输入充值金额：");
+                        case 3://recharge
+                        printf("\u8bf7\u8f93\u5165\u5145\u503c\u91d1\u989d\uff1a");
                         scanf("%lf", &k);
                         cardRecharge(c, k);
-                        logExtend(c->rechargeLog);
+                        l=logExtend(c->rechargeLog);
                         break;
-                        case 4: // 挂失
+                        case 4: // cardLost
                         if (cardIdentify(c))
                         {
                             cardLost(c);
-                            printf("挂失成功，任意键继续!");
+                            printf("\u6302\u5931\u6210\u529f\uff0c\u4efb\u610f\u952e\u7ee7\u7eed\u0021");
                             getch();
                         }
                         break;
-                        case 5://找回
+                        case 5://cardFind
                         if(cardIdentify(c)){
-                            cardFind(c);//随机数
+                            cardFind(c);
+                            printf("\u627e\u56de\u6210\u529f\uff0c\u4efb\u610f\u952e\u7ee7\u7eed\u0021");
+                            getch();
                         }
                         break;
-                        case 6://退卡
+                        case 6://delete
                         if (cardIdentify(c))
                         {
                             cards=cardDelete(c);
-                            printf("退卡成功，任意键继续!");
+                            printf("\u9000\u5361\u6210\u529f\uff0c\u4efb\u610f\u952e\u7ee7\u7eed\u0021");
                             getch();
                         }
                         else
                         {
-                        printf("会员卡身份验证错误，请重试！任意键继续\n");//重试怎么回到Identify那里呀
+                        printf("\u4f1a\u5458\u5361\u8eab\u4efd\u9a8c\u8bc1\u9519\u8bef\uff0c\u8bf7\u91cd\u8bd5\uff01\u4efb\u610f\u952e\u7ee7\u7eed\n");
                         getch();
+                        printf("\u0031\u002e\u8bf7\u518d\u6b21\u8fdb\u884c\u8eab\u4efd\u9a8c\u8bc1    \u0032\u002e\u9000\u51fa\u6b64\u9009\u9879\n")
+                        scanf("%d",&aa);
+                        switch (aa)
+                        {
+                        case 1:
+                            if (cardIdentify(c))
+                            {
+                                cards = cardDelete(c);
+                                printf("\u9000\u5361\u6210\u529f\uff0c\u4efb\u610f\u952e\u7ee7\u7eed\u0021");
+                                getch();
+                            }
+                            else
+                            {
+                                printf("\u4f1a\u5458\u5361\u8eab\u4efd\u9a8c\u8bc1\u9519\u8bef\uff0c\u4efb\u610f\u952e\u7ee7\u7eed\n");
+                                getch();
+                            }
+                            break;
+                        case 2:
+                            break;
                         }
-                        case 7://换绑手机号
+                        }
+                        case 7://update phone
                            cardUpdatePhone(c);
-                        case 8://更换密码
+                        case 8://update password
                            cardUpdatePassword(c);
                         case 0:
                         cardLogOut();
-                        printf("已退出此账号\n");
+                        printf("\u5df2\u9000\u51fa\u6b64\u8d26\u53f7\n");
                         break;
                         default:
                         printf("ERROR\n");
@@ -435,48 +448,48 @@ void menu()//会员卡系统界面
                     }
                     break;
                 }
-            case 3://输出所有信息 
+            case 3://print all
                 cardPrints();
                 break;
-            case 4://查询信息
+            case 4://search
                 //cardSearch();
                 break;
-            case 5://数据排序
+            case 5://sort
                 cards=cardSort();
                 cardPrints();
                 break;
-            case 6://数据统计
+            case 6://tongji
                 //cardSearchs();
                 break;
-            case 7://系统维护
-                //cards=cardFix();//传什么参，廖哥帮帮，真不会
-                printf("1.密码维护\n");
-                printf("2.数据备份\n");
-                printf("3.数据恢复\n");
-                printf("0.退出\n");
-                printf("请选择功能\n");
+            case 7://xitong weihu
+                
+                printf("\u0031\u002e\u5bc6\u7801\u7ef4\u62a4\n");
+                printf("\u0032\u002e\u6570\u636e\u5907\u4efd\n");
+                printf("\u0033\u002e\u6570\u636e\u6062\u590d\n");
+                printf("\u0030\u002e\u9000\u51fa\n");
+                printf("\u8bf7\u9009\u62e9\u529f\u80fd\n");
                 scanf("%d", &aa);
                 switch(aa)
                 {
-                    case 1://密码维护
-                        printf("请输入卡号或手机号\n");
+                    case 1://mima weihu
+                        printf("\u8bf7\u8f93\u5165\u5361\u53f7\u6216\u624b\u673a\u53f7\n");
                         numorphone=getstr();
                         cardFix(numorphone);
-                        printf("密码维护成功，任意键继续!\n");
+                        printf("\u5bc6\u7801\u7ef4\u62a4\u6210\u529f\uff0c\u4efb\u610f\u952e\u7ee7\u7eed\u0021\n");
                         getch();
                         break;
-                    case 2://数据备份
+                    case 2://backup
                         backUp();
-                        printf("数据备份成功，任意键继续!\n");
+                        printf("\u6570\u636e\u5907\u4efd\u6210\u529f\uff0c\u4efb\u610f\u952e\u7ee7\u7eed\u0021\n");
                         getch();
                         break;
-                    case 3://数据恢复
+                    case 3://restore
                         restore();
-                        printf("数据恢复成功，任意键继续!\n");
+                        printf("\u6570\u636e\u6062\u590d\u6210\u529f\uff0c\u4efb\u610f\u952e\u7ee7\u7eed\u0021\n");
                         getch();
                         break;
-                    case 0://退出
-                        printf("退出成功，任意键继续!\n");
+                    case 0://exit
+                        printf("\u9000\u51fa\u6210\u529f\uff0c\u4efb\u610f\u952e\u7ee7\u7eed\u0021\n");
                         getch();
                         break;
                     default:
