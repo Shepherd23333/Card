@@ -1,12 +1,12 @@
 #include"card.h"
-void cardRecharge(Card** head, double money)  
+void cardRecharge(Card* head, double money)  
 {
-    if (*head == NULL)  
+    if (head == NULL)  
     {  
         return;  
     }
 
-    Card* card = *head;  
+    Card* card = head;  
     while (card != NULL)  
     {  
         if (card->level == 1)  
@@ -35,7 +35,7 @@ void cardRecharge(Card** head, double money)
         }  
     }  
 
-}
+} 
 
 Card *cardLogIn(char *numorphone, char *password)
 {
@@ -100,7 +100,7 @@ Admin* adminCreate()
     return head;
 }
 
-Admin* adminDelete(char* u)  
+/*Admin* adminDelete(char* u)  
 {
     Admin *p1 = admins;  
     if(p1 == NULL)  
@@ -122,4 +122,36 @@ Admin* adminDelete(char* u)
 
     return NULL;  
 
+}*/
+ 
+
+Admin* adminDelete(char* u) 
+{    
+    Admin *admins = NULL; 
+    if (admins == NULL) 
+    {    
+        return NULL;    
+    }
+
+    if (strcmp(u, "") == 0) 
+    {    
+        return NULL;    
+    }
+
+    Admin *p1 = admins;    
+    Admin *p2 = NULL;    
+    while (p1 != NULL)    
+    {    
+        p2 = p1;    
+        p1 = p1->next;    
+    }
+
+    if (p2 == NULL) 
+    {    
+        return NULL;    
+    }
+
+    p2->next = p2->next->next;    
+    free(p2);    
+    return admins;    
 }

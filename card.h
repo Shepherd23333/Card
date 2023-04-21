@@ -8,9 +8,11 @@
 #include<stdbool.h>
 #include<windows.h>
 #include<math.h>
+#include<conio.h>
 typedef struct Time{
     unsigned year, month, day, hour, minute;
 }Time;
+Time t0;
 int timeComp(Time,Time);    //card4
 typedef struct Log{
     Time time;
@@ -37,15 +39,15 @@ typedef struct Card{
     struct Card *next;
 }Card;
 #define LENCard sizeof(Card)
-Card *cards;    //global Card list
+Card *cards,c0;    //global Card list
 //Card* cardCreate(); //card3
 Card* cardDelete(char*); //card1     
 Card* cardExtend();    //card1
 void cardPrint(Card*);  //card2
 void cardPrints();     //card2
 Card* cardSort();    //card2
-Card* cardSearch(Card*, ...);   //card1
-Card* cardSearchs(int*, ...);    
+Card* cardSearch(Card);   //card1
+Card* cardSearchs(Card);     
 void cardFix(Card*);   //card4
 void cardSignUp(); //card1
 Card* cardLogIn(char*, char*);   //card3

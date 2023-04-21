@@ -68,6 +68,7 @@ void cardFix(Card* c){
     int f[11]={0},t,y,mo,d,h,mi;
     double money;
     char *s;
+    Card tc=c0;
     scanf("%d",&t);
     while(t){
         f[t]=1;
@@ -90,9 +91,10 @@ void cardFix(Card* c){
                     if(authorize()){
                         printf("\u8bf7\u8f93\u5165\u65b0\u5361\u53f7\uff1a\n");
                         s=getstr();
+                        memcpy(tc.number,s,sizeof(s));
                         if(s[0]!='c'||strlen(s)==1||strspn(s+1,"0123456789")!=strlen(s+1))
                             printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
-                        else if(!cardSearch(cards,s)){
+                        else if(!cardSearch(tc)){
                             strcpy(c->number,s);
                             printf("\u4fee\u6539\u6210\u529f\uff01\n");
                         }else
@@ -103,9 +105,10 @@ void cardFix(Card* c){
                     if(authority!=2){
                         printf("\u8bf7\u8f93\u5165\u65b0\u624b\u673a\u53f7\uff1a\n");
                         s=getstr();
+                        memcpy(tc.phone,s,sizeof(s));
                         if(strlen(s)!=11||strspn(s,"0123456789")!=strlen(s))
                             printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
-                        else if(!cardSearch(cards,s)){
+                        else if(!cardSearch(tc)){
                             strcpy(c->phone,s);
                             printf("\u4fee\u6539\u6210\u529f\uff01\n");
                         }else

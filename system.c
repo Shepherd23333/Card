@@ -65,7 +65,11 @@ void initialize(){
     printf("\u7cfb\u7edf\u521d\u59cb\u5316\u4e2d\uff0c\u8bf7\u7b49\u5f85\u2026\u2026\n");
     admins=(Admin*)calloc(1,LENAdmin);
     cards=(Card*)calloc(1,LENCard);
-    read();
+    Time t={0,0,0,0,0};
+    Card c={""};
+    t0=t;
+    c0=c;
+    read_file();
     printf("\u521d\u59cb\u5316\u5b8c\u6210\uff01\n");
     Sleep(1500);
     system("cls");
@@ -150,7 +154,7 @@ void adminLogOut(){
 }
 bool authorize(){
     if(authority!=2){
-        printf("\u9519\u8bef\uff1a\u62d2\u7edd\u8bbf\u95ee\uff01\u005c\u006e\u8be5\u64cd\u4f5c\u9700\u8981\u8d85\u7ea7\u7ba1\u7406\u5458\u6743\u9650\u3002\n");
+        printf("\u9519\u8bef\uff1a\u62d2\u7edd\u8bbf\u95ee\uff01\n\u8be5\u64cd\u4f5c\u9700\u8981\u8d85\u7ea7\u7ba1\u7406\u5458\u6743\u9650\u3002\n");
         return 0;
     }
     return 1;
