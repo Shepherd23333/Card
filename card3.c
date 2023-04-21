@@ -1,12 +1,12 @@
 #include"card.h"
-void cardRecharge(Card** head, double money)  
+void cardRecharge(Card* head, double money)  
 {
-    if (*head == NULL)  
+    if (head == NULL)  
     {  
         return;  
     }
 
-    Card* card = *head;  
+    Card* card = head;  
     while (card != NULL)  
     {  
         if (card->level == 1)  

@@ -41,24 +41,24 @@ void cardPrint(Card* c)  //card2
         printf("\u662f\n");
     else
         printf("\u5426\n");
-    printf("Ïû·Ñ¼ÇÂ¼\n");
+    printf("æ¶ˆè´¹è®°å½•\n");
     Log* q = cur->consumeLog;
     while (q != NULL) {
-        printf("  Ê±¼ä£º %u\\%02u\\%02u\\%02u\\%02u,½ğ¶î: %d\n", q->time.year, q->time.month,q->time.day,q->time.hour,q->time.minute, q->money);
+        printf("  æ—¶é—´ï¼š %u\\%02u\\%02u\\%02u\\%02u,é‡‘é¢: %d\n", q->time.year, q->time.month,q->time.day,q->time.hour,q->time.minute, q->money);
         q = q->next;
     }
     printf("\n");
         cur = cur->next;
     }
-    printf("³äÖµ¼ÇÂ¼\n");
+    printf("å……å€¼è®°å½•\n");
     Log* w = cur->rechargeLog;
     while (w != NULL) {
-        printf("  Ê±¼ä£º%u\\%02u\\%02u\\%02u\\%02u,½ğ¶î: %d\n",  w->time.year, w->time.month,w->time.day,w->time.hour,w->time.minute,w->money);
+        printf("  æ—¶é—´ï¼š%u\\%02u\\%02u\\%02u\\%02u,é‡‘é¢: %d\n",  w->time.year, w->time.month,w->time.day,w->time.hour,w->time.minute,w->money);
         w = w->next;
     }
     printf("\n");
     }    
-}
+
 
 void cardPrints() 
 {
@@ -81,19 +81,19 @@ void cardPrints()
         printf("\u662f\n");
     else
         printf("\u5426\n");
-    printf("Ïû·Ñ¼ÇÂ¼\n");
+    printf("æ¶ˆè´¹è®°å½•\n");
     Log* q = cur->consumeLog;
     while (q != NULL) {
-        printf("  Ê±¼ä£º%u\\%02u\\%02u\\%02u\\%02u,½ğ¶î: %d\n",  q->time.year, q->time.month,q->time.day,q->time.hour,q->time.minute, q->money);
+        printf("  æ—¶é—´ï¼š%u\\%02u\\%02u\\%02u\\%02u,é‡‘é¢: %d\n",  q->time.year, q->time.month,q->time.day,q->time.hour,q->time.minute, q->money);
         q = q->next;
     }
     printf("\n");
         cur = cur->next;
     }
-    printf("³äÖµ¼ÇÂ¼\n");
+    printf("å……å€¼è®°å½•\n");
     Log* w = cur->rechargeLog;
     while (w != NULL) {
-        printf("  Ê±¼ä£º%u\\%02u\\%02u\\%02u\\%02u,½ğ¶î: %d\n",  w->time.year, w->time.month,w->time.day,w->time.hour,w->time.minute,w->money);
+        printf("  æ—¶é—´ï¼š%u\\%02u\\%02u\\%02u\\%02u,é‡‘é¢: %d\n",  w->time.year, w->time.month,w->time.day,w->time.hour,w->time.minute,w->money);
         w = w->next;
     }
     printf("\n");
@@ -361,7 +361,7 @@ void menu()
     printf("      \u0033\u002e\u8f93\u51fa\u4fe1\u606f         \u0034\u002e\u67e5\u8be2\u4fe1\u606f\n");
     printf("      \u0035\u002e\u6570\u636e\u6392\u5e8f         \u0036\u002e\u6570\u636e\u7edf\u8ba1\n");
     printf("      \u0037\u002e\u7cfb\u7edf\u7ef4\u62a4         \u0030\u002e\u9000\u51fa\n");
-    printf("\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u6b22\u8fce\u4f7f\u7528\u4f1a\u5458\u5361\u8ba1\u8d39\u7cfb\u7edf\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\n");//ÕÒ»ØÃÜÂëÒª²»ÒªĞ´
+    printf("\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u6b22\u8fce\u4f7f\u7528\u4f1a\u5458\u5361\u8ba1\u8d39\u7cfb\u7edf\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\u002d\n");//æ‰¾å›å¯†ç è¦ä¸è¦å†™
     int n=0,aa=0;
         printf("\u8bf7\u9009\u62e9\u529f\u80fd\uff1a");
         scanf("%d", &n);
