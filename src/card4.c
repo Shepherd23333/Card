@@ -13,6 +13,10 @@ int timeComp(Time x,Time y){
     ):sig(x.month-y.month)
     ):sig(x.year-y.year);
 }
+Log* logCreate(){
+    Log* head=(Log*)calloc(1,LENLog);
+    return head;
+}
 void logFix(Log* head){
     logPrints(head);
     printf("\u8bf7\u6307\u5b9a\u9700\u8981\u4fee\u6539\u7684\u4ea4\u6613\u8bb0\u5f55\uff1a\n");
@@ -60,6 +64,16 @@ void logFix(Log* head){
     }else
         printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
 }
+Card* cardCreate(){
+    Card* head=(Card*)calloc(1,LENCard);
+    head->name=(char*)calloc(1,sizeof(char));
+    head->number=(char*)calloc(1,sizeof(char));
+    head->phone=(char*)calloc(1,sizeof(char));
+    head->password=(char*)calloc(1,sizeof(char));
+    head->rechargeLog=logCreate();
+    head->consumeLog=logCreate();
+    return head;
+}
 void cardFix(Card* c){
     printf("\u8bf7\u9009\u62e9\u4f60\u8981\u4fee\u6539\u7684\u5185\u5bb9\uff08\u5141\u8bb8\u540c\u65f6\u4fee\u6539\u591a\u9879\u6570\u636e\uff0c\u8f93\u51650\u7ed3\u675f\u4fee\u6539\uff09\uff1a\n");
     printf("(1.\u7528\u6237\u540d  2.\u4f1a\u5458\u5361\u5361\u53f7  3.\u7528\u6237\u624b\u673a\u53f7  4.\u4f1a\u5458\u5361\u5bc6\u7801\n");
@@ -94,7 +108,7 @@ void cardFix(Card* c){
                         memcpy(tc.number,s,sizeof(s));
                         if(s[0]!='c'||strlen(s)==1||strspn(s+1,"0123456789")!=strlen(s+1))
                             printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
-                        else if(!cardSearch(tc)){
+                        else if(!cardSearch(cards,tc)){
                             strcpy(c->number,s);
                             printf("\u4fee\u6539\u6210\u529f\uff01\n");
                         }else
@@ -108,7 +122,7 @@ void cardFix(Card* c){
                         memcpy(tc.phone,s,sizeof(s));
                         if(strlen(s)!=11||strspn(s,"0123456789")!=strlen(s))
                             printf("\u9519\u8bef\uff1a\u975e\u6cd5\u6570\u636e\uff01\n");
-                        else if(!cardSearch(tc)){
+                        else if(!cardSearch(cards,tc)){
                             strcpy(c->phone,s);
                             printf("\u4fee\u6539\u6210\u529f\uff01\n");
                         }else

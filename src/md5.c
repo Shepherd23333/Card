@@ -136,6 +136,3 @@ char* md5C(char* s){
     }
     return result;
 }
-
-
-//??

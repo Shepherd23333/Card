@@ -9,10 +9,11 @@
 #include<windows.h>
 #include<math.h>
 #include<conio.h>
+#include<time.h>
 typedef struct Time{
     unsigned year, month, day, hour, minute;
 }Time;
-Time t0;
+extern Time t0;
 int timeComp(Time,Time);    //card4
 typedef struct Log{
     Time time;
@@ -26,7 +27,7 @@ Log* logExtend(Log*);   //card1
 void logPrint(Log*);//card2
 void logPrints(Log*);//card2
 Log* logSearch(Log*, ...);  //card1
-Log* logSearchs(Log*, int*,...);
+Log* logSearchs(Log*, int*,Time,Time,double);
 void logFix(Log*);  //card4
 
 typedef struct Card{
@@ -39,15 +40,15 @@ typedef struct Card{
     struct Card *next;
 }Card;
 #define LENCard sizeof(Card)
-Card *cards,c0;    //global Card list
-//Card* cardCreate(); //card3
+extern Card *cards,c0;    //global Card list
+Card* cardCreate(); //card3
 Card* cardDelete(char*); //card1     
 Card* cardExtend();    //card1
 void cardPrint(Card*);  //card2
-void cardPrints();     //card2
+void cardPrints(Card*);     //card2
 Card* cardSort();    //card2
-Card* cardSearch(Card);   //card1
-Card* cardSearchs(Card);     
+Card* cardSearch(Card*,Card);   //card1
+Card* cardSearchs(int*,Card);     
 void cardFix(Card*);   //card4
 void cardSignUp(); //card1
 Card* cardLogIn(char*, char*);   //card3
@@ -71,8 +72,8 @@ typedef struct Admin{
     struct Admin *next;
 }Admin;
 #define LENAdmin sizeof(Admin)
-Admin *admins;  //global Admin list
-//Admin* adminCreate();//card3
+extern Admin *admins;  //global Admin list
+Admin* adminCreate();//card3
 Admin* adminDelete(char*);  //card3
 Admin* adminExtend(); //card2
 Admin* adminSearch(char*);  //card1  
@@ -82,8 +83,8 @@ void SASignUp();    //system
 void adminSignUp();//card1
 void adminLogOut(); //system
 
-bool isLoggedIn,isCardLoggedIn;
-int authority;
+extern bool isLoggedIn,isCardLoggedIn;
+extern int authority;
 void logOut();//card1
 bool authorize();//system
 void backUp();//card1
@@ -93,4 +94,5 @@ void write_file();//card1
 void initialize();  //system
 void System();  //system
 void menu();//card2
+
 #endif

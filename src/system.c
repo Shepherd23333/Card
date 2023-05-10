@@ -1,4 +1,9 @@
 #include"card.h"
+Admin *admins;
+Card *cards,c0={"","",""};
+Time t0={0,0,0,0,0};
+bool isLoggedIn,isCardLoggedIn;
+int authority;
 char* getstr(){
     char *str,*_str;
     int i = 1;
@@ -61,14 +66,17 @@ bool isTime(int y,int mo,int d,int h,int mi){
     }
     return 0;
 }
+Admin* adminCreate(){
+    Admin* head=(Admin*)calloc(1,LENAdmin);
+    head->username=(char*)calloc(1,sizeof(char));
+    return head;
+}
 void initialize(){
+    SetConsoleOutputCP(65001);
+  
     printf("\u7cfb\u7edf\u521d\u59cb\u5316\u4e2d\uff0c\u8bf7\u7b49\u5f85\u2026\u2026\n");
-    admins=(Admin*)calloc(1,LENAdmin);
-    cards=(Card*)calloc(1,LENCard);
-    Time t={0,0,0,0,0};
-    Card c={""};
-    t0=t;
-    c0=c;
+    admins=adminCreate();
+    cards=cardCreate();
     read_file();
     printf("\u521d\u59cb\u5316\u5b8c\u6210\uff01\n");
     Sleep(1500);
@@ -103,7 +111,7 @@ void SASignUp(){
     printf("\u8bf7\u8f93\u5165\u5bc6\u94a5\uff1a\n");
     char *s;
     getchar();
-    s=getstr();
+    s=getPassword();
     if(!strcmp(md5C(s),"79e70d8cf6d56c831544a24ee970d5ed")){
         printf("\u9a8c\u8bc1\u6210\u529f\uff01\n");
         char *u,*p;
