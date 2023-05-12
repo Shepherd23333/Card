@@ -39,14 +39,14 @@ void cardPrint(Card *c){  // card2
         printf("\u6d88\u8d39\u8bb0\u5f55\n");
         Log *q = cur->consumeLog;
         while (q != NULL){
-            printf("  \u65f6\u95f4:%u\\%02u\\%02u\\%02u\\%02u,\u91d1\u989d: %d\n", q->time.year, q->time.month, q->time.day, q->time.hour, q->time.minute, q->money);
+            printf("  \u65f6\u95f4:%u\\%02u\\%02u %02u:%02u,\u91d1\u989d: %.2f\n", q->time.year, q->time.month, q->time.day, q->time.hour, q->time.minute, q->money);
             q = q->next;
         }
         printf("\n");
         printf("\u5145\u503c\u8bb0\u5f55\uff1a\n");
         Log *w = cur->rechargeLog;
         while (w != NULL){
-            printf(" \u65f6\u95f4:\\%02u\\%02u\\%02u\\%02u,\u91d1\u989d: %d\n", w->time.year, w->time.month, w->time.day, w->time.hour, w->time.minute, w->money);
+            printf("  \u65f6\u95f4:%u\\%02u\\%02u %02u:%02u,\u91d1\u989d: %.2f\n", w->time.year, w->time.month, w->time.day, w->time.hour, w->time.minute, w->money);
             w = w->next;
         }
         printf("\n");
@@ -57,38 +57,9 @@ void cardPrints(Card* c){
         return;
     Card *cur = c;
     while (cur != NULL){
-        printf("\u59d3\u540d\uff1a %s\n", cur->name);
-        printf("\u5361\u53f7\uff1a %s\n", cur->number);
-        printf("\u624b\u673a\u53f7\uff1a %s\n", cur->phone);
-        //printf("\u5bc6\u7801\uff1a %s\n", cur->password);
-        printf("\u7b49\u7ea7\uff1a %d\n", cur->level);
-        printf("\u4f59\u989d\uff1a %.2lf\n", cur->remaining_sum);
-        printf("\u603b\u5145\u503c\uff1a %.2lf\n", cur->total_charge);
-        printf("\u603b\u6d88\u8d39\uff1a %.2lf\n", cur->total_charge - cur->remaining_sum);
-        printf("\u521b\u5efa\u65f6\u95f4\uff1a %u\\%02u\\%02u\\%02u\\%02u\n", cur->createTime.year, cur->createTime.month, cur->createTime.day, cur->createTime.hour, cur->createTime.minute);
-        printf("\u6709\u6548\u65f6\u95f4\uff1a %u\\%02u\\%02u\\%02u\\%02u\n", cur->createTime.year, cur->createTime.month, cur->createTime.day, cur->createTime.hour, cur->createTime.minute);
-        printf("\u662f\u5426\u6302\u5931\uff1a ");
-        if (cur->isLost)
-            printf("\u662f\n");
-        else
-            printf("\u5426\n");
-        printf("\n");
-        Log *q = cur->consumeLog;
-        while (q != NULL){
-            printf("  \u65f6\u95f4:\\%02u\\%02u\\%02u\\%02u,\u91d1\u989d: %d\n", q->time.year, q->time.month, q->time.day, q->time.hour, q->time.minute, q->money);
-            q = q->next;
-        }
-        printf("\n");
-    
-    printf("");
-    Log *w = cur->rechargeLog;
-    while (w != NULL){
-        printf("  \u65f6\u95f4:\\%02u\\%02u\\%02u\\%02u,\u91d1\u989d: %d\n", w->time.year, w->time.month, w->time.day, w->time.hour, w->time.minute, w->money);
-        w = w->next;
+        cardPrint(cur);
+        cur = cur->next;
     }
-    printf("\n");
-    cur = cur->next;
-}
 }
 Card *cardSort(){
     printf("\u8bf7\u9009\u62e9\u5347\u5e8f\u6216\u964d\u5e8f\u6392\u5217\uff080\u8868\u793a\u5347\u5e8f\uff0c1\u8868\u793a\u964d\u5e8f\uff09\n");
@@ -213,7 +184,6 @@ void cardConsume(Card *c, double m){
     Log *l1;
     Card *p = c;
     double cost = m;
-    system("cls");
     int e = p->level;
     switch (e){
     case 0: // 1
@@ -339,10 +309,7 @@ void cardConsume(Card *c, double m){
         getchar();
         break;
     }
-    printf("\u7ed3\u7b97\u6210\u529f\uff01");
-    system("pause");
-    system("cls");
-    getch();
+    printf("\n\u7ed3\u7b97\u6210\u529f\uff01\n");
 }
 Admin *adminExtend(){  // card2
     Admin *p1 = admins;

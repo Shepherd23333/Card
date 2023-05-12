@@ -75,7 +75,7 @@ Card* cardCreate(){
     return head;
 }
 void cardFix(Card* c){
-    printf("\u8bf7\u9009\u62e9\u4f60\u8981\u4fee\u6539\u7684\u5185\u5bb9\uff08\u5141\u8bb8\u540c\u65f6\u4fee\u6539\u591a\u9879\u6570\u636e\uff0c\u8f93\u51650\u7ed3\u675f\u4fee\u6539\uff09\uff1a\n");
+    printf("\u8bf7\u9009\u62e9\u4f60\u8981\u4fee\u6539\u7684\u5185\u5bb9\uff08\u5141\u8bb8\u540c\u65f6\u4fee\u6539\u591a\u9879\u6570\u636e\uff0c\u8f93\u51650\u7ed3\u675f\u9009\u62e9\uff09\uff1a\n");
     printf("(1.\u7528\u6237\u540d  2.\u4f1a\u5458\u5361\u5361\u53f7  3.\u7528\u6237\u624b\u673a\u53f7  4.\u4f1a\u5458\u5361\u5bc6\u7801\n");
     printf("5.\u4f1a\u5458\u5361\u7b49\u7ea7  6.\u603b\u5145\u503c\u91d1\u989d  7.\u521b\u5efa\u65f6\u95f4  8.\u4e22\u5931\u72b6\u6001\n");
     printf("9.\u5145\u503c\u8bb0\u5f55  10.\u6d88\u8d39\u8bb0\u5f55)\n");
@@ -104,6 +104,7 @@ void cardFix(Card* c){
                 case 2:
                     if(authorize()){
                         printf("\u8bf7\u8f93\u5165\u65b0\u5361\u53f7\uff1a\n");
+                        getchar();
                         s=getstr();
                         memcpy(tc.number,s,sizeof(s));
                         if(s[0]!='c'||strlen(s)==1||strspn(s+1,"0123456789")!=strlen(s+1))

@@ -5,22 +5,23 @@ void cardRecharge(Card *head, double money){
     Card *card = head;
     card->remaining_sum += money;
     card->total_charge += money;
-    Log*l1;
+    Log *l1;
     l1=logExtend(head->rechargeLog);
     l1->money=money;
-        enum{year,month,day,hour,minute};
-        time_t t = time(NULL);
-        struct tm *lt = localtime(&t);
-        char str_time[20];
-        sprintf(str_time, "%04d-%02d-%02d %02d:%02d",
-                lt->tm_year + 1900, lt->tm_mon + 1, lt->tm_mday,
-                lt->tm_hour, lt->tm_min);
-        sscanf(str_time, "%d-%d-%d %d:%d",
-               &l1->time.year, &l1->time.month, &l1->time.day, &l1->time.hour, &l1->time.minute);
+    enum{year,month,day,hour,minute};
+    time_t t = time(NULL);
+    struct tm *lt = localtime(&t);
+    char str_time[20];
+    sprintf(str_time, "%04d-%02d-%02d %02d:%02d",
+            lt->tm_year + 1900, lt->tm_mon + 1, lt->tm_mday,
+            lt->tm_hour, lt->tm_min);
+    sscanf(str_time, "%d-%d-%d %d:%d",
+            &l1->time.year, &l1->time.month, &l1->time.day, &l1->time.hour, &l1->time.minute);
     double l[]={0,712,2048,8848,23333,65536,114514,524288,1919810,1e100};
     for(int i=0;i<9;i++)
         if(l[i]<=card->remaining_sum&&card->remaining_sum<l[i+1])
             card->level=i+1;
+    printf("\u5145\u503c\u6210\u529f\uff01\n");
 }
 Card *cardLogIn(char *numorphone, char *password){
     Card *c = NULL;

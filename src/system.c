@@ -35,9 +35,11 @@ char* getPassword(){
         if(c=='\r'){
             printf("\n");
             break;
-        }else if(c=='\b')
+        }else if(c=='\b'){
+            i--;
+            str[i-1]=0;
             printf("\b \b");
-        else{
+        }else{
             str[i-1]=c;
             printf("*"); 
             i++;
@@ -77,7 +79,7 @@ void initialize(){
     printf("\u7cfb\u7edf\u521d\u59cb\u5316\u4e2d\uff0c\u8bf7\u7b49\u5f85\u2026\u2026\n");
     admins=adminCreate();
     cards=cardCreate();
-    read_file();
+    //read_file();
     printf("\u521d\u59cb\u5316\u5b8c\u6210\uff01\n");
     Sleep(1500);
     system("cls");
@@ -128,7 +130,7 @@ void SASignUp(){
                 memcpy(a,&t,sizeof(t));
             }
             printf("\u6ce8\u518c\u6210\u529f\uff01\n");
-            isLoggedIn=1;
+            isLoggedIn=1;authority=2;
         }else
             printf("\u9519\u8bef\uff1a\u8be5\u8d26\u6237\u540d\u5df2\u5b58\u5728\uff01\n");
     }else
